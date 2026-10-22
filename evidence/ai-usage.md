@@ -129,7 +129,15 @@ No fue necesaria una nueva exploración de controles: se conservaron las observa
 
 El cierre aplicó la skill del proyecto: preparó la selección en work, archivó íntegra la entrega anterior fuera del repositorio, conservó los fallos relevantes existentes y actualizó el reporte, resumen, correlación y documentación sin duplicar reportes intermedios.
 
-GitHub respondió HTTP 200 sin autenticación para el repositorio andreudev/prueba-quality-engineer y lo identificó como público, rama principal main. No se cambió la visibilidad ni la identidad local del autor. El commit y su publicación se pueden contrastar con el historial de main; cualquier impedimento de publicación se registrará aquí antes de dar el cierre por terminado.
+GitHub respondió HTTP 200 sin autenticación para el repositorio andreudev/prueba-quality-engineer y lo identificó como público, rama principal main. No se cambió la visibilidad ni la identidad local del autor.
+
+Publicación verificada el 2026-10-22 a las 22:43:46 UTC:
+
+- Commit de la implementación y entrega: [e258f284a1b098e4993318949dc97d66bee4cce7](https://github.com/andreudev/prueba-quality-engineer/commit/e258f284a1b098e4993318949dc97d66bee4cce7), mensaje “pruebas: completa integración UI y API y entrega técnica”.
+- Se ejecutó git fetch origin main y se comprobó que origin/main era antecesor de HEAD antes de publicar. Se conservaron los commits históricos de la skill.
+- git push origin main terminó con código 0; git ls-remote confirmó que main remoto y HEAD local eran ese mismo commit. No se utilizó force push.
+- La API pública de GitHub devolvió HTTP 200 para el árbol de ese commit sin autenticación. Se comprobó la presencia de README, skill, Page Object, test integrado, reporte, resumen y uso de IA; había 21 archivos de evidencia.
+- Este registro y el campo de verificación del resumen son una actualización documental posterior a esa comprobación. No modifican el código ejecutado ni atribuyen una nueva ejecución de pruebas.
 
 Pendientes exclusivos del autor: revisión funcional humana y tiempo total real invertido. La sustentación y su variación están preparadas como instrucciones, no se declaran ya realizadas.
 ## Limitaciones

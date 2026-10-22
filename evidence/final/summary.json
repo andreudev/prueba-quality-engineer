@@ -158,5 +158,13 @@
     "visibilityChanged": false
   },
   "humanReview": "Pendiente; la revisión técnica del agente no constituye revisión humana.",
-  "totalTimeSpent": "Pendiente de indicar por el autor."
+  "totalTimeSpent": "Pendiente de indicar por el autor.",
+  "publicationVerification": {
+    "codeAndReportCommit": "e258f284a1b098e4993318949dc97d66bee4cce7",
+    "pushExitCode": 0,
+    "localAndRemoteMatched": true,
+    "anonymousTreeHttpStatus": 200,
+    "evidenceFiles": 21,
+    "verifiedAtUtc": "2026-10-22T22:43:46.9648156Z"
+  }
 }
