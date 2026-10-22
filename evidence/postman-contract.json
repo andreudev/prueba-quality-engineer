@@ -16,6 +16,11 @@
       "type": "string"
     }
   ],
+  "retrieval": {
+    "source": "postman configurado en el proyecto, OAuth",
+    "retrievedAtUtc": "2026-10-22T23:23:26.121Z",
+    "collectionId": "92957-55c5fdaf-6595-4ecd-a3f8-baf4d814e872"
+  },
   "folders": [
     {
       "name": "Auth",

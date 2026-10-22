@@ -1,8 +1,8 @@
 {
   "date": "2026-10-22",
-  "selectionStatus": "Cierre técnico del agente completado; revisión humana funcional pendiente",
-  "skillCommitBeforeImplementation": "6aecc9591eb81e0aab136eaded89bcf55bd4c843",
-  "codeBaseCommit": "6aecc9591eb81e0aab136eaded89bcf55bd4c843",
+  "selectionStatus": "Ampliación ejecutada: 10 aprobadas; revisión humana funcional pendiente",
+  "skillCommitBeforeImplementation": "29c1876e6f8e8cfa918b4edf736e26548976394d",
+  "originalSkillCommitBeforeImplementation": "6aecc9591eb81e0aab136eaded89bcf55bd4c843",
   "implementationSha256": [
     {
       "path": "src/api/AuthClient.ts",
@@ -29,8 +29,16 @@
       "sha256": "97AAEDCA52E0820CFE433B28D482366A4C128A934B8E9C118D2C70B2529594BD"
     },
     {
+      "path": "tests/api/booking-invalid-dates.spec.ts",
+      "sha256": "584DFB5DA2B3AB0F7CDC37BC77D398ABA8D1BBCCFE1634DF799995811F17B313"
+    },
+    {
       "path": "tests/api/booking-negative.spec.ts",
       "sha256": "700558E2697E5676F0A8C127CEF6AB4E5C79E456EDC60488EB49CCCD9FB5F962"
+    },
+    {
+      "path": "tests/api/booking-overlap.spec.ts",
+      "sha256": "3DCFD845EBE70E59CA1A1BF72AAD466F1E4A72DA6E1BE0AE0203186BD4C88617"
     },
     {
       "path": "tests/api/booking-success-with-deposit.spec.ts",
@@ -41,8 +49,20 @@
       "sha256": "E142DF9AD239F22E6898315367031AFE35BE0C555E6AB506BC5D185B9442BD1C"
     },
     {
+      "path": "tests/api/booking-unauthorized.spec.ts",
+      "sha256": "5AA87735A407A37F86193246015C03BF178DDFA0BA0372B5F1543BC644FB1D3A"
+    },
+    {
+      "path": "tests/data/booking-cases.ts",
+      "sha256": "670A25F6133F4A7132BB48C537EA9A8DA27DECFDCE22045D89414A2EF1BCA9F3"
+    },
+    {
       "path": "tests/fixtures/api.fixture.ts",
       "sha256": "F8F1720B5A6D8FB270B12CB1A93EA9F487E53779EA1AED90D1915DFF8EB64FAF"
+    },
+    {
+      "path": "tests/fixtures/owned-booking.fixture.ts",
+      "sha256": "125F3FDB53CF35D07370D7F689CA24FA6818940F0BDB589ED0F13908F6786A50"
     },
     {
       "path": "tests/scenarios/booking-success.scenario.ts",
@@ -62,19 +82,36 @@
     },
     {
       "path": "package.json",
-      "sha256": "00CFDB770044750E9EC651288C305EDCD239D20502D171BD5A0245167E18E1E6"
+      "sha256": "131DF9F4E72A6EDF002289FBC755654E424A55FA7B6709B18D15DE1DD7946F5A"
     },
     {
       "path": "package-lock.json",
-      "sha256": "8DF0D54D245B7A00A372D1302F6F1E6E0C0158E7370B0EB5FA2A5CD6784202B2"
+      "sha256": "4E9978B52DD35A7E4C8199D41A765DD345693336F484287091BE3E99BDB7DDFF"
     }
   ],
-  "hashSemantics": "SHA256 de los bytes de los archivos del árbol de trabajo ejecutado antes del commit; Git puede normalizar finales de línea.",
-  "skillAtClosureSha256": "5881B390D79F4CF614DBC8BBDD8516C68749B4083BE0C58B616FE770DAFC061B",
+  "hashSemantics": "SHA256 de los bytes del árbol de trabajo ejecutado; Git puede normalizar finales de línea.",
+  "skills": [
+    {
+      "name": "booker-ui-api-tests",
+      "sha256": "CDA1D3EBAA1E6E871D2AF3743B7C0BD8A8530DD6E141CBCFA7E42A49923DD827"
+    },
+    {
+      "name": "revisar-contrato-api",
+      "sha256": "2283D42F8237D98FD43E7C5189829D50F4BC80DEF6A80B8FED92A0B880048409"
+    },
+    {
+      "name": "priorizar-cobertura-reservas",
+      "sha256": "233D71E2467E3A394243A7B14362AB5C2F114B1657D3E561A4BC968C7C29F0D3"
+    },
+    {
+      "name": "diagnosticar-fallos-reservas",
+      "sha256": "662EFC8680906824DCFC458FACF4A79CD629A787A0E83EA01C998C7DC7B915C2"
+    }
+  ],
   "stats": {
-    "startTime": "2026-10-22T22:39:09.248Z",
-    "duration": 7001.744,
-    "expected": 4,
+    "startTime": "2026-10-22T23:15:03.059Z",
+    "duration": 14219.398,
+    "expected": 10,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
@@ -85,40 +122,266 @@
   ],
   "tests": [
     {
+      "title": "FEC-01 rechazar salida igual a entrada",
+      "suite": "api\\booking-invalid-dates.spec.ts",
+      "project": "chromium",
+      "annotations": [
+        {
+          "type": "dataset",
+          "description": "FEC-01"
+        },
+        {
+          "type": "prioridad",
+          "description": "P2"
+        },
+        {
+          "type": "riesgo",
+          "description": "Persistencia de una estancia de duración cero"
+        }
+      ],
+      "status": "passed",
+      "workerIndex": 0,
+      "startTime": "2026-10-22T23:15:03.742Z",
+      "durationMs": 1383
+    },
+    {
+      "title": "FEC-02 rechazar salida anterior a entrada",
+      "suite": "api\\booking-invalid-dates.spec.ts",
+      "project": "chromium",
+      "annotations": [
+        {
+          "type": "dataset",
+          "description": "FEC-02"
+        },
+        {
+          "type": "prioridad",
+          "description": "P2"
+        },
+        {
+          "type": "riesgo",
+          "description": "Persistencia de una estancia de duración negativa"
+        }
+      ],
+      "status": "passed",
+      "workerIndex": 1,
+      "startTime": "2026-10-22T23:15:03.765Z",
+      "durationMs": 1469
+    },
+    {
       "title": "rechazar un nombre vacío sin guardar la reserva",
       "suite": "api\\booking-negative.spec.ts",
       "project": "chromium",
+      "annotations": [],
       "status": "passed",
       "workerIndex": 0,
-      "startTime": "2026-10-22T22:39:09.884Z",
-      "durationMs": 1171
+      "startTime": "2026-10-22T23:15:05.173Z",
+      "durationMs": 1042
+    },
+    {
+      "title": "SOL-01 rechazar reserva con intervalo idéntico",
+      "suite": "api\\booking-overlap.spec.ts",
+      "project": "chromium",
+      "annotations": [
+        {
+          "type": "dataset",
+          "description": "SOL-01"
+        },
+        {
+          "type": "prioridad",
+          "description": "P1"
+        },
+        {
+          "type": "riesgo",
+          "description": "Doble asignación de una habitación en el mismo intervalo"
+        }
+      ],
+      "status": "passed",
+      "workerIndex": 1,
+      "startTime": "2026-10-22T23:15:05.277Z",
+      "durationMs": 2940
+    },
+    {
+      "title": "SOL-02 rechazar reserva con solapamiento parcial",
+      "suite": "api\\booking-overlap.spec.ts",
+      "project": "chromium",
+      "annotations": [
+        {
+          "type": "dataset",
+          "description": "SOL-02"
+        },
+        {
+          "type": "prioridad",
+          "description": "P1"
+        },
+        {
+          "type": "riesgo",
+          "description": "Doble asignación al cruzar parcialmente los intervalos"
+        }
+      ],
+      "status": "passed",
+      "workerIndex": 0,
+      "startTime": "2026-10-22T23:15:06.233Z",
+      "durationMs": 2775
     },
     {
       "title": "crear y consultar una reserva",
       "suite": "api\\booking-success-with-deposit.spec.ts > Reservas por API - con depósito",
       "project": "chromium",
+      "annotations": [],
       "status": "passed",
       "workerIndex": 1,
-      "startTime": "2026-10-22T22:39:09.888Z",
-      "durationMs": 2259
+      "startTime": "2026-10-22T23:15:08.234Z",
+      "durationMs": 2109
     },
     {
       "title": "crear y consultar una reserva",
       "suite": "api\\booking-success.spec.ts > Reservas por API - sin depósito",
       "project": "chromium",
+      "annotations": [],
       "status": "passed",
       "workerIndex": 0,
-      "startTime": "2026-10-22T22:39:11.100Z",
-      "durationMs": 2229
+      "startTime": "2026-10-22T23:15:09.026Z",
+      "durationMs": 2180
+    },
+    {
+      "title": "AUT-01 impedir eliminación sin token",
+      "suite": "api\\booking-unauthorized.spec.ts",
+      "project": "chromium",
+      "annotations": [
+        {
+          "type": "dataset",
+          "description": "AUT-01"
+        },
+        {
+          "type": "prioridad",
+          "description": "P1"
+        },
+        {
+          "type": "riesgo",
+          "description": "Eliminación de reservas sin autenticación"
+        }
+      ],
+      "status": "passed",
+      "workerIndex": 1,
+      "startTime": "2026-10-22T23:15:10.356Z",
+      "durationMs": 2495
+    },
+    {
+      "title": "AUT-02 impedir eliminación token inválido",
+      "suite": "api\\booking-unauthorized.spec.ts",
+      "project": "chromium",
+      "annotations": [
+        {
+          "type": "dataset",
+          "description": "AUT-02"
+        },
+        {
+          "type": "prioridad",
+          "description": "P1"
+        },
+        {
+          "type": "riesgo",
+          "description": "Eliminación de reservas con una identidad no válida"
+        }
+      ],
+      "status": "passed",
+      "workerIndex": 0,
+      "startTime": "2026-10-22T23:15:11.220Z",
+      "durationMs": 2463
     },
     {
       "title": "crear una reserva por UI y consultar exactamente la misma por API",
       "suite": "ui\\booking-integrated.spec.ts",
       "project": "chromium",
+      "annotations": [],
       "status": "passed",
       "workerIndex": 1,
-      "startTime": "2026-10-22T22:39:12.185Z",
-      "durationMs": 3879
+      "startTime": "2026-10-22T23:15:12.872Z",
+      "durationMs": 4125
+    }
+  ],
+  "additionalCaseResults": [
+    {
+      "dataset": "FEC-01",
+      "creationStatuses": [
+        409
+      ],
+      "unauthorizedDeleteStatuses": [],
+      "ownRecordsCleaned": []
+    },
+    {
+      "dataset": "FEC-02",
+      "creationStatuses": [
+        409
+      ],
+      "unauthorizedDeleteStatuses": [],
+      "ownRecordsCleaned": []
+    },
+    {
+      "dataset": "SOL-01",
+      "creationStatuses": [
+        201,
+        409
+      ],
+      "unauthorizedDeleteStatuses": [],
+      "ownRecordsCleaned": [
+        {
+          "bookingid": 5,
+          "marker": "Ex348c110852d940",
+          "deleteStatus": 202,
+          "getAfterDeleteStatus": 404
+        }
+      ]
+    },
+    {
+      "dataset": "SOL-02",
+      "creationStatuses": [
+        201,
+        409
+      ],
+      "unauthorizedDeleteStatuses": [],
+      "ownRecordsCleaned": [
+        {
+          "bookingid": 6,
+          "marker": "Ex5544d81ad23c4e",
+          "deleteStatus": 202,
+          "getAfterDeleteStatus": 404
+        }
+      ]
+    },
+    {
+      "dataset": "AUT-01",
+      "creationStatuses": [
+        201
+      ],
+      "unauthorizedDeleteStatuses": [
+        403
+      ],
+      "ownRecordsCleaned": [
+        {
+          "bookingid": 9,
+          "marker": "Ex669cacd3606b4d",
+          "deleteStatus": 202,
+          "getAfterDeleteStatus": 404
+        }
+      ]
+    },
+    {
+      "dataset": "AUT-02",
+      "creationStatuses": [
+        201
+      ],
+      "unauthorizedDeleteStatuses": [
+        403
+      ],
+      "ownRecordsCleaned": [
+        {
+          "bookingid": 10,
+          "marker": "Ex00f38f657f5745",
+          "deleteStatus": 202,
+          "getAfterDeleteStatus": 404
+        }
+      ]
     }
   ],
   "commands": [
@@ -128,43 +391,67 @@
       "log": "typecheck.log"
     },
     {
-      "command": "npx.cmd playwright test tests/ui --project=chromium --workers=2 --reporter=list,html,json --output=work/verification/ui-artifacts",
+      "command": "npx.cmd playwright test --list --project=chromium",
+      "exitCode": 0,
+      "listedTests": 10
+    },
+    {
+      "command": "npx.cmd playwright test tests/ui --project=chromium --workers=2 --reporter=list,html,json --output=work/expansion/ui-artifacts",
       "exitCode": 0,
       "actualWorkers": 1,
-      "durationMs": 8382.223,
+      "durationMs": 9295.055,
       "log": "ui.log",
       "environment": {
-        "PLAYWRIGHT_HTML_OUTPUT_DIR": "work/verification/ui-report",
-        "PLAYWRIGHT_JSON_OUTPUT_FILE": "work/verification/ui-results.json"
+        "PLAYWRIGHT_HTML_OUTPUT_DIR": "work/expansion/ui-report",
+        "PLAYWRIGHT_JSON_OUTPUT_FILE": "work/expansion/ui-results.json"
       }
     },
     {
-      "command": "npx.cmd playwright test tests/api tests/ui --project=chromium --workers=2 --reporter=list,html,json --output=work/verification/full-artifacts",
+      "command": "npx.cmd playwright test tests/api tests/ui --project=chromium --workers=2 --reporter=list,html,json --output=work/expansion/full-artifacts",
       "exitCode": 0,
       "actualWorkers": 2,
       "log": "suite.log",
       "environment": {
-        "PLAYWRIGHT_HTML_OUTPUT_DIR": "work/verification/full-report",
-        "PLAYWRIGHT_JSON_OUTPUT_FILE": "work/verification/full-results.json"
+        "PLAYWRIGHT_HTML_OUTPUT_DIR": "work/expansion/full-report",
+        "PLAYWRIGHT_JSON_OUTPUT_FILE": "work/expansion/full-results.json"
       }
     }
   ],
+  "connections": {
+    "projectConfig": ".codex/config.toml",
+    "projectConfigSha256": "0CE8F37A7B2CCC88B6831E61ACA2EB28AFE9A7F59CE99241CDB4623F894519E2",
+    "globalConfigUnchanged": true,
+    "playwright": {
+      "command": "npm.cmd",
+      "args": [
+        "run",
+        "--silent",
+        "mcp:playwright"
+      ],
+      "localPackageVersion": "0.0.83",
+      "exposedTools": 25,
+      "formObservedInProject": true,
+      "snapshot": "../exploration/project-form.yml"
+    },
+    "postman": {
+      "url": "https://mcp.postman.com/mcp",
+      "auth": "OAuth",
+      "exposedTools": [
+        "getCollectionResponse",
+        "searchPostmanElements",
+        "getEnabledTools",
+        "getCollection",
+        "getAuthenticatedUser",
+        "getCollectionRequest",
+        "getCollectionFolder"
+      ],
+      "authenticatedUserRead": true,
+      "collectionRead": true,
+      "createAndDeleteRequestsRead": true
+    }
+  },
   "report": "report/index.html",
   "reservationEvidence": "reservation.json",
-  "repository": {
-    "url": "https://github.com/andreudev/prueba-quality-engineer",
-    "anonymousReadVerified": true,
-    "httpStatus": 200,
-    "visibilityChanged": false
-  },
-  "humanReview": "Pendiente; la revisión técnica del agente no constituye revisión humana.",
-  "totalTimeSpent": "Pendiente de indicar por el autor.",
-  "publicationVerification": {
-    "codeAndReportCommit": "e258f284a1b098e4993318949dc97d66bee4cce7",
-    "pushExitCode": 0,
-    "localAndRemoteMatched": true,
-    "anonymousTreeHttpStatus": 200,
-    "evidenceFiles": 21,
-    "verifiedAtUtc": "2026-10-22T22:43:46.9648156Z"
-  }
+  "humanReview": "Pendiente",
+  "totalTimeSpent": "Pendiente de indicar por el autor"
 }

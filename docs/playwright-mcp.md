@@ -35,22 +35,17 @@ La skill `booker-ui-api-tests` utiliza Playwright MCP para inspeccionar la
 interfaz real antes de implementar el Page Object. La suite se ejecuta con
 Playwright Test y consulta el backend real.
 
-## Configuración global histórica en Windows
+## Alcance y requisitos del entorno
 
-Antes de añadir la configuración por proyecto se registró globalmente Playwright
-MCP 0.0.83 con Node.js 24.18.0 mediante:
+La configuración versionada está preparada para Windows y Node.js 24.18.0.
+Playwright MCP usa transporte STDIO; --headless ejecuta el navegador en segundo
+plano y --isolated mantiene su perfil en memoria. En el equipo verificado estaba
+instalado Chrome, utilizado por el MCP por defecto. El Chromium instalado en el
+paso inicial corresponde a las pruebas Playwright Test.
 
-```powershell
-codex mcp add playwright -- npx.cmd -y @playwright/mcp@0.0.83 --headless --isolated
-codex mcp get playwright --json
-```
-
-El servidor usa transporte STDIO. `--headless` ejecuta el navegador en segundo
-plano y `--isolated` mantiene su perfil en memoria durante la sesión.
-
-Codex guarda la conexión en su configuración local; este archivo explica cómo
-reproducirla en otro equipo. La dependencia se declara en
-`.agents/skills/booker-ui-api-tests/agents/openai.yaml`.
+La conexión global histórica no se elimina ni se usa para demostrar la conexión
+del proyecto. Las dependencias de herramientas de las skills están declaradas en
+sus archivos agents/openai.yaml cuando corresponden.
 
 ## Activación en el chat
 

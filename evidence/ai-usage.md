@@ -50,21 +50,20 @@ Contrato consultado: [documentación de Postman](https://www.postman.com/automat
 - GET no expone email/phone: el test comprueba su envío en el POST real, sin atribuir a GET una verificación de persistencia que no permite.
 - La confirmación no expone ID ni huésped; la correlación usa el ID de la respuesta real de creación. Se mantuvieron las fechas del entorno y la habitación 3 para separar este caso de los escenarios API de habitaciones 1 y 2.
 
-## Ejecuciones seleccionadas para el cierre técnico
+## Ejecuciones seleccionadas de la ampliación
 
-Las dependencias ya estaban instaladas y npm ls --depth=0 confirmó las versiones de package.json. Se ejecutaron de nuevo TypeScript, UI y la suite completa tras corregir las referencias de comentarios. No se cambiaron fechas ni se añadieron reintentos o mocks.
+El reporte actual corresponde a la ampliación posterior al commit previo 29c1876e6f8e8cfa918b4edf736e26548976394d. Los reportes anteriores se archivaron íntegros fuera del repositorio antes de sustituirlos; los enlaces de esta sección apuntan solo a la nueva ejecución.
 
-| Comprobación | Resultado observado | Código | Evidencia |
+| Comprobación | Resultado real | Código | Evidencia |
 | --- | --- | --- | --- |
 | npm run typecheck | Sin errores | 0 | [log](final/typecheck.log) |
-| UI con Chromium | 1 aprobada; 1 worker; 8.4 s | 0 | [log](final/ui.log) |
-| API + UI con Chromium | 4 aprobadas; 2 workers reales; 7.0 s | 0 | [log](final/suite.log), [reporte completo](final/report/index.html) |
+| Listado Chromium | 10 tests en 6 archivos | 0 | [resumen](final/summary.json) |
+| UI Chromium | 1 aprobada; 1 worker; 9.3 s | 0 | [log](final/ui.log) |
+| API + UI Chromium | 10 aprobadas; 2 workers reales; 14.2 s; sin omitidas, flaky ni errores | 0 | [log](final/suite.log), [reporte completo](final/report/index.html) |
 
-Los comandos exactos, variables de salida, códigos, versión y huellas del código están en [summary.json](final/summary.json). Las salidas temporales quedaron en work/verification, ignorado por Git. El reporte HTML se copió completo con sus recursos. La ejecución UI aislada tiene un único caso y utiliza un worker; la suite completa registra los workers 0 y 1 con tiempos solapados.
+El [resumen](final/summary.json) conserva comandos exactos, variables de salida, huellas del código ejecutado, anotaciones de datasets/prioridad/riesgo y resultados por variante. La [reserva integrada](final/reservation.json) correlaciona creación UI 201, GET 200 y limpieza 202/404 del mismo ID **11**. Las ventanas siguen siendo explícitas y no se alteraron automáticamente.
 
-La [evidencia conjunta de la reserva](final/reservation.json) contiene datos, disponibilidad, creación UI 201, consulta del mismo ID **8** y limpieza 202/404. Fechas: 2026-11-10 a 2026-11-12. Huésped sintético: Ui5736903516604d ReservaUi. La captura del reporte se inspeccionó visualmente: confirmación y fechas legibles.
-
-Como antecedente, la ejecución seleccionada anterior aprobó 4 casos con 2 workers en 7,2 s y verificó la reserva ID 9. Su reporte y documento anterior se archivaron localmente fuera del repositorio antes de sustituirlos; los enlaces de esta sección corresponden exclusivamente a la nueva ejecución.
+La UI aislada tiene un único test y utiliza un worker. La suite completa registra los workers 0 y 1 con tiempos solapados. Las expectativas de los seis casos adicionales fueron 409 para solapamientos/fechas y 403 para eliminación no autorizada; todos se comprobaron contra el backend real.
 ## Fallos observados y correcciones del agente
 
 | Fallo real | Corrección o diagnóstico | Evidencia conservada |
@@ -104,7 +103,7 @@ y validación de enlaces, recursos, versión del código y reglas de Git. Se acl
 en el README que no requiere una solicitud posterior de limpieza. Este ajuste afecta
 al flujo de futuras invocaciones; no cambia los tests ni acredita una nueva ejecución.
 
-## Revisión técnica del agente y cierre solicitado
+## Revisión técnica del agente y cierre original
 
 El usuario autorizó implementar el plan “Cerrar los pendientes de la entrega técnica”, incluyendo commit y publicación en origin/main. Esta es una revisión del agente y no sustituye la revisión humana.
 
@@ -147,3 +146,56 @@ Pendientes exclusivos del autor: revisión funcional humana y tiempo total real 
 - No se evaluó la persistencia de email/phone ni el diseño visual de la demo.
 - No se ha confirmado un bug de producto: los fallos conservados corresponden al desarrollo o configuración del harness y a herramientas del agente.
 - Los requisitos de entrega aún pendientes se señalan en [README](../README.md).
+
+## Ampliación solicitada y uso de las cuatro skills
+
+El usuario autorizó ejecutar el plan “Ampliar la automatización y configurar MCP por proyecto”: conservar la configuración global, usar Postman remoto con OAuth, implementar las tres skills propuestas y automatizar los tres casos adicionales con dos datasets explícitos cada uno. Esta ampliación excede el mínimo original de propuestas y responde a esa autorización.
+
+Antes de utilizarlas se guardaron .codex/config.toml, la dependencia local y las cuatro skills en el commit **29c1876e6f8e8cfa918b4edf736e26548976394d**, mensaje “configuración: agrega MCP del proyecto y skills de apoyo antes de usarlas”. Se mantuvieron los commits históricos originales.
+
+Invocación coordinada ejecutada por el agente dentro de esa solicitud:
+
+~~~text
+$booker-ui-api-tests: aplicar $revisar-contrato-api y $priorizar-cobertura-reservas; implementar SOL-01, SOL-02, AUT-01, AUT-02, FEC-01 y FEC-02 con datos explícitos; ejecutar UI y suite completa con dos workers; aplicar $diagnosticar-fallos-reservas a fallos reales y cerrar las evidencias.
+~~~
+
+No es una cita adicional atribuida al usuario: describe la invocación efectivamente aplicada por el agente. El encabezado de su solicitud fue PLEASE IMPLEMENT THIS PLAN y el plan autorizado tiene el nombre indicado arriba.
+
+| Skill utilizada | Entrada y salida real |
+| --- | --- |
+| revisar-contrato-api | Leyó la colección y los detalles CreateBooking/DeleteBooking con la conexión Postman del proyecto. Confirmó campos/cookie, ausencia de ejemplos de respuesta y el desfase de autorización de creación pública. Los códigos adicionales se sustentaron antes de ejecutar en BookingService y DateCheckValidator del repositorio oficial, sin confundir referencia con versión desplegada. |
+| priorizar-cobertura-reservas | Contrastó los 4 casos originales con los 6 datasets nuevos. Priorizó P1 solapamiento y autorización, P2 intervalos inválidos, comprobó ventanas separadas y verificó la matriz del README con el listado y reporte de 10 tests. |
+| diagnosticar-fallos-reservas | Analizó el error histórico de .env como configuración, anterior a un POST de reserva; no lo atribuyó al código actual. Analizó además los problemas reales de observación MCP descritos abajo. No cambió expectativas de negocio ni añadió reintentos. |
+| booker-ui-api-tests | Coordinó revisión, implementación, verificación y selección de evidencia. Reutilizó clientes/POM/fixture de autenticación y dejó revisión humana y tiempo real pendientes. |
+
+Cambios de implementación: tests/data/booking-cases.ts con seis datasets tipados; owned-booking.fixture.ts con propiedad por test, captura del intento antes del POST y limpieza de todos los registros propios aun si falla uno; tres specs parametrizados para solapamiento, autorización y fechas. Los clientes públicos y el flujo UI existente no cambiaron. Los contextos HTTP no autorizados empezaron con cookies vacías, sin copiar el token de la fixture autenticada.
+
+### MCP del proyecto comprobados
+
+codex mcp get leyó command=npm.cmd y args=run,--silent,mcp:playwright desde el proyecto. @playwright/mcp 0.0.83 se instaló localmente con npm install --save-dev --save-exact, código 0; la instalación informó cero vulnerabilidades. El usuario completó OAuth y codex mcp login postman terminó con código 0. Los tokens quedaron fuera de Git.
+
+La comprobación posterior utilizó el cliente nativo de Codex app-server en un contexto efímero situado en la raíz del proyecto, sin ejecutar un modelo ni crear un chat de trabajo persistente. El inventario mostró Playwright con 25 herramientas y Postman con OAuth y las siete herramientas de lectura configuradas. Se llamó realmente a getAuthenticatedUser, getCollection y getCollectionRequest para CreateBooking/DeleteBooking desde ese servidor Postman, no como sustitución mediante el plugin global.
+
+El Playwright local navegó a la habitación 3 con las fechas de .env y abrió el formulario sin enviar otra reserva. Se conservaron los campos reales en [snapshot del proyecto](exploration/project-form.yml). El [resumen](final/summary.json) registra conexiones, configuración y comprobaciones. La configuración global conservó exactamente su SHA256 original; sus conexiones permanecen intactas. No se crearon ni modificaron recursos remotos de Postman.
+
+### Diagnóstico de la observación MCP
+
+La herramienta global de la sesión rechazó guardar un snapshot en la ruta de otro workspace. Era una restricción de la raíz de esa conexión, no un error HTTP de la demo. Se verificó después el servidor del proyecto desde su propia raíz, sin ampliar permisos ni modificar la configuración global.
+
+El primer comprobador local usó browser_wait_for con texto visible Firstname. Falló porque ese nombre identificaba el textbox en accesibilidad y no un texto visible independiente: [error conservado](failures/mcp-form-observation.log). Se corrigió únicamente el comprobador temporal para observar el textbox con browser_find y guardar un snapshot; terminó con código 0. El fallo fue del comprobador de herramientas y no de las diez pruebas de negocio, que pasaron sin correcciones ni reintentos.
+
+### Entrega seleccionada
+
+Se archivó íntegra la selección anterior fuera del repositorio y se verificaron sus SHA256 antes de publicar este único reporte. Se conservaron los fallos relevantes y su anonimización previa, se sustituyó el extracto de contrato por la lectura OAuth actual y se añadieron solo el snapshot de la conexión del proyecto y el pequeño log diagnóstico. Los temporales, inventarios completos y salidas compiladas quedaron en work/ ignorado.
+
+El primer intento de archivar mediante rename del directorio evidence recibió EPERM en Windows antes de modificar sus archivos. Se usó una copia íntegra verificada por SHA256 y se trasladaron individualmente los archivos finales anteriores, sin borrar originales ni cambiar permisos.
+
+Las métricas de adopción de skills continúan siendo una propuesta de medición: no se inventaron mejoras de productividad. La autenticación OAuth completada por el usuario acredita esa acción, no una revisión funcional humana de los tests.
+
+Validación final de la ampliación: las cuatro skills pasaron quick_validate.py;
+se comprobaron 50 enlaces locales, las huellas del código ejecutado y de las skills,
+las seis variantes anotadas, sus códigos 409/403 y la selección de Git. El reporte
+HTML y su recurso PNG coinciden por SHA256 con la ejecución original. La captura
+de confirmación fue inspeccionada por el agente: mensaje y fechas legibles. La
+selección conserva 23 archivos, aproximadamente 1,31 MiB. El original de la entrega
+anterior quedó fuera del repositorio, verificado antes de sustituirlo.

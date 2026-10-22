@@ -1,0 +1,212 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - navigation [ref=e7]:
+      - generic [ref=e8]:
+        - link "Shady Meadows B&B" [ref=e9] [cursor=pointer]:
+          - /url: /
+        - list [ref=e12]:
+          - listitem [ref=e13]:
+            - link "Rooms" [ref=e14] [cursor=pointer]:
+              - /url: /#rooms
+          - listitem [ref=e15]:
+            - link "Booking" [ref=e16] [cursor=pointer]:
+              - /url: /#booking
+          - listitem [ref=e17]:
+            - link "Amenities" [ref=e18] [cursor=pointer]:
+              - /url: /#amenities
+          - listitem [ref=e19]:
+            - link "Location" [ref=e20] [cursor=pointer]:
+              - /url: /#location
+          - listitem [ref=e21]:
+            - link "Contact" [ref=e22] [cursor=pointer]:
+              - /url: /#contact
+          - listitem [ref=e23]:
+            - link "Admin" [ref=e24] [cursor=pointer]:
+              - /url: /admin
+    - navigation "breadcrumb" [ref=e27]:
+      - list [ref=e28]:
+        - listitem [ref=e29]:
+          - link "Home" [ref=e30] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=e31]:
+          - text: /
+          - link "Rooms" [ref=e32] [cursor=pointer]:
+            - /url: "#"
+        - listitem [ref=e33]: / Suite Room
+    - generic [ref=e35]:
+      - generic [ref=e36]:
+        - generic [ref=e37]:
+          - heading "Suite Room" [level=1] [ref=e38]
+          - generic [ref=e39]:
+            - generic [ref=e40]: Accessible
+            - generic [ref=e42]:
+              - generic [ref=e43]: 
+              - text: Max 2 Guests
+        - img "Room Image" [ref=e47]
+        - generic [ref=e48]:
+          - heading "Room Description" [level=2] [ref=e49]
+          - paragraph [ref=e50]: Etiam metus metus, fringilla ac sagittis id, consequat vel neque. Nunc commodo quis nisl nec posuere. Etiam at accumsan ex.
+        - generic [ref=e51]:
+          - heading "Room Features" [level=2] [ref=e52]
+          - generic [ref=e53]:
+            - generic [ref=e55]:
+              - generic [ref=e56]: 
+              - generic [ref=e57]: Radio
+            - generic [ref=e59]:
+              - generic [ref=e60]: 
+              - generic [ref=e61]: WiFi
+            - generic [ref=e63]:
+              - generic [ref=e64]: 
+              - generic [ref=e65]: Safe
+        - generic [ref=e66]:
+          - heading "Room Policies" [level=2] [ref=e67]
+          - generic [ref=e68]:
+            - generic [ref=e71]:
+              - heading "Check-in & Check-out" [level=3] [ref=e72]
+              - list [ref=e73]:
+                - listitem [ref=e74]:
+                  - generic [ref=e75]: 
+                  - generic [ref=e76]:
+                    - strong [ref=e77]: "Check-in:"
+                    - text: 3:00 PM - 8:00 PM
+                - listitem [ref=e78]:
+                  - generic [ref=e79]: 
+                  - generic [ref=e80]:
+                    - strong [ref=e81]: "Check-out:"
+                    - text: By 11:00 AM
+                - listitem [ref=e82]:
+                  - generic [ref=e83]: 
+                  - generic [ref=e84]:
+                    - strong [ref=e85]: "Early/Late:"
+                    - text: By arrangement
+            - generic [ref=e88]:
+              - heading "House Rules" [level=3] [ref=e89]
+              - list [ref=e90]:
+                - listitem [ref=e91]:
+                  - generic [ref=e92]: 
+                  - generic [ref=e93]: No smoking
+                - listitem [ref=e94]:
+                  - generic [ref=e95]: 
+                  - generic [ref=e96]: No parties or events
+                - listitem [ref=e97]:
+                  - generic [ref=e98]: 
+                  - generic [ref=e99]: Pets allowed (restrictions apply)
+      - generic [ref=e102]:
+        - heading "Book This Room" [level=2] [ref=e103]
+        - generic [ref=e104]:
+          - generic [ref=e105]: £225
+          - generic [ref=e106]: per night
+        - generic [ref=e107]:
+          - generic [ref=e108]:
+            - generic [ref=e317]: 
+            - textbox "Firstname" [ref=e319]
+          - generic [ref=e257]:
+            - generic [ref=e320]: 
+            - textbox "Lastname" [ref=e322]
+          - generic [ref=e323]:
+            - generic [ref=e324]: 
+            - textbox "Email" [ref=e326]
+          - generic [ref=e327]:
+            - generic [ref=e328]: 
+            - textbox "Phone" [ref=e330]
+          - generic [ref=e332]:
+            - heading "Price Summary" [level=3] [ref=e333]
+            - generic [ref=e334]:
+              - generic [ref=e335]: £225 x 2 nights
+              - generic [ref=e336]: £450
+            - generic [ref=e337]:
+              - generic [ref=e338]: Cleaning fee
+              - generic [ref=e339]: £25
+            - generic [ref=e340]:
+              - generic [ref=e341]: Service fee
+              - generic [ref=e342]: £15
+            - separator [ref=e343]
+            - generic [ref=e344]:
+              - generic [ref=e345]: Total
+              - generic [ref=e346]: £490
+          - button "Reserve Now" [ref=e347] [cursor=pointer]
+          - button "Cancel" [ref=e348] [cursor=pointer]
+    - generic [ref=e275]:
+      - heading "Similar Rooms You Might Like" [level=2] [ref=e276]
+      - generic [ref=e349]:
+        - generic [ref=e351]:
+          - img "Single" [ref=e352]
+          - generic [ref=e353]:
+            - heading "Single" [level=3] [ref=e354]
+            - generic [ref=e355]:
+              - generic [ref=e356]: 
+              - generic [ref=e357]: 2 Guests
+              - generic [ref=e358]:
+                - generic [ref=e359]: £100
+                - text: /night
+            - paragraph [ref=e360]: Aenean porttitor mauris sit amet lacinia molestie. In posuere accumsan aliquet. Maecenas sit amet nisl massa. Interdum et malesuada fames ac ante.
+            - link "View Details" [ref=e361] [cursor=pointer]:
+              - /url: /reservation/1?checkin=2026-11-10&checkout=2026-11-12
+        - generic [ref=e363]:
+          - img "Double" [ref=e364]
+          - generic [ref=e365]:
+            - heading "Double" [level=3] [ref=e366]
+            - generic [ref=e367]:
+              - generic [ref=e368]: 
+              - generic [ref=e369]: 2 Guests
+              - generic [ref=e370]:
+                - generic [ref=e371]: £150
+                - text: /night
+            - paragraph [ref=e372]: Vestibulum sollicitudin, lectus ac mollis consequat, lorem orci ultrices tellus, eleifend euismod tortor dui egestas erat. Phasellus et ipsum nisl.
+            - link "View Details" [ref=e373] [cursor=pointer]:
+              - /url: /reservation/2?checkin=2026-11-10&checkout=2026-11-12
+    - contentinfo [ref=e277]:
+      - generic [ref=e278]:
+        - generic [ref=e279]:
+          - generic [ref=e280]:
+            - heading "Shady Meadows B&B" [level=5] [ref=e281]
+            - paragraph [ref=e282]: Welcome to Shady Meadows, a delightful Bed & Breakfast nestled in the hills on Newingtonfordburyshire. A place so beautiful you will never want to leave. All our rooms have comfortable beds and we provide breakfast from the locally sourced supermarket. It is a delightful place.
+            - generic [ref=e283]:
+              - link "" [ref=e284] [cursor=pointer]:
+                - /url: "#"
+              - link "" [ref=e286] [cursor=pointer]:
+                - /url: "#"
+              - link "" [ref=e288] [cursor=pointer]:
+                - /url: "#"
+          - generic [ref=e290]:
+            - heading "Contact Us" [level=5] [ref=e291]
+            - list [ref=e292]:
+              - listitem [ref=e293]:
+                - generic [ref=e294]: 
+                - text: Shady Meadows B&B, Shadows valley, Newingtonfordburyshire, Dilbery, N1 1AA
+              - listitem [ref=e295]:
+                - generic [ref=e296]: 
+                - text: "012345678901"
+              - listitem [ref=e297]:
+                - generic [ref=e298]: 
+                - text: fake@fakeemail.com
+          - generic [ref=e299]:
+            - heading "Quick Links" [level=5] [ref=e300]
+            - list [ref=e301]:
+              - listitem [ref=e302]:
+                - link "Home" [ref=e303] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e304]:
+                - link "Rooms" [ref=e305] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e306]:
+                - link "Booking" [ref=e307] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e308]:
+                - link "Contact" [ref=e309] [cursor=pointer]:
+                  - /url: "#"
+        - separator [ref=e310]
+        - generic [ref=e312]:
+          - text: restful-booker-platform v2.2 Created by
+          - link "Mark Winteringham" [ref=e313] [cursor=pointer]:
+            - /url: http://www.mwtestconsultancy.co.uk
+          - text: "- © 2019-26"
+          - link "Cookie-Policy" [ref=e314] [cursor=pointer]:
+            - /url: /cookie
+          - text: "-"
+          - link "Privacy-Policy" [ref=e315] [cursor=pointer]:
+            - /url: /privacy
+          - text: "-"
+          - link "Admin panel" [ref=e316] [cursor=pointer]:
+            - /url: /admin
+  - alert [ref=e6]
