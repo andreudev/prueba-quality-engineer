@@ -453,5 +453,14 @@
   "report": "report/index.html",
   "reservationEvidence": "reservation.json",
   "humanReview": "Pendiente",
-  "totalTimeSpent": "Pendiente de indicar por el autor"
+  "totalTimeSpent": "Pendiente de indicar por el autor",
+  "publicationVerification": {
+    "codeAndReportCommit": "f928ae269a0cabb2710578bb0ecebcf7bda9d634",
+    "pushExitCode": 0,
+    "localAndRemoteMatched": true,
+    "anonymousTreeHttpStatus": 200,
+    "requiredFilesVerified": 12,
+    "evidenceFiles": 23,
+    "verifiedAtUtc": "2026-10-22T23:26:01.8036737Z"
+  }
 }

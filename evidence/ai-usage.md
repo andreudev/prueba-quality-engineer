@@ -199,3 +199,15 @@ HTML y su recurso PNG coinciden por SHA256 con la ejecución original. La captur
 de confirmación fue inspeccionada por el agente: mensaje y fechas legibles. La
 selección conserva 23 archivos, aproximadamente 1,31 MiB. El original de la entrega
 anterior quedó fuera del repositorio, verificado antes de sustituirlo.
+
+### Publicación de la ampliación
+
+El commit [f928ae269a0cabb2710578bb0ecebcf7bda9d634](https://github.com/andreudev/prueba-quality-engineer/commit/f928ae269a0cabb2710578bb0ecebcf7bda9d634)
+publicó la implementación y evidencia, conservando el commit previo 29c1876 de las
+skills. git push origin main terminó con código 0 y git ls-remote confirmó el mismo
+commit local y remoto. El 2026-10-22 a las 23:26:01 UTC, el árbol público de GitHub
+respondió HTTP 200 sin autenticación: se comprobaron doce rutas requeridas,
+incluyendo configuración MCP, cuatro skills, datasets, fixture, tres specs y reporte;
+había 23 archivos de evidencia. Este registro documental posterior no modifica
+el código de las diez pruebas ejecutadas. No se usó force push ni se cambió la
+visibilidad del repositorio o la configuración global de MCP.
