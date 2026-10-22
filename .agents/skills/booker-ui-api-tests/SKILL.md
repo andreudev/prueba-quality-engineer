@@ -16,6 +16,8 @@ comprueben su confirmación y consulten por API exactamente el mismo registro.
 - BASE_URL, BOOKING_CHECKIN y BOOKING_CHECKOUT del entorno.
 - Datos sintéticos del huésped.
 - Configuración, tipos, clientes y fixtures existentes.
+- Conexión al servidor MCP `playwright`, descrita en la
+  [configuración del proyecto](../../../docs/playwright-mcp.md).
 - Documentación de API:
   https://www.postman.com/automation-in-testing/restful-booker-collections/documentation/ci13ds3/restful-booker-platform
 
@@ -28,6 +30,23 @@ comprueben su confirmación y consulten por API exactamente el mismo registro.
    Distingue contrato documentado, comportamiento observado y supuestos.
 4. Inspecciona la interfaz actual antes de elegir locators.
 5. Consulta la disponibilidad de la habitación para las fechas configuradas.
+
+## Exploración con Playwright MCP
+
+- Usa el servidor MCP `playwright` para explorar la interfaz antes de escribir
+  o cambiar el Page Object. Comprueba que sus herramientas estén disponibles.
+- Navega a la URL del entorno y obtén un snapshot de accesibilidad actual.
+- Identifica roles, nombres accesibles, etiquetas y atributos realmente
+  observados. Vuelve a obtener el estado después de navegar o cambiar la página.
+- Utiliza las referencias temporales del snapshot para explorar. En el código
+  de las pruebas escribe locators estables basados en los elementos observados.
+- Guarda la URL y la evidencia de exploración en `evidence`. Distingue una
+  observación real de una expectativa o una hipótesis.
+- Verifica cada locator y la confirmación de reserva ejecutando Playwright Test
+  contra el backend real, sin sustituir sus respuestas por mocks.
+- Si Playwright MCP no está conectado o un elemento no se puede inspeccionar,
+  registra la limitación y resuelve esa conexión u observación antes de
+  implementar la interacción. No inventes selectores, respuestas ni resultados.
 
 ## Convenciones
 

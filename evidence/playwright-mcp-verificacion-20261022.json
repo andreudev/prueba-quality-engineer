@@ -1,0 +1,60 @@
+{
+  "server": "playwright",
+  "package": "@playwright/mcp@0.0.83",
+  "transport": "stdio",
+  "launcher": "npx.cmd",
+  "args": [
+    "-y",
+    "@playwright/mcp@0.0.83",
+    "--headless",
+    "--isolated"
+  ],
+  "verificationClient": "@modelcontextprotocol/inspector --cli",
+  "toolsListExitCode": 0,
+  "toolsCount": 25,
+  "tools": [
+    "browser_close",
+    "browser_resize",
+    "browser_console_messages",
+    "browser_handle_dialog",
+    "browser_emulate_media",
+    "browser_evaluate",
+    "browser_file_upload",
+    "browser_drop",
+    "browser_find",
+    "browser_fill_form",
+    "browser_press_key",
+    "browser_type",
+    "browser_navigate",
+    "browser_navigate_back",
+    "browser_network_requests",
+    "browser_network_request",
+    "browser_run_code_unsafe",
+    "browser_take_screenshot",
+    "browser_snapshot",
+    "browser_click",
+    "browser_drag",
+    "browser_hover",
+    "browser_select_option",
+    "browser_tabs",
+    "browser_wait_for"
+  ],
+  "call": {
+    "name": "browser_navigate",
+    "arguments": {
+      "url": "https://automationintesting.online/"
+    }
+  },
+  "callExitCode": 0,
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "### Ran Playwright code\n```js\nawait page.goto('https://automationintesting.online/');\n```\n### Page\n- Page URL: https://automationintesting.online/\n- Page Title: Restful-booker-platform demo\n### Snapshot\n- [Snapshot](.playwright-mcp\\page-2026-10-22T21-38-21-446Z.yml)"
+      }
+    ]
+  },
+  "snapshotCopy": "evidence/playwright-mcp-inicio-20261022-213821.yml",
+  "snapshotObservation": "Estado de carga inicial; todavía no se han identificado los controles del formulario.",
+  "codexChatToolExposure": "Pendiente de reiniciar la conexión MCP en el cliente; no se observaron herramientas playwright expuestas en el chat actual."
+}

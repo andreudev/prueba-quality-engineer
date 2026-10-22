@@ -1,0 +1,5 @@
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "playwright"
+      description: "Inspecciona la interfaz real mediante Playwright MCP antes de implementar locators."
