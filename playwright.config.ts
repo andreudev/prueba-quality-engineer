@@ -25,7 +25,7 @@ export default defineConfig({
     /* Base URL to use in actions like `await page.goto('')`. */
     baseURL: process.env.BASE_URL || "https://automationintesting.online",
 
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+    /* Keep traces for failed tests; retries remain disabled. */
     trace: "retain-on-failure",
     screenshot: "only-on-failure",
     video: "retain-on-failure",

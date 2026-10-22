@@ -1,0 +1,8 @@
+
+> prueba-quality-engineer@1.0.0 typecheck
+> tsc --noEmit
+
+tests/ui/booking-integrated.spec.ts(114,59): error TS2345: Argument of type 'CreateBookingRequest' is not assignable to parameter of type 'unknown[] | Record<string, unknown>'.
+  Type 'CreateBookingRequest' is not assignable to type 'Record<string, unknown>'.
+    Index signature for type 'string' is missing in type 'CreateBookingRequest'.
+EXIT_CODE=1

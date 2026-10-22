@@ -12,3 +12,13 @@ node_modules/
 .env
 .env.*
 !.env.example
+
+# Evidencia seleccionada para la entrega; las ejecuciones habituales usan
+# playwright-report/, test-results/ y work/, sin versionarlos.
+/work/
+/evidence/*
+!/evidence/ai-usage.md
+!/evidence/postman-contract.json
+!/evidence/final/
+!/evidence/exploration/
+!/evidence/failures/

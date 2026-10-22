@@ -1,0 +1,625 @@
+{
+  "info": {
+    "_postman_id": "55c5fdaf-6595-4ecd-a3f8-baf4d814e872",
+    "name": "Restful-Booker-Platform",
+    "description": "# Restful-Booker-Platform\n\nWelcome to restful-booker-platform, a collection of Web APIs built using SpringBoot that form together to create a fake Bed and Breakfast website. Each API is responsible for a section of the site, for example the management of rooms and bookings.\n\nAs this is a more complex application the challenge with testing this site is understanding when to focus on individual API testing, and when to combine APIs in your testing.\n\nIt also comes with a ReactJS frontend that can be used for practising testing techniques beyond API testing.\n\n**Where are the APIs?**\n\nYou can find the code for Restful-booker-platform on GitHub here: [https://github.com/mwinteringham/restful-booker-platform](https://github.com/mwinteringham/restful-booker-platform)\n\nYou can find a deployed instance at [https://automationintesting.online](https://automationintesting.online)\n\nThe application is seeded with data for you to work with **and resets itself every 10 minutes back to that default state.**",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2022-05-20T10:21:41.000Z",
+    "updatedAt": "2022-10-06T10:24:29.000Z",
+    "lastUpdatedBy": "943229",
+    "uid": "92957-55c5fdaf-6595-4ecd-a3f8-baf4d814e872"
+  },
+  "variable": [
+    {
+      "key": "host",
+      "value": "https://automationintesting.online",
+      "type": "string"
+    }
+  ],
+  "folders": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "/auth/actuator/health - HealthCheck",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "dff1ebb7-bc6d-4b5a-a315-caef66ed8042",
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "id": "926f3d49-1cab-4279-862b-52c35982e46f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/api/auth/actuator/health",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "actuator",
+                "health"
+              ]
+            },
+            "description": "A simple health check request for the Auth API."
+          },
+          "response": [],
+          "createdAt": "2022-06-07T10:03:35.000Z",
+          "updatedAt": "2025-09-27T17:35:20.000Z",
+          "uid": "92957-926f3d49-1cab-4279-862b-52c35982e46f"
+        },
+        {
+          "name": "/auth/login - CreateToken",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "ac601d61-cba2-45d7-be9a-c0f2a83cc7ca",
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "id": "f881f028-031d-4a77-b9a5-221888ea3876",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "*/*"
+              },
+              {
+                "key": "Referer",
+                "value": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"password\"\n}"
+            },
+            "url": {
+              "raw": "{{host}}/api/auth/login",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "A request that allows you to create a `token` that can be used by other requests to authenticate yourself.\n\nIf you would like to use authenticated API calls within this collection. Run the `/auth/login` request once and a valid token will be added.\n\n**Please note, tokens are reset on the deployed instance every 10 minutes**"
+          },
+          "response": [
+            {
+              "id": "84fe8fd2-b53d-4b50-87a1-f049bc51a55a",
+              "name": "/auth/login - CreateToken",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "accept",
+                    "value": "*/*"
+                  },
+                  {
+                    "key": "Referer",
+                    "value": ""
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"password\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{host}}/api/auth/login",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2022-07-25T21:07:37.000Z",
+              "updatedAt": "2025-09-27T17:35:38.000Z",
+              "uid": "92957-84fe8fd2-b53d-4b50-87a1-f049bc51a55a"
+            }
+          ],
+          "createdAt": "2022-06-06T20:37:14.000Z",
+          "updatedAt": "2025-09-27T18:21:14.000Z",
+          "uid": "92957-f881f028-031d-4a77-b9a5-221888ea3876"
+        },
+        {
+          "name": "/auth/validate - ValidateToken",
+          "id": "2321cb70-0e36-4986-b6d3-bdb8c44a8399",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "*/*"
+              },
+              {
+                "key": "Referer",
+                "value": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"abc123\"\n}"
+            },
+            "url": {
+              "raw": "{{host}}/api/auth/validate",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "validate"
+              ]
+            },
+            "description": "A request that allows you to validate whether a token is valid or not. The `token` is added to the body of the request."
+          },
+          "response": [
+            {
+              "id": "f068392f-a067-48cf-8283-5c5829a5281c",
+              "name": "/auth/validate - ValidateToken",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "accept",
+                    "value": "*/*"
+                  },
+                  {
+                    "key": "Referer",
+                    "value": ""
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"abc123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{host}}/api/auth/validate",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "validate"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2022-07-21T16:20:52.000Z",
+              "updatedAt": "2025-09-27T17:35:44.000Z",
+              "uid": "92957-f068392f-a067-48cf-8283-5c5829a5281c"
+            }
+          ],
+          "createdAt": "2022-06-06T20:35:05.000Z",
+          "updatedAt": "2025-09-27T17:35:48.000Z",
+          "uid": "92957-2321cb70-0e36-4986-b6d3-bdb8c44a8399"
+        },
+        {
+          "name": "/auth/logout - DestroyToken",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "3647c0d4-5a81-4c77-bfb7-7b84b6ffc410",
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "id": "af154e78-fc74-45fa-851c-a24716c2370d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "*/*"
+              },
+              {
+                "key": "Referer",
+                "value": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"abc123\"\n}"
+            },
+            "url": {
+              "raw": "{{host}}/api/auth/logout",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "logout"
+              ]
+            },
+            "description": "A request that allows you to destroy a token within the Auth API. The `token` is added to the body of the request."
+          },
+          "response": [],
+          "createdAt": "2022-06-06T20:36:09.000Z",
+          "updatedAt": "2025-09-27T17:38:42.000Z",
+          "uid": "92957-af154e78-fc74-45fa-851c-a24716c2370d"
+        }
+      ],
+      "id": "ffa77321-bb4d-4473-b376-74673be8fb35",
+      "description": "## Restful-Booker-Platform: Auth\n\nThe Auth API within restful-booker-platform is responsible for managing who can and cannot make specific calls within the application.\n\nOther APIs within the platform rely upon the Auth API to determine if specific requests can be carried out. For example, when creating a Room a valid `token` needs to be sent in the `Cookie` header inside the POST request. The Room API will then send the `token` to Auth API to validate if the token is real.\n\n**Authenticating for other APIs**\n\nIf you would like to use authenticated API calls within this collection. Run the `/auth/login` request once and a valid token will be added.\n\n**Please note, tokens are reset on the deployed instance every 10 minutes**",
+      "createdAt": "2022-06-06T19:36:55.000Z",
+      "updatedAt": "2022-06-07T10:03:38.000Z",
+      "uid": "92957-ffa77321-bb4d-4473-b376-74673be8fb35"
+    },
+    {
+      "name": "Booking",
+      "item": [
+        {
+          "name": "/booking/actuator/health - HealthCheck",
+          "id": "d7b09bef-4402-4f81-aad1-ffc4020cf575",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/api/booking/actuator/health",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "booking",
+                "actuator",
+                "health"
+              ]
+            },
+            "description": "A simple health check request for the Booking API."
+          },
+          "response": [],
+          "createdAt": "2022-06-07T10:00:30.000Z",
+          "updatedAt": "2025-09-27T19:54:14.000Z",
+          "uid": "92957-d7b09bef-4402-4f81-aad1-ffc4020cf575"
+        },
+        {
+          "name": "/booking/:id - GetBooking",
+          "id": "9562ac15-184f-4452-abc7-c0437b592ac3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "accept",
+                "value": "*/*"
+              },
+              {
+                "key": "Referer",
+                "value": ""
+              },
+              {
+                "key": "Cookie",
+                "value": "token={{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{host}}/api/booking/1",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "booking",
+                "1"
+              ]
+            },
+            "description": "A simple request to get the details of a booking. To get different bookings, simply change the booking ID from '1' to a different ID number.\n\n**Authorisation**\n\nTo use this request you must be authorised.\n\nAuthorisation is achieved by creating a `Cookie` header with the value `token=abc123`. To get a valid token, you send a request to `POST /auth` using the `Auth` API in restful-booker-platform.\n\nSimply run the request once with the default credentials to have Postman add a `token` to the Cookies manager."
+          },
+          "response": [],
+          "createdAt": "2022-06-07T09:53:40.000Z",
+          "updatedAt": "2025-09-27T19:03:38.000Z",
+          "uid": "92957-9562ac15-184f-4452-abc7-c0437b592ac3"
+        },
+        {
+          "name": "/booking/ - GetBookings",
+          "id": "fdcac68c-880f-446e-92ec-5abc9332a660",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "accept",
+                "value": "*/*"
+              },
+              {
+                "key": "Referer",
+                "value": ""
+              },
+              {
+                "key": "Cookie",
+                "value": "token={{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{host}}/api/booking/?roomid=1",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "booking",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "roomid",
+                  "value": "1"
+                }
+              ]
+            },
+            "description": "A simple request that returns all the bookings for a specific room. The request contains an optional querystring of `roomid`\n\nAdd the `roomid` query string to only return bookings for a specific room. Alternatively, remove the query string to return all bookings within the API.\n\n**Authorisation**\n\nTo use this request you must be authorised.\n\nAuthorisation is achieved by creating a `Cookie` header with the value `token=abc123`. To get a valid token, you send a request to `POST /auth` using the `Auth` API in restful-booker-platform.\n\nSimply run the request once with the default credentials to have Postman add a `token` to the Cookies manager."
+          },
+          "response": [],
+          "createdAt": "2022-06-07T09:54:45.000Z",
+          "updatedAt": "2025-09-27T19:54:45.000Z",
+          "uid": "92957-fdcac68c-880f-446e-92ec-5abc9332a660"
+        },
+        {
+          "name": "/booking/summary - GetBookingSummary",
+          "id": "e222224d-ed24-4da2-9844-958c9904e2bb",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Cookie",
+                "value": "token={{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{host}}/api/booking/summary?roomid=1",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "booking",
+                "summary"
+              ],
+              "query": [
+                {
+                  "key": "roomid",
+                  "value": "1"
+                }
+              ]
+            },
+            "description": "A simple request that returns summary details for all the bookings for a specific room. The request contains an optional querystring of `roomid`\n\nAdd the `roomid` query string to only return bookings for a specific room. Alternatively, remove the query string to return all bookings within the API.\n\n**Authorisation**\n\nTo use this request you must be authorised.\n\nAuthorisation is achieved by creating a `Cookie` header with the value `token=abc123`. To get a valid token, you send a request to `POST /auth` using the `Auth` API in restful-booker-platform.\n\nSimply run the request once with the default credentials to have Postman add a `token` to the Cookies manager."
+          },
+          "response": [],
+          "createdAt": "2022-06-07T09:56:09.000Z",
+          "updatedAt": "2025-09-27T19:09:33.000Z",
+          "uid": "92957-e222224d-ed24-4da2-9844-958c9904e2bb"
+        },
+        {
+          "name": "/booking/ - CreateBooking",
+          "id": "48e61e2a-40b0-4153-a4b2-4b4b59f83ad2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "*/*"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Cookie",
+                "value": "token={{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"roomid\": 1,\n    \"firstname\": \"James\",\n    \"lastname\": \"Dean\",\n    \"depositpaid\": true,\n    \"email\": \"test@email.com\",\n    \"phone\": \"07123456789\",\n    \"bookingdates\": {\n        \"checkin\": \"2026-03-06\",\n        \"checkout\": \"2026-03-07\"\n    }\n}"
+            },
+            "url": {
+              "raw": "{{host}}/api/booking/",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "booking",
+                ""
+              ]
+            },
+            "description": "A request that allows you to create a booking within the Booking API.\n\nNote that the `email` and `phone` parameters within the booking payload are optional. Removing them will mean the booking API will not make a call to the Message API.\n\n**Authorisation**\n\nTo use this request you must be authorised.\n\nAuthorisation is achieved by creating a `Cookie` header with the value `token=abc123`. To get a valid token, you send a request to `POST /auth` using the `Auth` API in restful-booker-platform.\n\nSimply run the request once with the default credentials to have Postman add a `token` to the Cookies manager."
+          },
+          "response": [],
+          "createdAt": "2022-06-07T09:58:02.000Z",
+          "updatedAt": "2025-09-27T19:20:18.000Z",
+          "uid": "92957-48e61e2a-40b0-4153-a4b2-4b4b59f83ad2"
+        },
+        {
+          "name": "/booking/:id - UpdateBooking",
+          "id": "61fa67b0-0789-495c-b082-429ed2e80896",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Referer",
+                "value": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Cookie",
+                "value": "token={{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"roomid\": 1,\n    \"firstname\": \"James\",\n    \"lastname\": \"Dean\",\n    \"depositpaid\": true,\n    \"bookingdates\": {\n        \"checkin\": \"2026-02-01\",\n        \"checkout\": \"2026-02-05\"\n    }\n}"
+            },
+            "url": {
+              "raw": "{{host}}/api/booking/1",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "booking",
+                "1"
+              ]
+            },
+            "description": "A request that allows you to update a booking's details within the booking API. To update other bookings, simply update the booking ID from '1' to a different booking ID number.\n\n**Authorisation**\n\nTo use this request you must be authorised.\n\nAuthorisation is achieved by creating a `Cookie` header with the value `token=abc123`. To get a valid token, you send a request to `POST /auth` using the `Auth` API in restful-booker-platform.\n\nSimply run the request once with the default credentials to have Postman add a `token` to the Cookies manager."
+          },
+          "response": [],
+          "createdAt": "2022-06-07T09:59:02.000Z",
+          "updatedAt": "2025-09-27T19:20:12.000Z",
+          "uid": "92957-61fa67b0-0789-495c-b082-429ed2e80896"
+        },
+        {
+          "name": "/booking/:id - DeleteBooking",
+          "id": "8ea379f1-02a4-41f8-9bd3-4931e7509c1c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Cookie",
+                "value": "token={{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{host}}/api/booking/1",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "booking",
+                "1"
+              ]
+            },
+            "description": "A request that allows you to delete a booking's details within the booking API. To delete other bookings, simply update the booking ID from '1' to a different booking ID number.\n\n**Authorisation**\n\nTo use this request you must be authorised.\n\nAuthorisation is achieved by creating a `Cookie` header with the value `token=abc123`. To get a valid token, you send a request to `POST /auth` using the `Auth` API in restful-booker-platform.\n\nSimply run the request once with the default credentials to have Postman add a `token` to the Cookies manager."
+          },
+          "response": [],
+          "createdAt": "2022-06-07T09:59:43.000Z",
+          "updatedAt": "2025-09-27T17:52:17.000Z",
+          "uid": "92957-8ea379f1-02a4-41f8-9bd3-4931e7509c1c"
+        }
+      ],
+      "id": "e980416f-3de2-4137-aa46-b57bc82389e3",
+      "description": "## Restful-Booker-Platform: Booking\n\nThe Booking API of restful-booker-platform is responsible for managing the bookings within the platform. The API allows you to create, read, update and delete bookings\n\n**Authorisation**\n\nRequests such as read, update and delete bookings require you to be authorised.\n\nAuthorisation is achieved by creating a `Cookie` header with the value `token=abc123`. To get a valid token, you send a request to `POST /auth` using the `Auth` API in restful-booker-platform.\n\nSimply run the request once with the default credentials to have Postman add a `token` to the Cookies manager.",
+      "createdAt": "2022-06-06T19:37:48.000Z",
+      "updatedAt": "2022-06-07T10:03:19.000Z",
+      "uid": "92957-e980416f-3de2-4137-aa46-b57bc82389e3"
+    }
+  ]
+}

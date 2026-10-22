@@ -1,0 +1,162 @@
+{
+  "date": "2026-10-22",
+  "selectionStatus": "Cierre técnico del agente completado; revisión humana funcional pendiente",
+  "skillCommitBeforeImplementation": "6aecc9591eb81e0aab136eaded89bcf55bd4c843",
+  "codeBaseCommit": "6aecc9591eb81e0aab136eaded89bcf55bd4c843",
+  "implementationSha256": [
+    {
+      "path": "src/api/AuthClient.ts",
+      "sha256": "D9C476927A1BF28FE8AA7CE8C90A3CA89D20ED1AB82EB34E272DC66E5B2D5DEB"
+    },
+    {
+      "path": "src/api/BookingClient.ts",
+      "sha256": "7FD7B931FCC2806206D27572F20ADE4C665C19A83A07BAA77DDD2F618C271D43"
+    },
+    {
+      "path": "src/pages/BookingConfirmationPage.ts",
+      "sha256": "BACF5A661D0FCC402DE591126E1D2CEF14DDD19DD8D9E8E381A235CC8B6BBF58"
+    },
+    {
+      "path": "src/pages/ReservationPage.ts",
+      "sha256": "05BB5504B19F322740B1155D5A59DE447999A8FFCF4DC7B60C5B8E636D2E9010"
+    },
+    {
+      "path": "src/types/auth.ts",
+      "sha256": "5C7E5C53FC5BD5E594A972B5F9C7422DC0E5259C06009D18296AB42CC88F8146"
+    },
+    {
+      "path": "src/types/booking.ts",
+      "sha256": "97AAEDCA52E0820CFE433B28D482366A4C128A934B8E9C118D2C70B2529594BD"
+    },
+    {
+      "path": "tests/api/booking-negative.spec.ts",
+      "sha256": "700558E2697E5676F0A8C127CEF6AB4E5C79E456EDC60488EB49CCCD9FB5F962"
+    },
+    {
+      "path": "tests/api/booking-success-with-deposit.spec.ts",
+      "sha256": "1FC019630F4B33A880DD7A356841FB87DCD11A2E5618E18E9E7F749A03CAA117"
+    },
+    {
+      "path": "tests/api/booking-success.spec.ts",
+      "sha256": "E142DF9AD239F22E6898315367031AFE35BE0C555E6AB506BC5D185B9442BD1C"
+    },
+    {
+      "path": "tests/fixtures/api.fixture.ts",
+      "sha256": "F8F1720B5A6D8FB270B12CB1A93EA9F487E53779EA1AED90D1915DFF8EB64FAF"
+    },
+    {
+      "path": "tests/scenarios/booking-success.scenario.ts",
+      "sha256": "C52F56E8305FACCC69DDA24519130B8DEEAF8D1822A43E1021FFD5B87D6CB17F"
+    },
+    {
+      "path": "tests/ui/booking-integrated.spec.ts",
+      "sha256": "E7B07D52BA9CEFDE3AE72AE93C733EB7D47BB81CD97978DB8138D69C9AA72E45"
+    },
+    {
+      "path": "playwright.config.ts",
+      "sha256": "C079B982BE81AE939B74729330FB5DDAAED047A55CD842635360BB48BF62564C"
+    },
+    {
+      "path": "tsconfig.json",
+      "sha256": "03D213F1ABB2BF1827D4214C686E905DBD0E3A59826752F4FDA135B49D54567F"
+    },
+    {
+      "path": "package.json",
+      "sha256": "00CFDB770044750E9EC651288C305EDCD239D20502D171BD5A0245167E18E1E6"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "8DF0D54D245B7A00A372D1302F6F1E6E0C0158E7370B0EB5FA2A5CD6784202B2"
+    }
+  ],
+  "hashSemantics": "SHA256 de los bytes de los archivos del árbol de trabajo ejecutado antes del commit; Git puede normalizar finales de línea.",
+  "skillAtClosureSha256": "5881B390D79F4CF614DBC8BBDD8516C68749B4083BE0C58B616FE770DAFC061B",
+  "stats": {
+    "startTime": "2026-10-22T22:39:09.248Z",
+    "duration": 7001.744,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "actualWorkerIndexes": [
+    0,
+    1
+  ],
+  "tests": [
+    {
+      "title": "rechazar un nombre vacío sin guardar la reserva",
+      "suite": "api\\booking-negative.spec.ts",
+      "project": "chromium",
+      "status": "passed",
+      "workerIndex": 0,
+      "startTime": "2026-10-22T22:39:09.884Z",
+      "durationMs": 1171
+    },
+    {
+      "title": "crear y consultar una reserva",
+      "suite": "api\\booking-success-with-deposit.spec.ts > Reservas por API - con depósito",
+      "project": "chromium",
+      "status": "passed",
+      "workerIndex": 1,
+      "startTime": "2026-10-22T22:39:09.888Z",
+      "durationMs": 2259
+    },
+    {
+      "title": "crear y consultar una reserva",
+      "suite": "api\\booking-success.spec.ts > Reservas por API - sin depósito",
+      "project": "chromium",
+      "status": "passed",
+      "workerIndex": 0,
+      "startTime": "2026-10-22T22:39:11.100Z",
+      "durationMs": 2229
+    },
+    {
+      "title": "crear una reserva por UI y consultar exactamente la misma por API",
+      "suite": "ui\\booking-integrated.spec.ts",
+      "project": "chromium",
+      "status": "passed",
+      "workerIndex": 1,
+      "startTime": "2026-10-22T22:39:12.185Z",
+      "durationMs": 3879
+    }
+  ],
+  "commands": [
+    {
+      "command": "npm.cmd run typecheck",
+      "exitCode": 0,
+      "log": "typecheck.log"
+    },
+    {
+      "command": "npx.cmd playwright test tests/ui --project=chromium --workers=2 --reporter=list,html,json --output=work/verification/ui-artifacts",
+      "exitCode": 0,
+      "actualWorkers": 1,
+      "durationMs": 8382.223,
+      "log": "ui.log",
+      "environment": {
+        "PLAYWRIGHT_HTML_OUTPUT_DIR": "work/verification/ui-report",
+        "PLAYWRIGHT_JSON_OUTPUT_FILE": "work/verification/ui-results.json"
+      }
+    },
+    {
+      "command": "npx.cmd playwright test tests/api tests/ui --project=chromium --workers=2 --reporter=list,html,json --output=work/verification/full-artifacts",
+      "exitCode": 0,
+      "actualWorkers": 2,
+      "log": "suite.log",
+      "environment": {
+        "PLAYWRIGHT_HTML_OUTPUT_DIR": "work/verification/full-report",
+        "PLAYWRIGHT_JSON_OUTPUT_FILE": "work/verification/full-results.json"
+      }
+    }
+  ],
+  "report": "report/index.html",
+  "reservationEvidence": "reservation.json",
+  "repository": {
+    "url": "https://github.com/andreudev/prueba-quality-engineer",
+    "anonymousReadVerified": true,
+    "httpStatus": 200,
+    "visibilityChanged": false
+  },
+  "humanReview": "Pendiente; la revisión técnica del agente no constituye revisión humana.",
+  "totalTimeSpent": "Pendiente de indicar por el autor."
+}

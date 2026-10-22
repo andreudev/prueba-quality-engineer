@@ -1,0 +1,9 @@
+
+Running 1 test using 1 worker
+
+(node:36152) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 [chromium] › tests\ui\booking-integrated.spec.ts:64:5 › crear una reserva por UI y consultar exactamente la misma por API (7.5s)
+
+  1 passed (8.4s)
+EXIT_CODE=0

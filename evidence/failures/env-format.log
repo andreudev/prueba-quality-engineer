@@ -1,0 +1,45 @@
+
+Running 1 test using 1 worker
+
+(node:3064) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 [chromium] › tests\ui\booking-integrated.spec.ts:64:5 › crear una reserva por UI y consultar exactamente la misma por API (954ms)
+
+
+  1) [chromium] › tests\ui\booking-integrated.spec.ts:64:5 › crear una reserva por UI y consultar exactamente la misma por API
+
+    Error: expect(received).toMatch(expected)
+
+    Expected pattern: /^\d{4}-\d{2}-\d{2}$/
+    Received string:  "\"2026-11-12\"BASE_URL=https://automationintesting.online"
+
+      67 |   if (!checkin || !checkout) throw new Error("Define BOOKING_CHECKIN y BOOKING_CHECKOUT.");
+      68 |   for (const date of [checkin, checkout]) {
+    > 69 |     expect(date).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+         |                  ^
+      70 |     expect(new Date(`${date}T00:00:00Z`).toISOString().slice(0, 10)).toBe(date);
+      71 |   }
+      72 |   expect(checkin > new Date().toISOString().slice(0, 10)).toBe(true);
+        at C:\Users\Andre\OneDrive\Documentos\prueba-quality-engineer\tests\ui\booking-integrated.spec.ts:69:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    evidence\runs\ui-final\artifacts\ui-booking-integrated-crea-8d0d9-xactamente-la-misma-por-API-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    evidence\runs\ui-final\artifacts\ui-booking-integrated-crea-8d0d9-xactamente-la-misma-por-API-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: evidence\runs\ui-final\artifacts\ui-booking-integrated-crea-8d0d9-xactamente-la-misma-por-API-chromium\error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    evidence\runs\ui-final\artifacts\ui-booking-integrated-crea-8d0d9-xactamente-la-misma-por-API-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace evidence\runs\ui-final\artifacts\ui-booking-integrated-crea-8d0d9-xactamente-la-misma-por-API-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › tests\ui\booking-integrated.spec.ts:64:5 › crear una reserva por UI y consultar exactamente la misma por API
+EXIT_CODE=1

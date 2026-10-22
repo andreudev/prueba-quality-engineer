@@ -41,6 +41,38 @@ Las referencias temporales de un snapshot no deben convertirse en selectores
 persistentes de la prueba. La exploración del navegador no cuenta como una
 prueba automatizada aprobada.
 
+## Diagnóstico del rechazo de aprobación
+
+Si una herramienta devuelve `MCP tool call requires approval, but approval policy
+is never`, la llamada encontró una exigencia de aprobación que la política
+activa de Codex no permite solicitar. Ese resultado no contiene un error HTTP
+de la aplicación ni demuestra que el servidor Playwright esté desconectado.
+
+La política general de aprobación y las reglas por herramienta MCP son ajustes
+distintos. Consulta el perfil efectivo de la sesión y las reglas de la herramienta
+concreta; una autorización para `browser_click` no establece la de
+`browser_fill_form`. El archivo de configuración puede diferir del perfil activo
+de una sesión. La [referencia oficial de configuración](https://learn.chatgpt.com/docs/config-file/config-reference)
+describe `approval_policy` y `mcp_servers.<id>.tools.<tool>.approval_mode`.
+
+El 2026-10-22 se repitieron las llamadas antes rechazadas y funcionaron
+`browser_evaluate` y `browser_fill_form`. También se completó por MCP una reserva
+con confirmación visible y se verificó y limpió el mismo ID mediante
+`BookingClient`. El perfil de permisos suministrado a esa sesión era diferente
+del de la ejecución anterior. El agente no modificó la configuración global,
+no reinstaló MCP y no cambió locators para resolver el rechazo.
+
+Esto demuestra que el rechazo ya no se reproduce en esa sesión; no identifica
+qué ajuste interno del cliente cambió la decisión de autorización. No es necesario
+dar por fallida una prueba de la aplicación por un rechazo previo a ejecutar la
+herramienta. Conserva ambos resultados por separado y verifica el flujo real.
+
+La [confirmación MCP](../evidence/exploration/confirmation.yml) y su
+[consulta y limpieza API](../evidence/exploration/mcp-api-cleanup.json) conservan
+el resultado de esa repetición. La invocación y los resultados se documentan en
+[ai-usage.md](../evidence/ai-usage.md). Solo se versiona la selección necesaria
+para la entrega; los auxiliares y reportes repetidos se conservan fuera de Git.
+
 ## Referencias
 
 - [Configuración de Playwright MCP para Codex](https://playwright.dev/mcp/clients/other-clients)

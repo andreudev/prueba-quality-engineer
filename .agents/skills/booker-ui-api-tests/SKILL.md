@@ -1,6 +1,6 @@
 ---
 name: booker-ui-api-tests
-description: Implementa pruebas de reservas UI y API con TypeScript y Playwright en Restful Booker Platform, siguiendo las convenciones y fixtures de este proyecto.
+description: Implementa pruebas de reservas UI y API con TypeScript y Playwright en Restful Booker Platform y prepara sus evidencias de entrega sin acumular archivos intermedios en Git.
 ---
 
 # Pruebas de reservas UI y API
@@ -9,6 +9,8 @@ description: Implementa pruebas de reservas UI y API con TypeScript y Playwright
 
 Implementar escenarios que creen una reserva mediante la interfaz,
 comprueben su confirmación y consulten por API exactamente el mismo registro.
+El agente también ejecuta la selección, organización y validación de evidencias
+al terminar el trabajo; no delega esa gestión al usuario ni se limita a recomendarla.
 
 ## Entradas
 
@@ -30,6 +32,8 @@ comprueben su confirmación y consulten por API exactamente el mismo registro.
    Distingue contrato documentado, comportamiento observado y supuestos.
 4. Inspecciona la interfaz actual antes de elegir locators.
 5. Consulta la disponibilidad de la habitación para las fechas configuradas.
+6. Revisa la evidencia existente y `.gitignore`. Identifica la ejecución seleccionada,
+   los fallos pendientes y el directorio local de trabajo antes de generar archivos.
 
 ## Exploración con Playwright MCP
 
@@ -40,8 +44,9 @@ comprueben su confirmación y consulten por API exactamente el mismo registro.
   observados. Vuelve a obtener el estado después de navegar o cambiar la página.
 - Utiliza las referencias temporales del snapshot para explorar. En el código
   de las pruebas escribe locators estables basados en los elementos observados.
-- Guarda la URL y la evidencia de exploración en `evidence`. Distingue una
-  observación real de una expectativa o una hipótesis.
+- Conserva en `evidence/exploration` solo los snapshots necesarios para justificar
+  el formulario y los locators. Reutiliza nombres por etapa; guarda las observaciones
+  intermedias en `work/`. Distingue observación, expectativa e hipótesis.
 - Verifica cada locator y la confirmación de reserva ejecutando Playwright Test
   contra el backend real, sin sustituir sus respuestas por mocks.
 - Si Playwright MCP no está conectado o un elemento no se puede inspeccionar,
@@ -88,12 +93,60 @@ comprueben su confirmación y consulten por API exactamente el mismo registro.
   configurar el límite no demuestra por sí solo la concurrencia.
 - Conserva el reporte de Playwright y las evidencias pertinentes.
 - Registra los comandos y sus códigos de salida.
+- Antes de que otro comando sobrescriba las salidas habituales, conserva los adjuntos
+  de cualquier fallo relevante. Al acabar la verificación, ejecuta el cierre de abajo.
+
+## Cierre obligatorio de evidencias por el agente
+
+Ejecuta estos pasos como parte de cada implementación o adaptación realizada con
+esta skill. No dejes la organización como una tarea posterior para el usuario.
+La revisión funcional humana se registra por separado y puede seguir pendiente.
+
+1. Reúne los resultados reales, comandos y códigos de salida. Identifica qué versión
+   del código se ejecutó mediante commit y, si hay cambios sin commit, huellas de los
+   archivos relevantes. Un reporte anterior no acredita cambios posteriores.
+2. Prepara una selección en `work/`: un reporte HTML completo con todos sus recursos,
+   un resumen y la evidencia mínima que permita revisar el caso. Reutiliza nombres
+   de trabajo; no crees una carpeta versionada por cada intento. El resumen registra
+   fecha, código ejecutado, casos, workers reales, comandos, códigos y revisión humana.
+   Consolida en un JSON los datos de creación UI, consulta del mismo ID y limpieza
+   si el reporte por sí solo dificulta esa revisión. No dupliques sus adjuntos.
+3. Selecciona los snapshots que justifican el formulario y los locators para
+   `evidence/exploration`. Conserva los fallos relevantes en `evidence/failures`, con
+   diagnóstico, corrección y adjuntos necesarios. Un fallo pendiente no desaparece
+   por seleccionar otro resultado aprobado. Si la última ejecución falla, registra
+   ese resultado; no presentes una ejecución anterior como éxito del cambio actual.
+4. Comprueba que la selección se puede revisar antes de sustituir la entrega actual.
+   Archiva localmente la selección anterior y los intermedios fuera del repositorio
+   y verifica su integridad. Antes de mover directorios, resuelve y valida las rutas
+   absolutas de origen y destino. No borres originales como paso de limpieza.
+   Publica la nueva selección en `evidence/final`; las ejecuciones habituales no
+   escriben directamente allí ni reemplazan la entrega mientras están corriendo.
+5. Actualiza `evidence/ai-usage.md` y los enlaces del README con la invocación, cambios,
+   ejecuciones, fallos y correcciones realmente realizados. Distingue las correcciones
+   del agente de las humanas y señala los requisitos del documento aún pendientes.
+6. Verifica todos los enlaces locales de entrega, los recursos del reporte y la
+   coincidencia del ID de la reserva entre creación, consulta y limpieza. Comprueba
+   que los archivos del código ejecutado no cambiaron después de la ejecución.
+7. Revisa `.gitignore` y `git status --short`: la selección debe poder versionarse;
+   `playwright-report/`, `test-results/`, `work/`, secretos y auxiliares deben quedar
+   fuera. Limita la entrega a lo exigido por la prueba técnica y elimina de la
+   selección las copias redundantes, conservando su archivo local. No uses
+   `git add .` sin revisar qué archivos se incorporarían.
+   Revisa también los adjuntos: un trace puede contener tokens aunque `.env` esté
+   ignorado. Anonimiza esos valores en la copia de entrega, conserva el original
+   localmente y documenta la modificación sin ocultar el fallo que demuestra.
+8. Informa del resultado, ubicación del reporte, número y tamaño de los archivos
+   seleccionados y pendientes. Si la organización o su validación falla, registra
+   la limitación y conserva los originales; no declares completado el cierre.
 
 ## Salidas
 
 - Page Objects en `src/pages` y prueba integrada en `tests/ui`.
 - Cambios necesarios en clientes, tipos o fixtures existentes.
 - Reporte de Playwright y evidencia del uso de IA en `evidence/ai-usage.md`.
+- Selección de entrega organizada y validada por el agente en `evidence/final`,
+  `evidence/exploration` y `evidence/failures`, con intermedios archivados fuera de Git.
 - Resumen de resultados, diferencias de contrato y pendientes.
 
 ## Evidencia del uso de IA
@@ -126,3 +179,5 @@ No inventes correcciones humanas ni declares aprobadas pruebas no ejecutadas.
 - La suite demuestra ejecución real con dos workers.
 - Los datos propios se limpian o se documenta el fallo.
 - La evidencia permite revisar la implementación y sus limitaciones.
+- El agente completó el cierre de evidencias: reporte íntegro, enlaces válidos,
+  código ejecutado identificado, fallos conservados y entrega sin copias redundantes.

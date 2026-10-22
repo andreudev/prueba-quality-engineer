@@ -1,0 +1,64 @@
+{
+  "data": {
+    "roomid": 3,
+    "firstname": "Ui5736903516604d",
+    "lastname": "ReservaUi",
+    "depositpaid": false,
+    "email": "qa.5736903516604d@example.com",
+    "phone": "07123456789",
+    "bookingdates": {
+      "checkin": "2026-11-10",
+      "checkout": "2026-11-12"
+    }
+  },
+  "availability": {
+    "roomid": 3,
+    "bookingdates": {
+      "checkin": "2026-11-10",
+      "checkout": "2026-11-12"
+    },
+    "occupied": [
+      {
+        "checkin": "2026-03-01",
+        "checkout": "2026-03-05"
+      }
+    ]
+  },
+  "created": {
+    "status": 201,
+    "body": {
+      "bookingdates": {
+        "checkin": "2026-11-10",
+        "checkout": "2026-11-12"
+      },
+      "bookingid": 8,
+      "depositpaid": false,
+      "firstname": "Ui5736903516604d",
+      "lastname": "ReservaUi",
+      "roomid": 3
+    }
+  },
+  "queried": {
+    "bookingdates": {
+      "checkin": "2026-11-10",
+      "checkout": "2026-11-12"
+    },
+    "bookingid": 8,
+    "depositpaid": false,
+    "firstname": "Ui5736903516604d",
+    "lastname": "ReservaUi",
+    "roomid": 3
+  },
+  "cleanup": {
+    "bookingid": 8,
+    "firstname": "Ui5736903516604d",
+    "lastname": "ReservaUi",
+    "roomid": 3,
+    "bookingdates": {
+      "checkin": "2026-11-10",
+      "checkout": "2026-11-12"
+    },
+    "deleteStatus": 202,
+    "getAfterDeleteStatus": 404
+  }
+}

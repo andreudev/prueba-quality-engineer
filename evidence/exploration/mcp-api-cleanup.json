@@ -1,0 +1,17 @@
+{
+  "bookingid": 5,
+  "persisted": {
+    "bookingdates": {
+      "checkin": "2026-11-10",
+      "checkout": "2026-11-12"
+    },
+    "bookingid": 5,
+    "depositpaid": false,
+    "firstname": "Mcpe6b996aa146f49",
+    "lastname": "ReservaMcp",
+    "roomid": 3
+  },
+  "verified": true,
+  "deleteStatus": 202,
+  "getAfterDeleteStatus": 404
+}

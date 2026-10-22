@@ -1,0 +1,10 @@
+
+> prueba-quality-engineer@1.0.0 typecheck
+> tsc --noEmit
+
+src/pages/ReservationPage.ts(9,29): error TS2729: Property 'page' is used before its initialization.
+src/pages/ReservationPage.ts(10,36): error TS2729: Property 'page' is used before its initialization.
+src/pages/ReservationPage.ts(11,33): error TS2729: Property 'page' is used before its initialization.
+src/pages/ReservationPage.ts(12,33): error TS2729: Property 'page' is used before its initialization.
+src/pages/ReservationPage.ts(13,35): error TS2729: Property 'page' is used before its initialization.
+EXIT_CODE=1

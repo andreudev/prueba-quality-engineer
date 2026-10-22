@@ -1,0 +1,225 @@
+- generic [active] [ref=f2e1]:
+  - generic [ref=f2e3]:
+    - navigation [ref=f2e7]:
+      - generic [ref=f2e8]:
+        - link "Shady Meadows B&B" [ref=f2e9] [cursor=pointer]:
+          - /url: /
+        - list [ref=f2e12]:
+          - listitem [ref=f2e13]:
+            - link "Rooms" [ref=f2e14] [cursor=pointer]:
+              - /url: /#rooms
+          - listitem [ref=f2e15]:
+            - link "Booking" [ref=f2e16] [cursor=pointer]:
+              - /url: /#booking
+          - listitem [ref=f2e17]:
+            - link "Amenities" [ref=f2e18] [cursor=pointer]:
+              - /url: /#amenities
+          - listitem [ref=f2e19]:
+            - link "Location" [ref=f2e20] [cursor=pointer]:
+              - /url: /#location
+          - listitem [ref=f2e21]:
+            - link "Contact" [ref=f2e22] [cursor=pointer]:
+              - /url: /#contact
+          - listitem [ref=f2e23]:
+            - link "Admin" [ref=f2e24] [cursor=pointer]:
+              - /url: /admin
+    - navigation "breadcrumb" [ref=f2e27]:
+      - list [ref=f2e28]:
+        - listitem [ref=f2e29]:
+          - link "Home" [ref=f2e30] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=f2e31]:
+          - text: /
+          - link "Rooms" [ref=f2e32] [cursor=pointer]:
+            - /url: "#"
+        - listitem [ref=f2e33]: / Suite Room
+    - generic [ref=f2e35]:
+      - generic [ref=f2e36]:
+        - generic [ref=f2e37]:
+          - heading "Suite Room" [level=1] [ref=f2e38]
+          - generic [ref=f2e39]:
+            - generic [ref=f2e40]: Accessible
+            - generic [ref=f2e42]:
+              - generic [ref=f2e43]: 
+              - text: Max 2 Guests
+        - img "Room Image" [ref=f2e47]
+        - generic [ref=f2e48]:
+          - heading "Room Description" [level=2] [ref=f2e49]
+          - paragraph [ref=f2e50]: Etiam metus metus, fringilla ac sagittis id, consequat vel neque. Nunc commodo quis nisl nec posuere. Etiam at accumsan ex.
+        - generic [ref=f2e51]:
+          - heading "Room Features" [level=2] [ref=f2e52]
+          - generic [ref=f2e53]:
+            - generic [ref=f2e55]:
+              - generic [ref=f2e56]: 
+              - generic [ref=f2e57]: Radio
+            - generic [ref=f2e59]:
+              - generic [ref=f2e60]: 
+              - generic [ref=f2e61]: WiFi
+            - generic [ref=f2e63]:
+              - generic [ref=f2e64]: 
+              - generic [ref=f2e65]: Safe
+        - generic [ref=f2e66]:
+          - heading "Room Policies" [level=2] [ref=f2e67]
+          - generic [ref=f2e68]:
+            - generic [ref=f2e71]:
+              - heading "Check-in & Check-out" [level=3] [ref=f2e72]
+              - list [ref=f2e73]:
+                - listitem [ref=f2e74]:
+                  - generic [ref=f2e75]: 
+                  - generic [ref=f2e76]:
+                    - strong [ref=f2e77]: "Check-in:"
+                    - text: 3:00 PM - 8:00 PM
+                - listitem [ref=f2e78]:
+                  - generic [ref=f2e79]: 
+                  - generic [ref=f2e80]:
+                    - strong [ref=f2e81]: "Check-out:"
+                    - text: By 11:00 AM
+                - listitem [ref=f2e82]:
+                  - generic [ref=f2e83]: 
+                  - generic [ref=f2e84]:
+                    - strong [ref=f2e85]: "Early/Late:"
+                    - text: By arrangement
+            - generic [ref=f2e88]:
+              - heading "House Rules" [level=3] [ref=f2e89]
+              - list [ref=f2e90]:
+                - listitem [ref=f2e91]:
+                  - generic [ref=f2e92]: 
+                  - generic [ref=f2e93]: No smoking
+                - listitem [ref=f2e94]:
+                  - generic [ref=f2e95]: 
+                  - generic [ref=f2e96]: No parties or events
+                - listitem [ref=f2e97]:
+                  - generic [ref=f2e98]: 
+                  - generic [ref=f2e99]: Pets allowed (restrictions apply)
+      - generic [ref=f2e102]:
+        - heading "Book This Room" [level=2] [ref=f2e103]
+        - generic [ref=f2e104]:
+          - generic [ref=f2e105]: £225
+          - generic [ref=f2e106]: per night
+        - generic [ref=f2e107]:
+          - generic [ref=f2e108]:
+            - generic [ref=f2e354]: 
+            - textbox "Firstname" [ref=f2e356]
+          - generic [ref=f2e257]:
+            - generic [ref=f2e357]: 
+            - textbox "Lastname" [ref=f2e359]
+          - generic [ref=f2e360]:
+            - generic [ref=f2e361]: 
+            - textbox "Email" [ref=f2e363]
+          - generic [ref=f2e364]:
+            - generic [ref=f2e365]: 
+            - textbox "Phone" [ref=f2e367]
+          - generic [ref=f2e369]:
+            - heading "Price Summary" [level=3] [ref=f2e370]
+            - generic [ref=f2e371]:
+              - generic [ref=f2e372]: £225 x 2 nights
+              - generic [ref=f2e373]: £450
+            - generic [ref=f2e374]:
+              - generic [ref=f2e375]: Cleaning fee
+              - generic [ref=f2e376]: £25
+            - generic [ref=f2e377]:
+              - generic [ref=f2e378]: Service fee
+              - generic [ref=f2e379]: £15
+            - separator [ref=f2e380]
+            - generic [ref=f2e381]:
+              - generic [ref=f2e382]: Total
+              - generic [ref=f2e383]: £490
+          - button "Reserve Now" [ref=f2e384] [cursor=pointer]
+          - button "Cancel" [ref=f2e385] [cursor=pointer]
+    - generic [ref=f2e275]:
+      - heading "Similar Rooms You Might Like" [level=2] [ref=f2e276]
+      - generic [ref=f2e277]:
+        - generic [ref=f2e279]:
+          - img "Single" [ref=f2e280]
+          - generic [ref=f2e281]:
+            - heading "Single" [level=3] [ref=f2e282]
+            - generic [ref=f2e283]:
+              - generic [ref=f2e284]: 
+              - generic [ref=f2e285]: 2 Guests
+              - generic [ref=f2e286]:
+                - generic [ref=f2e287]: £100
+                - text: /night
+            - paragraph [ref=f2e288]: Aenean porttitor mauris sit amet lacinia molestie. In posuere accumsan aliquet. Maecenas sit amet nisl massa. Interdum et malesuada fames ac ante.
+            - link "View Details" [ref=f2e289] [cursor=pointer]:
+              - /url: /reservation/1?checkin=2026-11-10&checkout=2026-11-12
+        - generic [ref=f2e291]:
+          - img "Double" [ref=f2e292]
+          - generic [ref=f2e293]:
+            - heading "Double" [level=3] [ref=f2e294]
+            - generic [ref=f2e295]:
+              - generic [ref=f2e296]: 
+              - generic [ref=f2e297]: 2 Guests
+              - generic [ref=f2e298]:
+                - generic [ref=f2e299]: £150
+                - text: /night
+            - paragraph [ref=f2e300]: Vestibulum sollicitudin, lectus ac mollis consequat, lorem orci ultrices tellus, eleifend euismod tortor dui egestas erat. Phasellus et ipsum nisl.
+            - link "View Details" [ref=f2e301] [cursor=pointer]:
+              - /url: /reservation/2?checkin=2026-11-10&checkout=2026-11-12
+        - generic [ref=f2e303]:
+          - img "Single" [ref=f2e304]
+          - generic [ref=f2e305]:
+            - heading "Single" [level=3] [ref=f2e306]
+            - generic [ref=f2e307]:
+              - generic [ref=f2e308]: 
+              - generic [ref=f2e309]: 2 Guests
+              - generic [ref=f2e310]:
+                - generic [ref=f2e311]: £150
+                - text: /night
+            - paragraph [ref=f2e312]: Please enter a description for this room
+            - link "View Details" [ref=f2e313] [cursor=pointer]:
+              - /url: /reservation/4?checkin=2026-11-10&checkout=2026-11-12
+    - contentinfo [ref=f2e314]:
+      - generic [ref=f2e315]:
+        - generic [ref=f2e316]:
+          - generic [ref=f2e317]:
+            - heading "Shady Meadows B&B" [level=5] [ref=f2e318]
+            - paragraph [ref=f2e319]: Welcome to Shady Meadows, a delightful Bed & Breakfast nestled in the hills on Newingtonfordburyshire. A place so beautiful you will never want to leave. All our rooms have comfortable beds and we provide breakfast from the locally sourced supermarket. It is a delightful place.
+            - generic [ref=f2e320]:
+              - link "" [ref=f2e321] [cursor=pointer]:
+                - /url: "#"
+              - link "" [ref=f2e323] [cursor=pointer]:
+                - /url: "#"
+              - link "" [ref=f2e325] [cursor=pointer]:
+                - /url: "#"
+          - generic [ref=f2e327]:
+            - heading "Contact Us" [level=5] [ref=f2e328]
+            - list [ref=f2e329]:
+              - listitem [ref=f2e330]:
+                - generic [ref=f2e331]: 
+                - text: Shady Meadows B&B, Shadows valley, Newingtonfordburyshire, Dilbery, N1 1AA
+              - listitem [ref=f2e332]:
+                - generic [ref=f2e333]: 
+                - text: "012345678901"
+              - listitem [ref=f2e334]:
+                - generic [ref=f2e335]: 
+                - text: fake@fakeemail.com
+          - generic [ref=f2e336]:
+            - heading "Quick Links" [level=5] [ref=f2e337]
+            - list [ref=f2e338]:
+              - listitem [ref=f2e339]:
+                - link "Home" [ref=f2e340] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=f2e341]:
+                - link "Rooms" [ref=f2e342] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=f2e343]:
+                - link "Booking" [ref=f2e344] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=f2e345]:
+                - link "Contact" [ref=f2e346] [cursor=pointer]:
+                  - /url: "#"
+        - separator [ref=f2e347]
+        - generic [ref=f2e349]:
+          - text: restful-booker-platform v2.2 Created by
+          - link "Mark Winteringham" [ref=f2e350] [cursor=pointer]:
+            - /url: http://www.mwtestconsultancy.co.uk
+          - text: "- © 2019-26"
+          - link "Cookie-Policy" [ref=f2e351] [cursor=pointer]:
+            - /url: /cookie
+          - text: "-"
+          - link "Privacy-Policy" [ref=f2e352] [cursor=pointer]:
+            - /url: /privacy
+          - text: "-"
+          - link "Admin panel" [ref=f2e353] [cursor=pointer]:
+            - /url: /admin
+  - alert [ref=f2e6]
