@@ -1,0 +1,16 @@
+
+> prueba-quality-engineer@1.0.0 test:api:success
+> playwright test tests/api/booking-success --project=chromium
+
+
+Running 2 tests using 2 workers
+
+(node:8000) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:26168) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 2 [chromium] › tests\scenarios\booking-success.scenario.ts:57:9 › Reservas por API - sin depósito › crear y consultar una reserva (2.7s)
+  ok 1 [chromium] › tests\scenarios\booking-success.scenario.ts:57:9 › Reservas por API - con depósito › crear y consultar una reserva (2.7s)
+
+  2 passed (3.7s)
+EXIT_CODE=0

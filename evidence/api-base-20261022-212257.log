@@ -1,0 +1,13 @@
+
+Running 3 tests using 2 workers
+
+(node:16772) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18412) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 [chromium] › tests\api\booking-negative.spec.ts:64:5 › rechazar un nombre vacío sin guardar la reserva (5.7s)
+  ok 2 [chromium] › tests\scenarios\booking-success.scenario.ts:57:9 › Reservas por API - con depósito › crear y consultar una reserva (6.9s)
+  ok 3 [chromium] › tests\scenarios\booking-success.scenario.ts:57:9 › Reservas por API - sin depósito › crear y consultar una reserva (2.4s)
+
+  3 passed (9.3s)
+EXIT_CODE=0
