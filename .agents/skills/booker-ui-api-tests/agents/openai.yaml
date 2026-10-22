@@ -1,5 +1,8 @@
 dependencies:
   tools:
     - type: "mcp"
+      value: "postman"
+      description: "Consulta el contrato de API desde la conexión del proyecto."
+    - type: "mcp"
       value: "playwright"
       description: "Inspecciona la interfaz real mediante Playwright MCP antes de implementar locators."

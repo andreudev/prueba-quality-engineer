@@ -1,12 +1,44 @@
-# Playwright MCP para explorar la interfaz
+# Playwright y Postman MCP del proyecto
+
+Las conexiones actuales están en [.codex/config.toml](../.codex/config.toml).
+Codex debe abrirse desde la raíz de este repositorio, marcado como confiable.
+La configuración global anterior se conserva; la entrada de Playwright del proyecto
+utiliza la dependencia local fijada en package.json y package-lock.json.
+
+## Instalación de las conexiones del proyecto
+
+~~~powershell
+npm ci
+npx playwright install chromium
+codex mcp get playwright --json
+codex mcp get postman --json
+codex mcp login postman
+~~~
+
+Playwright debe resolver command=npm.cmd y args=run,--silent,mcp:playwright, que
+ejecuta el binario instalado en node_modules con --headless --isolated. El proceso
+se inicia desde la raíz del proyecto; no necesita un paquete npm global.
+
+Postman usa https://mcp.postman.com/mcp por Streamable HTTP y OAuth. Completa el
+inicio de sesión en el navegador cuando el cliente lo solicite. La configuración
+versionada expone únicamente siete herramientas de lectura: identidad, catálogo de
+herramientas, búsqueda, colección, carpeta, solicitud y respuesta. No guarda claves
+ni tokens y no concede a este flujo operaciones para modificar recursos de Postman.
+OAuth almacena sus credenciales en el cliente, fuera del repositorio.
+
+Reinicia la conexión o abre una sesión del proyecto si el chat conserva herramientas
+anteriores. Comprueba /mcp y distingue conexión habilitada, autenticación terminada y
+llamada real completada. Un plugin global ya autenticado no demuestra la conexión
+nueva. Los tests Playwright no requieren que Codex ni estos MCP estén activos.
 
 La skill `booker-ui-api-tests` utiliza Playwright MCP para inspeccionar la
 interfaz real antes de implementar el Page Object. La suite se ejecuta con
 Playwright Test y consulta el backend real.
 
-## Configuración en Windows
+## Configuración global histórica en Windows
 
-Se configuró Playwright MCP 0.0.83 con Node.js 24.18.0 mediante:
+Antes de añadir la configuración por proyecto se registró globalmente Playwright
+MCP 0.0.83 con Node.js 24.18.0 mediante:
 
 ```powershell
 codex mcp add playwright -- npx.cmd -y @playwright/mcp@0.0.83 --headless --isolated

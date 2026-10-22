@@ -35,6 +35,22 @@ al terminar el trabajo; no delega esa gestión al usuario ni se limita a recomen
 6. Revisa la evidencia existente y `.gitignore`. Identifica la ejecución seleccionada,
    los fallos pendientes y el directorio local de trabajo antes de generar archivos.
 
+## Coordinación de skills del proyecto
+
+- Ejecuta [revisar-contrato-api](../revisar-contrato-api/SKILL.md) antes de fijar las
+  expectativas API y [priorizar-cobertura-reservas](../priorizar-cobertura-reservas/SKILL.md)
+  para relacionar requisitos, riesgos, prioridades y datasets con la cobertura real.
+- Invoca [diagnosticar-fallos-reservas](../diagnosticar-fallos-reservas/SKILL.md) ante
+  fallos. Si la ampliación exige demostrar su uso y todo pasa, analiza el fallo
+  histórico de `.env` y etiquétalo como histórico; no provoques un fallo artificial.
+- Usa las conexiones de [.codex/config.toml](../../../.codex/config.toml) al abrir
+  este repositorio. La presencia de un MCP global o plugin conectado no demuestra
+  que la conexión del proyecto esté autenticada. Conserva los registros globales.
+- Registra las invocaciones reales y sus salidas en el documento único de uso de IA.
+  Guarda estas skills en un commit anterior a usarlas para implementar la ampliación.
+- Si se solicitan los tres casos adicionales, parametriza cada uno con dos datasets
+  explícitos, registra prioridad y riesgo, y mantén la fixture de propiedad por test.
+
 ## Exploración con Playwright MCP
 
 - Usa el servidor MCP `playwright` para explorar la interfaz antes de escribir

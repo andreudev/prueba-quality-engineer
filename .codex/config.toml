@@ -1,0 +1,11 @@
+# Conexiones del proyecto. Abrir Codex desde la raíz del repositorio confiable.
+# No contiene credenciales ni modifica la configuración global.
+[mcp_servers.playwright]
+command = "npm.cmd"
+args = ["run", "--silent", "mcp:playwright"]
+startup_timeout_sec = 60
+
+[mcp_servers.postman]
+url = "https://mcp.postman.com/mcp"
+enabled_tools = ["getEnabledTools", "getAuthenticatedUser", "searchPostmanElements", "getCollection", "getCollectionFolder", "getCollectionRequest", "getCollectionResponse"]
+startup_timeout_sec = 60

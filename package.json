@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "mcp:playwright": "playwright-mcp --headless --isolated",
     "typecheck": "tsc --noEmit",
     "test:api:success": "playwright test tests/api/booking-success --project=chromium"
   },
@@ -12,6 +13,7 @@
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
+    "@playwright/mcp": "0.0.83",
     "@playwright/test": "^1.64.1",
     "@types/node": "^26.6.5",
     "dotenv": "^18.0.9",

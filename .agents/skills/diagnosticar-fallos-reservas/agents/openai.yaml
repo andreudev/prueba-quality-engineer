@@ -1,0 +1,8 @@
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "playwright"
+      description: "Inspecciona controles UI afectados cuando el diagnóstico lo requiere."
+    - type: "mcp"
+      value: "postman"
+      description: "Contrasta expectativas y lagunas del contrato de API."
