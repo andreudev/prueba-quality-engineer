@@ -1,9 +1,10 @@
 
 Running 1 test using 1 worker
 
-(node:8076) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(node:37976) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
 (Use `node --trace-warnings ...` to show where the warning was created)
-  ok 1 [chromium] › tests\ui\booking-integrated.spec.ts:64:5 › crear una reserva por UI y consultar exactamente la misma por API (8.4s)
+  ok 1 [chromium] › tests\ui\booking-integrated.spec.ts:64:5 › crear una reserva por UI y consultar exactamente la misma por API (11.9s)
 
-  1 passed (9.3s)
+  1 passed (14.9s)
+
 EXIT_CODE=0

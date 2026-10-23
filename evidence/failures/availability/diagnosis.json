@@ -1,0 +1,65 @@
+{
+  "source": "Reporte local previo a la reejecución, conservado íntegro fuera de Git",
+  "expected": "Ventana disponible antes de crear reservas propias",
+  "observed": "Reservas existentes solapadas en habitación 1; los tres casos fallaron antes de POST /api/booking",
+  "cases": [
+    {
+      "dataset": "SOL-01",
+      "test": "SOL-01 rechazar reserva con intervalo idéntico",
+      "roomid": 1,
+      "requested": {
+        "checkin": "2026-11-16",
+        "checkout": "2026-11-20"
+      },
+      "conflictingIntervals": [
+        {
+          "checkin": "2026-11-16",
+          "checkout": "2026-11-20"
+        }
+      ],
+      "bookingPostCount": 0,
+      "message": "Error: La ventana explícita del dataset debe estar disponible; no se cambiará automáticamente\n\nexpect(received).toBe(expected) // Object.is equality\n\nExpected: false\nReceived: true\n\n   at fixtures\\owned-booking.fixture.ts:66\n\n  64 |       }\n  65 |       expect(dates.checkin < occupied.checkout && dates.checkout > occupied.checkin,\n> 66 |         \"La ventana explícita del dataset debe estar disponible; no se cambiará automáticamente\").toBe(false);\n     |                                                                                                   ^\n  67 |     }\n  68 |   }\n  69 |\n    at OwnedBookings.expectAvailable (C:\\Users\\Andre\\OneDrive\\Documentos\\prueba-quality-engineer\\tests\\fixtures\\owned-booking.fixture.ts:66:99)\n    at C:\\Users\\Andre\\OneDrive\\Documentos\\prueba-quality-engineer\\tests\\api\\booking-overlap.spec.ts:8:5",
+      "classification": "datos compartidos: precondición de disponibilidad incumplida",
+      "trace": "sol-01-trace.zip",
+      "redactedTokenCount": 1
+    },
+    {
+      "dataset": "API-SIN-DEPOSITO",
+      "test": "crear y consultar una reserva",
+      "roomid": 1,
+      "requested": {
+        "checkin": "2026-11-10",
+        "checkout": "2026-11-12"
+      },
+      "conflictingIntervals": [
+        {
+          "checkin": "2026-11-09",
+          "checkout": "2026-11-12"
+        }
+      ],
+      "bookingPostCount": 0,
+      "message": "Error: Las fechas elegidas se solapan con una reserva de la habitación 1.\n\nexpect(received).toBe(expected) // Object.is equality\n\nExpected: false\nReceived: true\n\n  103 |           overlaps,\n  104 |           `Las fechas elegidas se solapan con una reserva de la habitación ${data.roomid}.`,\n> 105 |         ).toBe(false);\n      |           ^\n  106 |       }\n  107 |\n  108 |       const createResponse = await bookingClient.create(data);\n    at C:\\Users\\Andre\\OneDrive\\Documentos\\prueba-quality-engineer\\tests\\scenarios\\booking-success.scenario.ts:105:11",
+      "classification": "datos compartidos: precondición de disponibilidad incumplida"
+    },
+    {
+      "dataset": "AUT-01",
+      "test": "AUT-01 impedir eliminación sin token",
+      "roomid": 1,
+      "requested": {
+        "checkin": "2026-12-01",
+        "checkout": "2026-12-03"
+      },
+      "conflictingIntervals": [
+        {
+          "checkin": "2026-11-30",
+          "checkout": "2026-12-03"
+        }
+      ],
+      "bookingPostCount": 0,
+      "message": "Error: La ventana explícita del dataset debe estar disponible; no se cambiará automáticamente\n\nexpect(received).toBe(expected) // Object.is equality\n\nExpected: false\nReceived: true\n\n   at fixtures\\owned-booking.fixture.ts:66\n\n  64 |       }\n  65 |       expect(dates.checkin < occupied.checkout && dates.checkout > occupied.checkin,\n> 66 |         \"La ventana explícita del dataset debe estar disponible; no se cambiará automáticamente\").toBe(false);\n     |                                                                                                   ^\n  67 |     }\n  68 |   }\n  69 |\n    at OwnedBookings.expectAvailable (C:\\Users\\Andre\\OneDrive\\Documentos\\prueba-quality-engineer\\tests\\fixtures\\owned-booking.fixture.ts:66:99)\n    at OwnedBookings.createValid (C:\\Users\\Andre\\OneDrive\\Documentos\\prueba-quality-engineer\\tests\\fixtures\\owned-booking.fixture.ts:85:5)\n    at C:\\Users\\Andre\\OneDrive\\Documentos\\prueba-quality-engineer\\tests\\api\\booking-unauthorized.spec.ts:10:22",
+      "classification": "datos compartidos: precondición de disponibilidad incumplida"
+    }
+  ],
+  "causeLimit": "No se atribuye el origen o desaparición de esas reservas a un actor o reset sin evidencia",
+  "traceDeliveryModification": "Se sustituyeron los tokens de autenticación en una copia; el ZIP original permanece íntegro fuera del repositorio"
+}

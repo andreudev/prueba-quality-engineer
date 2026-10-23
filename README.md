@@ -4,7 +4,7 @@ Automatización en TypeScript de reservas en [Restful Booker Platform](https://a
 
 **Repositorio:** [andreudev/prueba-quality-engineer](https://github.com/andreudev/prueba-quality-engineer).
 
-**Última ejecución conservada:** 22 de octubre de 2026; **10 pruebas aprobadas en Chromium con 2 workers reales**, sin omitidas ni reintentos. Consulta el [reporte](evidence/final/report/index.html) y el [resumen verificable](evidence/final/summary.json). Cada ejecución futura debe comprobar sus propios resultados.
+**Última ejecución conservada:** 22 de octubre de 2026 en Colombia (23 de octubre en UTC); **10 pruebas aprobadas en Chromium con 2 workers reales**, sin omitidas ni reintentos. Consulta el [reporte](evidence/final/report/index.html), el [resumen verificable](evidence/final/summary.json) y el [diagnóstico de tres fallos anteriores de disponibilidad](evidence/failures/availability/diagnosis.json). Cada ejecución futura debe comprobar sus propios resultados.
 
 ## Índice
 
@@ -144,8 +144,8 @@ Para conservar por separado la ejecución UI y la suite completa, el agente util
 
 | Ejecución conservada | HTML generado antes de seleccionar la entrega | Artefactos (`--output`) | JSON de resultados |
 | --- | --- | --- | --- |
-| UI aislada | `work/expansion/ui-report/` | `work/expansion/ui-artifacts/` | `work/expansion/ui-results.json` |
-| Suite completa API + UI | `work/expansion/full-report/` | `work/expansion/full-artifacts/` | `work/expansion/full-results.json` |
+| UI aislada | `work/diagnostico/ui-report/` | `work/diagnostico/ui-artifacts/` | `work/diagnostico/ui-results.json` |
+| Suite completa API + UI | `work/diagnostico/full-report/` | `work/diagnostico/full-artifacts/` | `work/diagnostico/full-results.json` |
 
 El reporte completo de la segunda fila se seleccionó para `evidence/final/report/`. Las rutas de `work/` son intermedios locales ignorados y no forman parte de la descarga del repositorio. Estas variables no están definidas por la configuración versionada: los comandos habituales generan el reporte local predeterminado si la sesión no conserva un override. Si se utiliza una ruta personalizada, debe registrarse y abrirse con `show-report` apuntando a esa carpeta.
 
@@ -359,22 +359,42 @@ La [documentación de Postman](https://www.postman.com/automation-in-testing/res
 
 La demo es compartida y puede reiniciarse, eliminar registros o reutilizar IDs. Consultar disponibilidad antes de crear no impide que otro usuario reserve después. La comprobación de identidad protege la limpieza; si un registro ya no existe, se anota sin inventar la causa. Las ramas de recuperación sin ID y fallo forzado de limpieza no se han ejercitado deliberadamente. No se atribuye cobertura de otros navegadores a la ejecución Chromium.
 
-**No se ha confirmado un bug de producto.** Los fallos de implementación, configuración y herramientas encontrados se conservan en la evidencia de IA. Si una ejecución futura revela una discrepancia, debe registrar pasos, dataset, esperado, observado y evidencia; no relajar aserciones ni cambiar fechas automáticamente para declararla aprobada.
+**No se ha confirmado un bug de producto.** Los fallos de implementación, configuración, herramientas y disponibilidad de datos encontrados se conservan en la evidencia de IA. Si una ejecución futura revela una discrepancia, debe registrar pasos, dataset, esperado, observado y evidencia; no relajar aserciones ni cambiar fechas automáticamente para declararla aprobada.
 
 ## 7. Resultados, evidencias y uso de IA
 
 ### Ejecución seleccionada
 
-Resultados conservados del **22 de octubre de 2026**. La suite completa comenzó a las **23:15 UTC (18:15 de Colombia)**. Esta reorganización documental no representa una nueva ejecución contra el backend.
+Resultados conservados de la reejecución solicitada el **22 de octubre de 2026 en Colombia**. La suite completa comenzó el **23 de octubre a las 01:37 UTC (22 de octubre, 20:37 de Colombia)** y utilizó el backend real con las mismas fechas y aserciones.
 
 | Comprobación conservada | Resultado | Código de salida | Evidencia |
 | --- | --- | --- | --- |
 | TypeScript | Sin errores | 0 | [typecheck.log](evidence/final/typecheck.log) |
 | Listado Chromium | 10 pruebas en 6 archivos de origen reportados | 0 | [summary.json](evidence/final/summary.json) |
-| UI Chromium | 1 aprobada, 1 worker, 9.3 s | 0 | [ui.log](evidence/final/ui.log) |
-| API + UI Chromium | 10 aprobadas, 2 workers efectivos, 14.2 s; sin omitidas, flaky ni errores | 0 | [suite.log](evidence/final/suite.log), [reporte completo](evidence/final/report/index.html) |
+| UI Chromium | 1 aprobada, 1 worker, 14.9 s | 0 | [ui.log](evidence/final/ui.log) |
+| API + UI Chromium | 10 aprobadas, 2 workers efectivos, 19.4 s; sin omitidas, flaky ni errores | 0 | [suite.log](evidence/final/suite.log), [reporte completo](evidence/final/report/index.html) |
 
 El [resumen](evidence/final/summary.json) contiene los comandos exactos, variables de salida del reporte, códigos, workers, datasets y huellas del código ejecutado. [reservation.json](evidence/final/reservation.json) conserva creación UI, consulta API y limpieza 202/404 del mismo registro. La observación con MCP y la ejecución de Playwright Test están identificadas por separado.
+
+### Diagnóstico del reporte local anterior
+
+El reporte local anterior tenía tres fallos por disponibilidad en la habitación 1. Los traces confirman que los tres se detuvieron antes de enviar POST `/api/booking`; no fueron rechazos de creación ni fallos de autenticación.
+
+| Caso | Fechas solicitadas | Reserva existente que impedía la preparación |
+| --- | --- | --- |
+| API exitosa sin depósito | 2026-11-10 → 2026-11-12 | 2026-11-09 → 2026-11-12 |
+| SOL-01 | 2026-11-16 → 2026-11-20 | 2026-11-16 → 2026-11-20 |
+| AUT-01 | 2026-12-01 → 2026-12-03 | 2026-11-30 → 2026-12-03 |
+
+La comprobación de disponibilidad detectó correctamente esas colisiones. En la nueva ejecución las ventanas estaban disponibles y pasaron los diez tests. No se cambiaron fechas, aserciones, reintentos ni registros ajenos. La desaparición de las reservas conflictivas puede depender de actividad externa o de un reinicio; no se atribuye una causa concreta sin evidencia.
+
+El [diagnóstico](evidence/failures/availability/diagnosis.json) conserva esperado, observado, mensajes y los intervalos obtenidos de los traces. Se mantiene una [copia del trace de SOL-01](evidence/failures/availability/sol-01-trace.zip) con tokens anonimizados; los tres traces y el reporte original permanecen íntegros en el archivo local fuera de Git. Para inspeccionar la copia entregable:
+
+~~~powershell
+npx.cmd playwright show-trace evidence/failures/availability/sol-01-trace.zip
+~~~
+
+El aviso de Node sobre `NO_COLOR` y `FORCE_COLOR` afecta al formato de la terminal y no hizo fallar ninguna prueba. Los estados y códigos de salida, no ese aviso, determinan el resultado.
 
 ### Trazabilidad del agente y revisión
 

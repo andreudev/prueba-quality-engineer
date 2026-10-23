@@ -1,20 +1,21 @@
 
 Running 10 tests using 2 workers
 
-(node:28116) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(node:7012) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
 (Use `node --trace-warnings ...` to show where the warning was created)
-(node:24224) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(node:37592) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
 (Use `node --trace-warnings ...` to show where the warning was created)
-  ok  1 [chromium] › tests\api\booking-invalid-dates.spec.ts:5:7 › FEC-01 rechazar salida igual a entrada (1.4s)
   ok  2 [chromium] › tests\api\booking-invalid-dates.spec.ts:5:7 › FEC-02 rechazar salida anterior a entrada (1.5s)
+  ok  1 [chromium] › tests\api\booking-invalid-dates.spec.ts:5:7 › FEC-01 rechazar salida igual a entrada (1.6s)
   ok  3 [chromium] › tests\api\booking-negative.spec.ts:64:5 › rechazar un nombre vacío sin guardar la reserva (1.0s)
-  ok  4 [chromium] › tests\api\booking-overlap.spec.ts:5:7 › SOL-01 rechazar reserva con intervalo idéntico (2.9s)
-  ok  5 [chromium] › tests\api\booking-overlap.spec.ts:5:7 › SOL-02 rechazar reserva con solapamiento parcial (2.8s)
+  ok  4 [chromium] › tests\api\booking-overlap.spec.ts:5:7 › SOL-01 rechazar reserva con intervalo idéntico (3.0s)
+  ok  5 [chromium] › tests\api\booking-overlap.spec.ts:5:7 › SOL-02 rechazar reserva con solapamiento parcial (3.2s)
   ok  6 [chromium] › tests\scenarios\booking-success.scenario.ts:57:9 › Reservas por API - con depósito › crear y consultar una reserva (2.1s)
   ok  7 [chromium] › tests\scenarios\booking-success.scenario.ts:57:9 › Reservas por API - sin depósito › crear y consultar una reserva (2.2s)
-  ok  8 [chromium] › tests\api\booking-unauthorized.spec.ts:7:7 › AUT-01 impedir eliminación sin token (2.5s)
-  ok  9 [chromium] › tests\api\booking-unauthorized.spec.ts:7:7 › AUT-02 impedir eliminación token inválido (2.5s)
-  ok 10 [chromium] › tests\ui\booking-integrated.spec.ts:64:5 › crear una reserva por UI y consultar exactamente la misma por API (4.1s)
+  ok  8 [chromium] › tests\api\booking-unauthorized.spec.ts:7:7 › AUT-01 impedir eliminación sin token (2.9s)
+  ok  9 [chromium] › tests\api\booking-unauthorized.spec.ts:7:7 › AUT-02 impedir eliminación token inválido (2.8s)
+  ok 10 [chromium] › tests\ui\booking-integrated.spec.ts:64:5 › crear una reserva por UI y consultar exactamente la misma por API (6.9s)
 
-  10 passed (14.2s)
+  10 passed (19.4s)
+
 EXIT_CODE=0

@@ -1,6 +1,6 @@
 # Uso de IA para la reserva integrada UI y API
 
-Fecha de las ejecuciones: 2026-10-22. Agente: Codex.
+Última reejecución: 2026-10-23 UTC (2026-10-22 en Colombia). Historial desde 2026-10-22 UTC. Agente: Codex.
 **Revisión humana funcional: PENDIENTE.** La selección de archivos no equivale a aprobar los tests.
 
 ## Invocaciones exactas
@@ -50,20 +50,23 @@ Contrato consultado: [documentación de Postman](https://www.postman.com/automat
 - GET no expone email/phone: el test comprueba su envío en el POST real, sin atribuir a GET una verificación de persistencia que no permite.
 - La confirmación no expone ID ni huésped; la correlación usa el ID de la respuesta real de creación. Se mantuvieron las fechas del entorno y la habitación 3 para separar este caso de los escenarios API de habitaciones 1 y 2.
 
-## Ejecuciones seleccionadas de la ampliación
+## Reejecución seleccionada y diagnóstico
 
-El reporte actual corresponde a la ampliación posterior al commit previo 29c1876e6f8e8cfa918b4edf736e26548976394d. Los reportes anteriores se archivaron íntegros fuera del repositorio antes de sustituirlos; los enlaces de esta sección apuntan solo a la nueva ejecución.
+La selección actual corresponde a la reejecución del 23 de octubre de 2026 en UTC (22 de octubre en Colombia), sobre el commit `3eefd8b789c4c1cd48874ed5d949c190b96a8bc1` y el formato local de `tests/data/booking-cases.ts`. Se comprobó que sus datasets y valores son idénticos a HEAD; ese cambio local no se incorpora al commit de evidencias.
 
 | Comprobación | Resultado real | Código | Evidencia |
 | --- | --- | --- | --- |
 | npm run typecheck | Sin errores | 0 | [log](final/typecheck.log) |
 | Listado Chromium | 10 tests en 6 archivos | 0 | [resumen](final/summary.json) |
-| UI Chromium | 1 aprobada; 1 worker; 9.3 s | 0 | [log](final/ui.log) |
-| API + UI Chromium | 10 aprobadas; 2 workers reales; 14.2 s; sin omitidas, flaky ni errores | 0 | [log](final/suite.log), [reporte completo](final/report/index.html) |
+| UI Chromium | 1 aprobada; 1 worker; 14.9 s | 0 | [log](final/ui.log) |
+| API + UI Chromium | 10 aprobadas; 2 workers reales; 19.4 s; sin omitidas, flaky ni errores | 0 | [log](final/suite.log), [reporte completo](final/report/index.html) |
 
-El [resumen](final/summary.json) conserva comandos exactos, variables de salida, huellas del código ejecutado, anotaciones de datasets/prioridad/riesgo y resultados por variante. La [reserva integrada](final/reservation.json) correlaciona creación UI 201, GET 200 y limpieza 202/404 del mismo ID **11**. Las ventanas siguen siendo explícitas y no se alteraron automáticamente.
+El [resumen](final/summary.json) conserva comandos, variables de salida, huellas del árbol ejecutado, versiones de skills y anotaciones de datasets/prioridad/riesgo. La [reserva integrada](final/reservation.json) correlaciona creación UI 201, GET 200 y limpieza 202/404 del mismo ID **15**. Las fechas, aserciones y reintentos no se modificaron. La suite utilizó efectivamente los workers 0 y 1.
 
-La UI aislada tiene un único test y utiliza un worker. La suite completa registra los workers 0 y 1 con tiempos solapados. Las expectativas de los seis casos adicionales fueron 409 para solapamientos/fechas y 403 para eliminación no autorizada; todos se comprobaron contra el backend real.
+Antes de ejecutar se preservaron el reporte local fallido y sus adjuntos fuera del repositorio. Sus tres fallos ocurrieron antes de POST /api/booking por ventanas ocupadas en la habitación 1: [diagnóstico verificable](failures/availability/diagnosis.json). La nueva selección conserva ese diagnóstico y un [trace representativo anonimizado](failures/availability/sol-01-trace.zip); los tres originales permanecen íntegros en el archivo local. El éxito actual no borra los fallos anteriores ni demuestra quién creó o retiró las reservas conflictivas.
+
+La ampliación original del 22 de octubre a las 23:15 UTC tuvo diez aprobadas en 14.2 s y UI aislada en 9.3 s. Aquella selección se archivó íntegra y sigue identificada por el commit [f928ae26](https://github.com/andreudev/prueba-quality-engineer/commit/f928ae269a0cabb2710578bb0ecebcf7bda9d634); los enlaces relativos de esta sección corresponden a la nueva ejecución.
+
 ## Fallos observados y correcciones del agente
 
 | Fallo real | Corrección o diagnóstico | Evidencia conservada |
@@ -211,3 +214,25 @@ incluyendo configuración MCP, cuatro skills, datasets, fixture, tres specs y re
 había 23 archivos de evidencia. Este registro documental posterior no modifica
 el código de las diez pruebas ejecutadas. No se usó force push ni se cambió la
 visibilidad del repositorio o la configuración global de MCP.
+
+## Reejecución solicitada por errores locales
+
+Solicitud del usuario aplicada en esta revisión:
+
+~~~text
+Puedes re ejecutar todo y ver que esta pasando, veo unso errores
+~~~
+
+El agente aplicó `booker-ui-api-tests` y sus capacidades de revisión de contrato, cobertura y diagnóstico. Las instrucciones de la skill principal ya estaban guardadas en `3eefd8b` antes de esta reejecución. Se utilizaron también las guías Postman api-engineer y api-testing; la suite siguió en Playwright Test contra el backend real, sin sustituirla por mocks o ejecución de colecciones.
+
+- **Contrato:** la conexión Postman del proyecto volvió a consultar identidad, colección y detalles CreateBooking/DeleteBooking mediante OAuth. Se actualizó el [extracto](postman-contract.json); no se modificaron recursos remotos ni expectativas HTTP.
+- **Cobertura:** se listaron los diez tests, se mantuvieron los seis datasets y sus prioridades/riesgos, y se verificaron dos workers efectivos. Los códigos adicionales observados siguen siendo 409 para solapamientos/fechas y 403 para eliminación no autorizada.
+- **Diagnóstico:** el reporte local anterior tenía fallos en SOL-01, API exitosa sin depósito y AUT-01. Los traces muestran conflictos con 2026-11-16 → 2026-11-20, 2026-11-09 → 2026-11-12 y 2026-11-30 → 2026-12-03 respectivamente. Los tres casos se detuvieron en la comprobación de disponibilidad antes de enviar una creación. Es un incumplimiento de precondiciones por datos compartidos; no se confirmó un bug de producto.
+- **MCP/UI:** el servidor Playwright local abrió el formulario real sin enviar otra reserva. Postman expuso las siete herramientas configuradas y Playwright las 25 del servidor local. Se actualizó el [snapshot](exploration/project-form.yml). La configuración global conservó su SHA256 conocido.
+- **Resultado:** TypeScript, listado, UI y suite completa terminaron con código 0. La UI aislada utilizó un worker; la suite completa pasó diez pruebas con dos workers. Se verificó la limpieza de los registros propios.
+- **Límites:** las ventanas conflictivas estaban disponibles al reejecutar. No se cambiaron fechas ni se borraron registros ajenos; no hay evidencia para atribuir su desaparición a un reset o a un actor concreto. El aviso NO_COLOR/FORCE_COLOR solo afecta al formato de la salida y no provocó fallos.
+- **Cierre:** se verificó por SHA256 la copia íntegra de los 23 archivos de la selección anterior antes de sustituir los archivos finales. La nueva selección mantiene un único reporte completo y añade solo el diagnóstico de disponibilidad y un trace representativo. En la copia entregable del trace se sustituyeron tokens por REDACTED_DEMO_TOKEN; el original quedó intacto fuera de Git. Los recursos del nuevo reporte coinciden con la ejecución y el código no cambió durante ella.
+
+Después de verificar el archivo de las salidas locales anteriores, se actualizaron también `playwright-report/` y `test-results/` con las salidas de la nueva suite. El listado había generado un HTML intermedio con diez omitidas; también se archivó, sin contarlo como ejecución aprobada. Así, `show-report playwright-report` abre el resultado de diez aprobadas y `.last-run.json` registra `passed`. Ambas carpetas siguen ignoradas por Git; sus originales se conservaron fuera del repositorio antes de sustituir los archivos. Los logs seleccionados añaden el código de salida observado; las salidas brutas se conservan con los intermedios.
+
+Los cambios de esta revisión son la selección de evidencia y su documentación. No se corrigió lógica de pruebas, no se relajaron aserciones y no se añadieron reintentos ni nuevos escenarios. El cambio local previo de formato de los datasets permanece fuera del commit. La revisión del agente no se presenta como una nueva aprobación funcional humana.
