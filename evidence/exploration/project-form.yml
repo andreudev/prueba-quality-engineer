@@ -141,7 +141,7 @@
                 - text: /night
             - paragraph [ref=e288]: Aenean porttitor mauris sit amet lacinia molestie. In posuere accumsan aliquet. Maecenas sit amet nisl massa. Interdum et malesuada fames ac ante.
             - link "View Details" [ref=e289] [cursor=pointer]:
-              - /url: /reservation/1?checkin=2026-11-10&checkout=2026-11-12
+              - /url: /reservation/1?checkin=2027-03-10&checkout=2027-03-12
         - generic [ref=e291]:
           - img "Double" [ref=e292]
           - generic [ref=e293]:
@@ -154,7 +154,7 @@
                 - text: /night
             - paragraph [ref=e300]: Vestibulum sollicitudin, lectus ac mollis consequat, lorem orci ultrices tellus, eleifend euismod tortor dui egestas erat. Phasellus et ipsum nisl.
             - link "View Details" [ref=e301] [cursor=pointer]:
-              - /url: /reservation/2?checkin=2026-11-10&checkout=2026-11-12
+              - /url: /reservation/2?checkin=2027-03-10&checkout=2027-03-12
     - contentinfo [ref=e302]:
       - generic [ref=e303]:
         - generic [ref=e304]:

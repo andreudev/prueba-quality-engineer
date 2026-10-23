@@ -4,7 +4,7 @@ Automatización en TypeScript de reservas en [Restful Booker Platform](https://a
 
 **Repositorio:** [andreudev/prueba-quality-engineer](https://github.com/andreudev/prueba-quality-engineer).
 
-**Última ejecución conservada:** 22 de octubre de 2026 en Colombia (23 de octubre en UTC); **10 pruebas aprobadas en Chromium con 2 workers reales**, sin omitidas ni reintentos. Consulta el [reporte](evidence/final/report/index.html), el [resumen verificable](evidence/final/summary.json) y el [diagnóstico de tres fallos anteriores de disponibilidad](evidence/failures/availability/diagnosis.json). Cada ejecución futura debe comprobar sus propios resultados.
+**Verificación conservada:** 22 de octubre de 2026 en Colombia (23 de octubre en UTC); **dos ejecuciones consecutivas de 10 pruebas aprobadas en Chromium con 2 workers reales**, sin omitidas ni reintentos, tras actualizar las fechas explícitas a marzo y abril de 2027. Consulta el [último reporte](evidence/final/report/index.html), el [resumen de ambas ejecuciones](evidence/final/summary.json) y el [diagnóstico de los fallos anteriores de disponibilidad](evidence/failures/availability/diagnosis.json). Cada ejecución futura debe comprobar sus propios resultados.
 
 ## Índice
 
@@ -79,12 +79,14 @@ Edita `.env` siguiendo [.env.example](.env.example). [playwright.config.ts](play
 | `BASE_URL` | Entorno de la aplicación y API | `https://automationintesting.online` |
 | `API_USERNAME` | Usuario de autenticación API | `admin`, credencial pública de la demo |
 | `API_PASSWORD` | Contraseña de autenticación API | `password`, credencial pública de la demo |
-| `BOOKING_CHECKIN` | Entrada de las reservas de los casos originales | `2026-11-10`, ejemplo que debe revisarse antes de ejecutar |
-| `BOOKING_CHECKOUT` | Salida de esas reservas | `2026-11-12`, posterior a la entrada |
+| `BOOKING_CHECKIN` | Entrada de las reservas de los casos originales | `2027-03-10`, fecha explícita que debe revisarse antes de ejecutar |
+| `BOOKING_CHECKOUT` | Salida de esas reservas | `2027-03-12`, posterior a la entrada |
 
 Las fechas base deben ser futuras, válidas y estar disponibles en las habitaciones **1, 2 y 3**. Los seis datasets adicionales tienen fechas independientes en [tests/data/booking-cases.ts](tests/data/booking-cases.ts): modifica allí sus ventanas cuando expiren o no estén disponibles, manteniendo la intención de cada caso y la separación respecto a las fechas base.
 
 Las fechas inválidas de FEC-01/FEC-02 son deliberadas: conserva salida igual o anterior a entrada. Las pruebas no buscan fechas automáticamente. La disponibilidad de una ejecución pasada no garantiza disponibilidad actual en esta demo compartida.
+
+Las ventanas de marzo y abril de 2027 se eligieron explícitamente, con autorización del autor, después de reproducir conflictos recurrentes en noviembre y diciembre de 2026. Se conservaron las habitaciones 1, 2 y 3. Esta actualización de datos evita aquellas colisiones observadas, pero no convierte la demo compartida en un entorno aislado. Al actualizar el repositorio, un `.env` ya existente debe conservarse y revisar sus dos fechas: cambiar `.env.example` no lo modifica automáticamente.
 
 ## 3. Ejecución de pruebas y reportes
 
@@ -144,10 +146,11 @@ Para conservar por separado la ejecución UI y la suite completa, el agente util
 
 | Ejecución conservada | HTML generado antes de seleccionar la entrega | Artefactos (`--output`) | JSON de resultados |
 | --- | --- | --- | --- |
-| UI aislada | `work/diagnostico/ui-report/` | `work/diagnostico/ui-artifacts/` | `work/diagnostico/ui-results.json` |
-| Suite completa API + UI | `work/diagnostico/full-report/` | `work/diagnostico/full-artifacts/` | `work/diagnostico/full-results.json` |
+| UI aislada | `work/fechas-explicitas/ui-report/` | `work/fechas-explicitas/ui-artifacts/` | `work/fechas-explicitas/ui-results.json` |
+| Suite completa, primera ejecución | `work/fechas-explicitas/first-report/` | `work/fechas-explicitas/first-artifacts/` | `work/fechas-explicitas/first-results.json` |
+| Suite completa, segunda ejecución | `work/fechas-explicitas/full-report/` | `work/fechas-explicitas/full-artifacts/` | `work/fechas-explicitas/full-results.json` |
 
-El reporte completo de la segunda fila se seleccionó para `evidence/final/report/`. Las rutas de `work/` son intermedios locales ignorados y no forman parte de la descarga del repositorio. Estas variables no están definidas por la configuración versionada: los comandos habituales generan el reporte local predeterminado si la sesión no conserva un override. Si se utiliza una ruta personalizada, debe registrarse y abrirse con `show-report` apuntando a esa carpeta.
+El reporte completo de la última fila se seleccionó para `evidence/final/report/`. El resumen y los logs conservan también el resultado de la primera ejecución. Las rutas de `work/` son intermedios locales ignorados y no forman parte de la descarga del repositorio. Estas variables no están definidas por la configuración versionada: los comandos habituales generan el reporte local predeterminado si la sesión no conserva un override. Si se utiliza una ruta personalizada, debe registrarse y abrirse con `show-report` apuntando a esa carpeta.
 
 El código de salida **0** indica que el comando terminó correctamente; cualquier código distinto de 0 bloquea el gate y debe investigarse. En PowerShell, consulta `$LASTEXITCODE` inmediatamente después del comando. Un listado correcto no equivale a pruebas ejecutadas. La configuración conserva traces, capturas y vídeo pertinentes ante fallos, y mantiene los reintentos desactivados.
 
@@ -344,12 +347,12 @@ Los datos se editan en [booking-cases.ts](tests/data/booking-cases.ts). Valores 
 
 | Dataset | Habitación | Reserva original o payload | Segundo intento | HTTP esperado |
 | --- | --- | --- | --- | --- |
-| SOL-01 | 1 | 2026-11-16 → 2026-11-20 | Mismo intervalo | 409 |
-| SOL-02 | 2 | 2026-11-23 → 2026-11-27 | 2026-11-25 → 2026-11-29 | 409 |
-| AUT-01 | 1 | 2026-12-01 → 2026-12-03 | DELETE sin token | 403 |
-| AUT-02 | 2 | 2026-12-05 → 2026-12-07 | DELETE con token inválido | 403 |
-| FEC-01 | 1 | 2026-12-10 → 2026-12-10 | No aplica | 409 |
-| FEC-02 | 2 | 2026-12-15 → 2026-12-14 | No aplica | 409 |
+| SOL-01 | 1 | 2027-03-16 → 2027-03-20 | Mismo intervalo | 409 |
+| SOL-02 | 2 | 2027-03-23 → 2027-03-27 | 2027-03-25 → 2027-03-29 | 409 |
+| AUT-01 | 1 | 2027-04-01 → 2027-04-03 | DELETE sin token | 403 |
+| AUT-02 | 2 | 2027-04-05 → 2027-04-07 | DELETE con token inválido | 403 |
+| FEC-01 | 1 | 2027-04-10 → 2027-04-10 | No aplica | 409 |
+| FEC-02 | 2 | 2027-04-15 → 2027-04-14 | No aplica | 409 |
 
 Dataset, prioridad y riesgo de las variantes adicionales aparecen como anotaciones en el reporte. Las fechas válidas de preparación no compiten entre sí; si cambias las fechas base, comprueba su separación de estas ventanas.
 
@@ -365,28 +368,29 @@ La demo es compartida y puede reiniciarse, eliminar registros o reutilizar IDs. 
 
 ### Ejecución seleccionada
 
-Resultados conservados de la reejecución solicitada el **22 de octubre de 2026 en Colombia**. La suite completa comenzó el **23 de octubre a las 01:37 UTC (22 de octubre, 20:37 de Colombia)** y utilizó el backend real con las mismas fechas y aserciones.
+Resultados conservados después del cambio de fechas autorizado el **22 de octubre de 2026 en Colombia**. Las suites completas comenzaron el **23 de octubre a las 02:13:07 y 02:13:40 UTC (22 de octubre, 21:13 en Colombia)**. Ambas utilizaron el backend real, las mismas fechas de marzo/abril de 2027 y las aserciones originales.
 
 | Comprobación conservada | Resultado | Código de salida | Evidencia |
 | --- | --- | --- | --- |
 | TypeScript | Sin errores | 0 | [typecheck.log](evidence/final/typecheck.log) |
 | Listado Chromium | 10 pruebas en 6 archivos de origen reportados | 0 | [summary.json](evidence/final/summary.json) |
-| UI Chromium | 1 aprobada, 1 worker, 14.9 s | 0 | [ui.log](evidence/final/ui.log) |
-| API + UI Chromium | 10 aprobadas, 2 workers efectivos, 19.4 s; sin omitidas, flaky ni errores | 0 | [suite.log](evidence/final/suite.log), [reporte completo](evidence/final/report/index.html) |
+| UI Chromium | 1 aprobada, 1 worker, 13.2 s | 0 | [ui.log](evidence/final/ui.log) |
+| API + UI Chromium, primera ejecución | 10 aprobadas, 2 workers efectivos, 18.4 s | 0 | [first-suite.log](evidence/final/first-suite.log) |
+| API + UI Chromium, segunda ejecución | 10 aprobadas, 2 workers efectivos, 18.3 s; sin omitidas, flaky ni errores | 0 | [suite.log](evidence/final/suite.log), [reporte completo](evidence/final/report/index.html) |
 
 El [resumen](evidence/final/summary.json) contiene los comandos exactos, variables de salida del reporte, códigos, workers, datasets y huellas del código ejecutado. [reservation.json](evidence/final/reservation.json) conserva creación UI, consulta API y limpieza 202/404 del mismo registro. La observación con MCP y la ejecución de Playwright Test están identificadas por separado.
 
 ### Diagnóstico del reporte local anterior
 
-El reporte local anterior tenía tres fallos por disponibilidad en la habitación 1. Los traces confirman que los tres se detuvieron antes de enviar POST `/api/booking`; no fueron rechazos de creación ni fallos de autenticación.
+El reporte local anterior al cambio de fechas tenía siete aprobadas y tres fallos por disponibilidad en la habitación 1. Los traces confirman que los tres se detuvieron antes de enviar POST `/api/booking`; no fueron rechazos de creación ni fallos de autenticación.
 
 | Caso | Fechas solicitadas | Reserva existente que impedía la preparación |
 | --- | --- | --- |
-| API exitosa sin depósito | 2026-11-10 → 2026-11-12 | 2026-11-09 → 2026-11-12 |
-| SOL-01 | 2026-11-16 → 2026-11-20 | 2026-11-16 → 2026-11-20 |
-| AUT-01 | 2026-12-01 → 2026-12-03 | 2026-11-30 → 2026-12-03 |
+| API exitosa sin depósito | 2026-11-10 → 2026-11-12 | 2026-11-09 → 2026-11-13 |
+| SOL-01 | 2026-11-16 → 2026-11-20 | 2026-11-14 → 2026-11-17; 2026-11-17 → 2026-11-19; 2026-11-19 → 2026-11-22 |
+| AUT-01 | 2026-12-01 → 2026-12-03 | 2026-12-01 → 2026-12-02; 2026-12-02 → 2026-12-06 |
 
-La comprobación de disponibilidad detectó correctamente esas colisiones. En la nueva ejecución las ventanas estaban disponibles y pasaron los diez tests. No se cambiaron fechas, aserciones, reintentos ni registros ajenos. La desaparición de las reservas conflictivas puede depender de actividad externa o de un reinicio; no se atribuye una causa concreta sin evidencia.
+La comprobación de disponibilidad detectó correctamente esas colisiones. Una reejecución previa había pasado momentáneamente, pero el problema reapareció al ocuparse otra vez las ventanas fijas. Por decisión explícita del autor se actualizaron los datos a marzo y abril de 2027, sin crear habitaciones, alterar aserciones, añadir reintentos ni borrar registros ajenos. Después pasaron dos ejecuciones completas consecutivas. Esto verifica la repetición con los datos elegidos; no garantiza disponibilidad indefinida en la demo compartida.
 
 El [diagnóstico](evidence/failures/availability/diagnosis.json) conserva esperado, observado, mensajes y los intervalos obtenidos de los traces. Se mantiene una [copia del trace de SOL-01](evidence/failures/availability/sol-01-trace.zip) con tokens anonimizados; los tres traces y el reporte original permanecen íntegros en el archivo local fuera de Git. Para inspeccionar la copia entregable:
 

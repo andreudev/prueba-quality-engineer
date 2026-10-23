@@ -52,20 +52,21 @@ Contrato consultado: [documentación de Postman](https://www.postman.com/automat
 
 ## Reejecución seleccionada y diagnóstico
 
-La selección actual corresponde a la reejecución del 23 de octubre de 2026 en UTC (22 de octubre en Colombia), sobre el commit `3eefd8b789c4c1cd48874ed5d949c190b96a8bc1` y el formato local de `tests/data/booking-cases.ts`. Se comprobó que sus datasets y valores son idénticos a HEAD; ese cambio local no se incorpora al commit de evidencias.
+La selección actual corresponde al cambio de fechas autorizado y guardado en `1a08a50c8bff91aeef4fdc66af6d7a9a12884ccc`. El árbol ejecutado conserva el formato local previo de `tests/data/booking-cases.ts`; sus valores coinciden con el commit y ese formato no se incorporó. Las instrucciones de la skill principal estaban guardadas desde `3eefd8b`.
 
 | Comprobación | Resultado real | Código | Evidencia |
 | --- | --- | --- | --- |
 | npm run typecheck | Sin errores | 0 | [log](final/typecheck.log) |
 | Listado Chromium | 10 tests en 6 archivos | 0 | [resumen](final/summary.json) |
-| UI Chromium | 1 aprobada; 1 worker; 14.9 s | 0 | [log](final/ui.log) |
-| API + UI Chromium | 10 aprobadas; 2 workers reales; 19.4 s; sin omitidas, flaky ni errores | 0 | [log](final/suite.log), [reporte completo](final/report/index.html) |
+| UI Chromium | 1 aprobada; 1 worker; 13.2 s | 0 | [log](final/ui.log) |
+| API + UI Chromium, primera ejecución | 10 aprobadas; 2 workers reales; 18.4 s | 0 | [log](final/first-suite.log) |
+| API + UI Chromium, segunda ejecución | 10 aprobadas; 2 workers reales; 18.3 s; sin omitidas, flaky ni errores | 0 | [log](final/suite.log), [reporte completo](final/report/index.html) |
 
-El [resumen](final/summary.json) conserva comandos, variables de salida, huellas del árbol ejecutado, versiones de skills y anotaciones de datasets/prioridad/riesgo. La [reserva integrada](final/reservation.json) correlaciona creación UI 201, GET 200 y limpieza 202/404 del mismo ID **15**. Las fechas, aserciones y reintentos no se modificaron. La suite utilizó efectivamente los workers 0 y 1.
+Son las mismas diez pruebas ejecutadas dos veces con las mismas fechas y sin reintentos automáticos. El [resumen](final/summary.json) registra ambos resultados, comandos, variables de salida, huellas del árbol ejecutado y versiones de las skills. La [reserva integrada](final/reservation.json) de la segunda suite correlaciona creación UI 201, GET 200 y limpieza 202/404 del mismo ID **20**.
 
-Antes de ejecutar se preservaron el reporte local fallido y sus adjuntos fuera del repositorio. Sus tres fallos ocurrieron antes de POST /api/booking por ventanas ocupadas en la habitación 1: [diagnóstico verificable](failures/availability/diagnosis.json). La nueva selección conserva ese diagnóstico y un [trace representativo anonimizado](failures/availability/sol-01-trace.zip); los tres originales permanecen íntegros en el archivo local. El éxito actual no borra los fallos anteriores ni demuestra quién creó o retiró las reservas conflictivas.
+La recurrencia anterior produjo siete aprobadas y tres fallos en las ventanas originales de noviembre/diciembre: [diagnóstico](failures/availability/diagnosis.json) y [trace representativo anonimizado](failures/availability/sol-01-trace.zip). Los tres casos se detenían antes de POST /api/booking. Las nuevas ventanas explícitas son marzo/abril de 2027 y se conservaron las habitaciones 1, 2 y 3, las aserciones y la limpieza de registros propios. La disponibilidad futura sigue dependiendo de la demo compartida.
 
-La ampliación original del 22 de octubre a las 23:15 UTC tuvo diez aprobadas en 14.2 s y UI aislada en 9.3 s. Aquella selección se archivó íntegra y sigue identificada por el commit [f928ae26](https://github.com/andreudev/prueba-quality-engineer/commit/f928ae269a0cabb2710578bb0ecebcf7bda9d634); los enlaces relativos de esta sección corresponden a la nueva ejecución.
+Las selecciones anteriores se archivaron íntegramente fuera del repositorio. La ampliación original del 22 de octubre a las 23:15 UTC pasó en 14.2 s y se identifica por [f928ae26](https://github.com/andreudev/prueba-quality-engineer/commit/f928ae269a0cabb2710578bb0ecebcf7bda9d634). La reejecución posterior de [f8f549e](https://github.com/andreudev/prueba-quality-engineer/commit/f8f549e7e3dd9f5e5397ac9ce73b2f00614f4b4e) pasó en 19.4 s con las fechas originales, pero no resolvía la recurrencia. Los enlaces relativos de la tabla corresponden a las nuevas ejecuciones.
 
 ## Fallos observados y correcciones del agente
 
@@ -215,7 +216,7 @@ había 23 archivos de evidencia. Este registro documental posterior no modifica
 el código de las diez pruebas ejecutadas. No se usó force push ni se cambió la
 visibilidad del repositorio o la configuración global de MCP.
 
-## Reejecución solicitada por errores locales
+## Reejecución solicitada por errores locales, previa al cambio de fechas
 
 Solicitud del usuario aplicada en esta revisión:
 
@@ -236,3 +237,25 @@ El agente aplicó `booker-ui-api-tests` y sus capacidades de revisión de contra
 Después de verificar el archivo de las salidas locales anteriores, se actualizaron también `playwright-report/` y `test-results/` con las salidas de la nueva suite. El listado había generado un HTML intermedio con diez omitidas; también se archivó, sin contarlo como ejecución aprobada. Así, `show-report playwright-report` abre el resultado de diez aprobadas y `.last-run.json` registra `passed`. Ambas carpetas siguen ignoradas por Git; sus originales se conservaron fuera del repositorio antes de sustituir los archivos. Los logs seleccionados añaden el código de salida observado; las salidas brutas se conservan con los intermedios.
 
 Los cambios de esta revisión son la selección de evidencia y su documentación. No se corrigió lógica de pruebas, no se relajaron aserciones y no se añadieron reintentos ni nuevos escenarios. El cambio local previo de formato de los datasets permanece fuera del commit. La revisión del agente no se presenta como una nueva aprobación funcional humana.
+
+## Cambio explícito de fechas autorizado y comprobación de repetición
+
+El usuario informó que la suite volvía a fallar. Se revisó el reporte del 23 de octubre a las 02:01:55 UTC (22 de octubre en Colombia): siete aprobadas y tres fallidas. Se reprodujo el mismo patrón de ocupación en habitación 1. El agente aclaró que un resultado momentáneamente aprobado no resolvía la dependencia de esas ventanas compartidas.
+
+Después de consultar alternativas y comprobar por GET unas ventanas explícitas disponibles, el usuario eligió:
+
+~~~text
+Cambiar esas fechas explícitas (recomendado por menor alcance; puede volver a haber interferencias)
+~~~
+
+Se aplicó la skill principal con revisión de contrato, cobertura y diagnóstico:
+
+- Se actualizaron `BOOKING_CHECKIN=2027-03-10` y `BOOKING_CHECKOUT=2027-03-12` en el `.env` local y en `.env.example`; los seis datasets adicionales se trasladaron explícitamente a marzo/abril. Se conservaron las variantes de fechas iguales/invertidas.
+- El commit `1a08a50` contiene únicamente esas fechas y la corrección del comentario de habitaciones de `.env.example`. Se separó el formato local previo del fichero de datasets al preparar el commit.
+- La conexión Postman del proyecto volvió a consultar identidad, colección y solicitudes de reservas; Playwright MCP observó el formulario de la habitación 3 con las nuevas fechas, sin enviar una reserva adicional. No cambiaron los contratos ni los recursos remotos de Postman.
+- Se ejecutaron TypeScript, listado, UI y dos suites completas consecutivas con dos workers. Ambas suites pasaron diez casos con las mismas fechas. El código y las skills conservaron sus huellas durante las ejecuciones.
+- Se archivaron y verificaron los 25 archivos de la selección anterior antes de sustituirla. Se mantiene un único HTML completo, el de la segunda ejecución, y se conserva el resultado de la primera en el resumen y su log. La copia del trace de disponibilidad se actualizó al último fallo recurrente, anonimizando los tokens; los originales quedaron fuera de Git.
+- Se conservaron las habitaciones existentes y las aserciones de negocio. No se añadieron búsqueda automática de fechas, reintentos ni borrados de registros ajenos. Dos ejecuciones aprobadas verifican la repetición observada y no garantizan disponibilidad indefinida.
+- El README distingue las fechas vigentes de los intervalos históricos del diagnóstico. Las salidas locales habituales se actualizan al último reporte aprobado después de archivar sus versiones anteriores.
+
+La elección humana modifica explícitamente los datos, no constituye una revisión funcional inventada de todo el código. Los logs seleccionados incorporan sus códigos de salida observados y las salidas brutas permanecen en el archivo local de intermedios.

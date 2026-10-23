@@ -1,26 +1,30 @@
 {
   "data": {
     "roomid": 3,
-    "firstname": "Ui58e380e9c7704e",
+    "firstname": "Uif29e783a32f54e",
     "lastname": "ReservaUi",
     "depositpaid": false,
-    "email": "qa.58e380e9c7704e@example.com",
+    "email": "qa.f29e783a32f54e@example.com",
     "phone": "07123456789",
     "bookingdates": {
-      "checkin": "2026-11-10",
-      "checkout": "2026-11-12"
+      "checkin": "2027-03-10",
+      "checkout": "2027-03-12"
     }
   },
   "availability": {
     "roomid": 3,
     "bookingdates": {
-      "checkin": "2026-11-10",
-      "checkout": "2026-11-12"
+      "checkin": "2027-03-10",
+      "checkout": "2027-03-12"
     },
     "occupied": [
       {
         "checkin": "2026-03-01",
         "checkout": "2026-03-05"
+      },
+      {
+        "checkin": "2026-10-23",
+        "checkout": "2026-10-24"
       }
     ]
   },
@@ -28,35 +32,35 @@
     "status": 201,
     "body": {
       "bookingdates": {
-        "checkin": "2026-11-10",
-        "checkout": "2026-11-12"
+        "checkin": "2027-03-10",
+        "checkout": "2027-03-12"
       },
-      "bookingid": 15,
+      "bookingid": 20,
       "depositpaid": false,
-      "firstname": "Ui58e380e9c7704e",
+      "firstname": "Uif29e783a32f54e",
       "lastname": "ReservaUi",
       "roomid": 3
     }
   },
   "queried": {
     "bookingdates": {
-      "checkin": "2026-11-10",
-      "checkout": "2026-11-12"
+      "checkin": "2027-03-10",
+      "checkout": "2027-03-12"
     },
-    "bookingid": 15,
+    "bookingid": 20,
     "depositpaid": false,
-    "firstname": "Ui58e380e9c7704e",
+    "firstname": "Uif29e783a32f54e",
     "lastname": "ReservaUi",
     "roomid": 3
   },
   "cleanup": {
-    "bookingid": 15,
-    "firstname": "Ui58e380e9c7704e",
+    "bookingid": 20,
+    "firstname": "Uif29e783a32f54e",
     "lastname": "ReservaUi",
     "roomid": 3,
     "bookingdates": {
-      "checkin": "2026-11-10",
-      "checkout": "2026-11-12"
+      "checkin": "2027-03-10",
+      "checkout": "2027-03-12"
     },
     "deleteStatus": 202,
     "getAfterDeleteStatus": 404
