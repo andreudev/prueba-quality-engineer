@@ -15,7 +15,6 @@ Automatización en TypeScript de reservas en [Restful Booker Platform](https://a
 5. [Skills y trabajo con el agente](#5-skills-y-trabajo-con-el-agente)
 6. [Diseño, cobertura y riesgos](#6-diseño-cobertura-y-riesgos)
 7. [Resultados, evidencias y uso de IA](#7-resultados-evidencias-y-uso-de-ia)
-8. [Sustentación y pendientes humanos](#8-sustentación-y-pendientes-humanos)
 
 ## 1. Cumplimiento de la prueba técnica
 
@@ -32,7 +31,7 @@ El alcance original exige tres escenarios de negocio y al menos uno con dos conj
 | Tres casos adicionales con prioridad y riesgo | Solapamiento, eliminación no autorizada y fechas inválidas; ahora automatizados | [Cobertura y datasets](#6-diseño-cobertura-y-riesgos) |
 | Tres skills propuestas, adopción, métricas y distinción frente a scripts/fixtures | Propuestas conservadas e implementadas en la ampliación | [Skills y adopción](#5-skills-y-trabajo-con-el-agente) |
 | Instalación y ejecución para personas y agentes; gates | Instrucciones reproducibles y gates propuestos de smoke/regresión | [Instalación](#2-instalación-desde-cero), [ejecución](#3-ejecución-de-pruebas-y-reportes), [MCP](#4-mcp-del-proyecto) |
-| Reporte, riesgos, fallos, tiempo y pendientes | Selección de evidencias y limitaciones; revisión humana y tiempo pendientes | [Evidencias](#7-resultados-evidencias-y-uso-de-ia), [pendientes](#8-sustentación-y-pendientes-humanos) |
+| Reporte, riesgos y fallos | Selección de evidencias, resultados y limitaciones técnicas | [Evidencias](#7-resultados-evidencias-y-uso-de-ia) |
 
 ## 2. Instalación desde cero
 
@@ -103,12 +102,32 @@ Ejecuta los comandos desde la raíz del repositorio. La suite funciona sin Codex
 
 El escenario UI aislado tiene una sola prueba y utiliza un worker, aunque el límite configurado sea dos. La evidencia de concurrencia corresponde a la suite completa. Firefox y WebKit están definidos en la configuración, pero la ejecución entregada y los comandos anteriores corresponden a Chromium.
 
+### Generación y ubicación de los reportes
+
+El reporter se habilita en [playwright.config.ts](playwright.config.ts). Fragmento de la configuración vigente:
+
+~~~typescript
+reporter: [["list"], ["html", { open: "never" }]],
+~~~
+
+`list` muestra los resultados en la terminal y `html` genera el reporte. `open: "never"` evita abrirlo automáticamente; no desactiva su generación. Como no se configura `outputFolder`, el HTML usa la carpeta predeterminada `playwright-report/`, salvo que se indique otra mediante una variable de entorno. Véase el [reporter HTML oficial](https://playwright.dev/docs/test-reporters#html-reporter).
+
+| Salida | Ubicación desde la raíz del repositorio | Cómo se genera |
+| --- | --- | --- |
+| Reporte HTML habitual | `playwright-report/index.html` y sus recursos | Reporter HTML de la configuración, al ejecutar las pruebas con los comandos anteriores |
+| Adjuntos de ejecución | `test-results/` | Directorio predeterminado de artefactos; los tests adjuntan datos y la configuración conserva trace, captura y vídeo pertinentes ante fallos |
+| Reporte seleccionado para entregar | `evidence/final/report/index.html` y sus recursos | Copia completa preparada por el agente durante el cierre de la skill |
+
+`test-results/` es el valor predeterminado de [outputDir](https://playwright.dev/docs/api/class-testconfig#test-config-output-dir). Las salidas habituales se reutilizan en posteriores ejecuciones y están ignoradas por Git. El reporte seleccionado permanece separado para que una ejecución local no lo sustituya.
+
+**`evidence/final/report/` no es un destino configurado en Playwright.** No existe un script npm ni un hook que lo actualice al ejecutar los tests. El agente aplica el cierre de la skill: conserva el reporte completo elegido, incluidos sus recursos, y prepara el resumen, los logs y la correlación del mismo registro.
+
 ### Consultar reportes
 
 Para abrir el reporte de tu última ejecución local:
 
 ~~~powershell
-npx.cmd playwright show-report
+npx.cmd playwright show-report playwright-report
 ~~~
 
 Para abrir el reporte seleccionado de la entrega, con sus recursos incluidos:
@@ -118,6 +137,17 @@ npx.cmd playwright show-report evidence/final/report
 ~~~
 
 GitHub permite consultar los archivos; para utilizar el visor interactivo del reporte HTML, clona el proyecto y ábrelo con el comando anterior.
+
+### Rutas de la ejecución conservada
+
+Para conservar por separado la ejecución UI y la suite completa, el agente utilizó temporalmente `--reporter=list,html,json`, `PLAYWRIGHT_HTML_OUTPUT_DIR` para el HTML, `PLAYWRIGHT_JSON_OUTPUT_FILE` para el JSON y `--output` para los artefactos. **`--output` no cambia la carpeta del reporte HTML.** Los comandos y variables exactos figuran en [summary.json](evidence/final/summary.json).
+
+| Ejecución conservada | HTML generado antes de seleccionar la entrega | Artefactos (`--output`) | JSON de resultados |
+| --- | --- | --- | --- |
+| UI aislada | `work/expansion/ui-report/` | `work/expansion/ui-artifacts/` | `work/expansion/ui-results.json` |
+| Suite completa API + UI | `work/expansion/full-report/` | `work/expansion/full-artifacts/` | `work/expansion/full-results.json` |
+
+El reporte completo de la segunda fila se seleccionó para `evidence/final/report/`. Las rutas de `work/` son intermedios locales ignorados y no forman parte de la descarga del repositorio. Estas variables no están definidas por la configuración versionada: los comandos habituales generan el reporte local predeterminado si la sesión no conserva un override. Si se utiliza una ruta personalizada, debe registrarse y abrirse con `show-report` apuntando a esa carpeta.
 
 El código de salida **0** indica que el comando terminó correctamente; cualquier código distinto de 0 bloquea el gate y debe investigarse. En PowerShell, consulta `$LASTEXITCODE` inmediatamente después del comando. Un listado correcto no equivale a pruebas ejecutadas. La configuración conserva traces, capturas y vídeo pertinentes ante fallos, y mantiene los reintentos desactivados.
 
@@ -216,7 +246,7 @@ Las cuatro skills ya vienen con el repositorio en `.agents/skills`. Codex las de
 | [$priorizar-cobertura-reservas](.agents/skills/priorizar-cobertura-reservas/SKILL.md) | Ayudar a QA a priorizar cobertura por riesgo | Requisitos, casos, datasets, contrato y límites de la demo | Matriz requisito/riesgo/escenario/dataset/prioridad sin duplicados; contraste con listado y resultados | Lectura del proyecto y terminal |
 | [$diagnosticar-fallos-reservas](.agents/skills/diagnosticar-fallos-reservas/SKILL.md) | Ayudar a QA/desarrolladores a distinguir producto, test, datos y entorno | Fallo, comando, código de salida, reporte, trace, configuración sin secretos y contrato | Diagnóstico sustentado o hipótesis explícita, referencias y siguiente comprobación; revisión humana/reproducción cuando sea posible | Artefactos y terminal; MCP cuando ayuden al diagnóstico |
 
-La skill principal coordina la revisión de contrato antes de fijar expectativas, la priorización de cobertura y el diagnóstico ante fallos. También selecciona el reporte, actualiza resumen y correlación, conserva fallos pertinentes, archiva intermedios fuera de Git y comprueba enlaces y archivos de entrega. Ese cierre forma parte de la skill; la revisión funcional humana sigue siendo un paso propio del autor.
+La skill principal coordina la revisión de contrato antes de fijar expectativas, la priorización de cobertura y el diagnóstico ante fallos. También selecciona el reporte, actualiza resumen y correlación, conserva fallos pertinentes, archiva intermedios fuera de Git y comprueba enlaces y archivos de entrega. Ese cierre forma parte del trabajo del agente y distingue las revisiones y correcciones efectivamente realizadas.
 
 ### Invocaciones copiables
 
@@ -353,6 +383,8 @@ El [resumen](evidence/final/summary.json) contiene los comandos exactos, variabl
 - Código y evidencia seleccionada de la ampliación: commit [f928ae26](https://github.com/andreudev/prueba-quality-engineer/commit/f928ae269a0cabb2710578bb0ecebcf7bda9d634).
 - Invocaciones exactas, cambios, revisión técnica del agente, diferencias de contrato y observaciones humanas reales: [evidence/ai-usage.md](evidence/ai-usage.md). Las observaciones sobre alcance y evidencias no se presentan como aprobación funcional humana.
 
+Las huellas de las skills en el resumen identifican las versiones utilizadas en aquella ejecución. Los ajustes posteriores de sus instrucciones no reescriben esa evidencia ni representan una nueva ejecución de pruebas.
+
 Las conexiones del proyecto se comprobaron mediante observación real del formulario con Playwright y lectura de identidad/colección/solicitudes con Postman OAuth. Se conservan el [snapshot del proyecto](evidence/exploration/project-form.yml) y el resumen de conexiones; no se versionan credenciales personales ni tokens.
 
 ### Fallos históricos y conservación
@@ -372,19 +404,3 @@ npx.cmd playwright show-trace evidence/failures/env-format/trace.zip
 | `evidence/ai-usage.md` y `evidence/postman-contract.json` | Trazabilidad del trabajo y extracto útil del contrato |
 
 Las ejecuciones normales no sustituyen la selección final. Al preparar otra entrega, la skill archiva localmente la selección anterior fuera de Git, actualiza reporte/resumen/enlaces, conserva fallos pertinentes y anonimiza tokens en la copia entregable. Los logs históricos mantienen sus rutas originales; el registro de IA indica dónde están ahora sus adjuntos. La [.gitignore](.gitignore) separa las salidas locales de la evidencia seleccionada.
-
-## 8. Sustentación y pendientes humanos
-
-Para los **30 minutos de sustentación** previstos en el enunciado:
-
-1. Explicar POM, clientes, fixtures, aislamiento y parametrización; mostrar qué cubre el alcance original y qué añadió la ampliación.
-2. Mostrar la skill previa, una invocación real y las decisiones o correcciones registradas; diferenciar revisión del agente y revisión humana.
-3. Ejecutar con el agente una prueba existente y revisar su resultado, la correlación y la limpieza del mismo registro.
-4. Aplicar una variación pequeña: cambiar un dato sintético del huésped dentro de longitudes válidas, mantener las aserciones de identidad y volver a ejecutar con fechas explícitas disponibles. Esta variación se propone para la sustentación; no se declara realizada.
-
-| Pendiente humano | Estado |
-| --- | --- |
-| Revisión funcional del autor | Pendiente: revisar POM, aserciones, correlación del mismo registro y protección de registros ajenos |
-| Tiempo total real invertido | Pendiente de indicar por el autor; no se deduce de los commits ni se sustituye por las 4–5 horas esperadas en el enunciado |
-
-La entrega técnica incluye código, lockfile, configuración, skills previas a su uso y evidencias de ejecución. Los pendientes humanos permanecen explícitos para evaluación.

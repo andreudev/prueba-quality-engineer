@@ -80,6 +80,11 @@ al terminar el trabajo; no delega esa gestión al usuario ni se limita a recomen
 - Evita esperas fijas y dependencias entre pruebas.
 - Usa un marcador sintético único por ejecución.
 - Mantén las fechas configurables; no añadas un buscador automático de fechas.
+- Mantén el README centrado en instalación, ejecución, configuración, cobertura,
+  resultados y limitaciones técnicas. Guarda las agendas de sustentación y tareas
+  personales solicitadas fuera del repositorio, sin enlaces desde el entregable.
+  Esto no permite inventar revisiones, correcciones humanas ni tiempo invertido;
+  conserva los hechos y el estado real de revisión en la evidencia técnica.
 
 ## Implementación
 
@@ -108,6 +113,11 @@ al terminar el trabajo; no delega esa gestión al usuario ni se limita a recomen
 - Comprueba en la salida que la suite completa realmente usa dos workers;
   configurar el límite no demuestra por sí solo la concurrencia.
 - Conserva el reporte de Playwright y las evidencias pertinentes.
+- Las ejecuciones habituales generan HTML en `playwright-report/` y artefactos en
+  `test-results/`. Si usas rutas temporales, registra `PLAYWRIGHT_HTML_OUTPUT_DIR`,
+  `PLAYWRIGHT_JSON_OUTPUT_FILE` cuando habilites JSON y `--output` para artefactos.
+  `--output` no configura el destino del HTML. Ningún comando habitual publica
+  automáticamente la selección de `evidence/final/report`.
 - Registra los comandos y sus códigos de salida.
 - Antes de que otro comando sobrescriba las salidas habituales, conserva los adjuntos
   de cualquier fallo relevante. Al acabar la verificación, ejecuta el cierre de abajo.
@@ -117,6 +127,10 @@ al terminar el trabajo; no delega esa gestión al usuario ni se limita a recomen
 Ejecuta estos pasos como parte de cada implementación o adaptación realizada con
 esta skill. No dejes la organización como una tarea posterior para el usuario.
 La revisión funcional humana se registra por separado y puede seguir pendiente.
+Una edición solo documental o de instrucciones de la skill conserva los reportes
+y las huellas históricas: no necesita crear reservas ni reconstruir una selección
+para aparentar una nueva ejecución. Las huellas siguen identificando la versión
+realmente utilizada; distingue esa versión de las instrucciones actuales.
 
 1. Reúne los resultados reales, comandos y códigos de salida. Identifica qué versión
    del código se ejecutó mediante commit y, si hay cambios sin commit, huellas de los
@@ -140,7 +154,8 @@ La revisión funcional humana se registra por separado y puede seguir pendiente.
    escriben directamente allí ni reemplazan la entrega mientras están corriendo.
 5. Actualiza `evidence/ai-usage.md` y los enlaces del README con la invocación, cambios,
    ejecuciones, fallos y correcciones realmente realizados. Distingue las correcciones
-   del agente de las humanas y señala los requisitos del documento aún pendientes.
+   del agente de las humanas y conserva las limitaciones técnicas. Mantén las agendas
+   de sustentación y tareas personales fuera del repositorio; no las añadas al README.
 6. Verifica todos los enlaces locales de entrega, los recursos del reporte y la
    coincidencia del ID de la reserva entre creación, consulta y limpieza. Comprueba
    que los archivos del código ejecutado no cambiaron después de la ejecución.
