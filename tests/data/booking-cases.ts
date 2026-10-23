@@ -32,15 +32,15 @@ export const overlapCases: readonly OverlapCase[] = [
     id: "SOL-01", name: "intervalo idéntico", priority: "P1",
     risk: "Doble asignación de una habitación en el mismo intervalo",
     roomid: 1, expectedStatus: 409,
-    original: { checkin: "2026-11-16", checkout: "2026-11-20" },
-    candidate: { checkin: "2026-11-16", checkout: "2026-11-20" },
+    original: { checkin: "2027-03-16", checkout: "2027-03-20" },
+    candidate: { checkin: "2027-03-16", checkout: "2027-03-20" },
   },
   {
     id: "SOL-02", name: "solapamiento parcial", priority: "P1",
     risk: "Doble asignación al cruzar parcialmente los intervalos",
     roomid: 2, expectedStatus: 409,
-    original: { checkin: "2026-11-23", checkout: "2026-11-27" },
-    candidate: { checkin: "2026-11-25", checkout: "2026-11-29" },
+    original: { checkin: "2027-03-23", checkout: "2027-03-27" },
+    candidate: { checkin: "2027-03-25", checkout: "2027-03-29" },
   },
 ];
 
@@ -49,13 +49,13 @@ export const unauthorizedCases: readonly UnauthorizedCase[] = [
     id: "AUT-01", name: "sin token", priority: "P1",
     risk: "Eliminación de reservas sin autenticación", roomid: 1,
     expectedStatus: 403, mode: "missing",
-    bookingdates: { checkin: "2026-12-01", checkout: "2026-12-03" },
+    bookingdates: { checkin: "2027-04-01", checkout: "2027-04-03" },
   },
   {
     id: "AUT-02", name: "token inválido", priority: "P1",
     risk: "Eliminación de reservas con una identidad no válida", roomid: 2,
     expectedStatus: 403, mode: "invalid",
-    bookingdates: { checkin: "2026-12-05", checkout: "2026-12-07" },
+    bookingdates: { checkin: "2027-04-05", checkout: "2027-04-07" },
   },
 ];
 
@@ -64,12 +64,12 @@ export const invalidDateCases: readonly InvalidDatesCase[] = [
     id: "FEC-01", name: "salida igual a entrada", priority: "P2",
     risk: "Persistencia de una estancia de duración cero", roomid: 1,
     expectedStatus: 409,
-    bookingdates: { checkin: "2026-12-10", checkout: "2026-12-10" },
+    bookingdates: { checkin: "2027-04-10", checkout: "2027-04-10" },
   },
   {
     id: "FEC-02", name: "salida anterior a entrada", priority: "P2",
     risk: "Persistencia de una estancia de duración negativa", roomid: 2,
     expectedStatus: 409,
-    bookingdates: { checkin: "2026-12-15", checkout: "2026-12-14" },
+    bookingdates: { checkin: "2027-04-15", checkout: "2027-04-14" },
   },
 ];
