@@ -1,68 +1,23 @@
 {
+  "date": "2026-10-24",
   "data": {
     "roomid": 3,
-    "firstname": "Uif29e783a32f54e",
+    "firstname": "Ui79e85bfe34bc44",
     "lastname": "ReservaUi",
     "depositpaid": false,
-    "email": "qa.f29e783a32f54e@example.com",
+    "email": "qa.79e85bfe34bc44@example.com",
     "phone": "07123456789",
     "bookingdates": {
       "checkin": "2027-03-10",
       "checkout": "2027-03-12"
     }
   },
-  "availability": {
-    "roomid": 3,
-    "bookingdates": {
-      "checkin": "2027-03-10",
-      "checkout": "2027-03-12"
-    },
-    "occupied": [
-      {
-        "checkin": "2026-03-01",
-        "checkout": "2026-03-05"
-      },
-      {
-        "checkin": "2026-10-23",
-        "checkout": "2026-10-24"
-      }
-    ]
-  },
-  "created": {
-    "status": 201,
-    "body": {
-      "bookingdates": {
-        "checkin": "2027-03-10",
-        "checkout": "2027-03-12"
-      },
-      "bookingid": 20,
-      "depositpaid": false,
-      "firstname": "Uif29e783a32f54e",
-      "lastname": "ReservaUi",
-      "roomid": 3
-    }
-  },
-  "queried": {
-    "bookingdates": {
-      "checkin": "2027-03-10",
-      "checkout": "2027-03-12"
-    },
-    "bookingid": 20,
-    "depositpaid": false,
-    "firstname": "Uif29e783a32f54e",
-    "lastname": "ReservaUi",
-    "roomid": 3
-  },
+  "created": null,
+  "queried": null,
+  "status": "Falló antes de enviar el POST UI: no apareció Book This Room.",
   "cleanup": {
-    "bookingid": 20,
-    "firstname": "Uif29e783a32f54e",
-    "lastname": "ReservaUi",
-    "roomid": 3,
-    "bookingdates": {
-      "checkin": "2027-03-10",
-      "checkout": "2027-03-12"
-    },
-    "deleteStatus": 202,
-    "getAfterDeleteStatus": 404
-  }
+    "required": false,
+    "reason": "No se registró intento de envío de reserva por UI."
+  },
+  "historicalCorrelation": "https://github.com/andreudev/prueba-quality-engineer/blob/3b35be02197e378cdc42d7d50a33770ddd1e840f/evidence/final/reservation.json"
 }

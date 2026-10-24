@@ -4,7 +4,7 @@ Automatización en TypeScript de reservas en [Restful Booker Platform](https://a
 
 **Repositorio:** [andreudev/prueba-quality-engineer](https://github.com/andreudev/prueba-quality-engineer).
 
-**Verificación conservada:** 22 de octubre de 2026 en Colombia (23 de octubre en UTC); **dos ejecuciones consecutivas de 10 pruebas aprobadas en Chromium con 2 workers reales**, sin omitidas ni reintentos, tras actualizar las fechas explícitas a marzo y abril de 2027. Consulta el [último reporte](evidence/final/report/index.html), el [resumen de ambas ejecuciones](evidence/final/summary.json) y el [diagnóstico de los fallos anteriores de disponibilidad](evidence/failures/availability/diagnosis.json). Cada ejecución futura debe comprobar sus propios resultados.
+**Última verificación:** 24 de octubre de 2026 en Colombia: **3 pruebas aprobadas y 7 fallidas en Chromium con 2 workers concurrentes**, sin omitidas ni reintentos. La demo respondió 500 en consultas por ID y no cargó el formulario. Se conservan el [reporte completo actual](evidence/final/report/index.html), el [resumen](evidence/final/summary.json) y las [incidencias con pasos, esperado y observado](evidence/failures/demo-20261024/diagnosis.md). Las dos ejecuciones de diez aprobadas del 22 de octubre son **históricas** y siguen accesibles desde el commit citado más abajo; no representan la situación actual.
 
 ## Índice
 
@@ -122,7 +122,7 @@ reporter: [["list"], ["html", { open: "never" }]],
 
 `test-results/` es el valor predeterminado de [outputDir](https://playwright.dev/docs/api/class-testconfig#test-config-output-dir). Las salidas habituales se reutilizan en posteriores ejecuciones y están ignoradas por Git. El reporte seleccionado permanece separado para que una ejecución local no lo sustituya.
 
-**`evidence/final/report/` no es un destino configurado en Playwright.** No existe un script npm ni un hook que lo actualice al ejecutar los tests. El agente aplica el cierre de la skill: conserva el reporte completo elegido, incluidos sus recursos, y prepara el resumen, los logs y la correlación del mismo registro.
+**`evidence/final/report/` no es un destino configurado en Playwright.** No existe un script npm ni un hook que lo actualice al ejecutar los tests. El agente aplica el cierre de la skill: conserva el reporte completo elegido, incluidos sus recursos, y prepara el resumen, los logs y la correlación del mismo registro; si el flujo falla antes de crear, registra ese estado sin inventar una correlación.
 
 ### Consultar reportes
 
@@ -142,15 +142,22 @@ GitHub permite consultar los archivos; para utilizar el visor interactivo del re
 
 ### Rutas de la ejecución conservada
 
-Para conservar por separado la ejecución UI y la suite completa, el agente utilizó temporalmente `--reporter=list,html,json`, `PLAYWRIGHT_HTML_OUTPUT_DIR` para el HTML, `PLAYWRIGHT_JSON_OUTPUT_FILE` para el JSON y `--output` para los artefactos. **`--output` no cambia la carpeta del reporte HTML.** Los comandos y variables exactos figuran en [summary.json](evidence/final/summary.json).
+La revisión del 24 de octubre utilizó temporalmente `--reporter=list,html,json`,
+`PLAYWRIGHT_HTML_OUTPUT_DIR` para el HTML, `PLAYWRIGHT_JSON_OUTPUT_FILE` para el JSON
+y `--output` para los artefactos, en un directorio local de revisión fuera del
+repositorio. **`--output` no cambia la carpeta del reporte HTML.**
+Los destinos absolutos originales y el comando figuran en
+[summary.json](evidence/final/summary.json). Solo la copia seleccionada del HTML
+completo se publica en `evidence/final/report/`.
 
-| Ejecución conservada | HTML generado antes de seleccionar la entrega | Artefactos (`--output`) | JSON de resultados |
-| --- | --- | --- | --- |
-| UI aislada | `work/fechas-explicitas/ui-report/` | `work/fechas-explicitas/ui-artifacts/` | `work/fechas-explicitas/ui-results.json` |
-| Suite completa, primera ejecución | `work/fechas-explicitas/first-report/` | `work/fechas-explicitas/first-artifacts/` | `work/fechas-explicitas/first-results.json` |
-| Suite completa, segunda ejecución | `work/fechas-explicitas/full-report/` | `work/fechas-explicitas/full-artifacts/` | `work/fechas-explicitas/full-results.json` |
+Las carpetas `work/fechas-explicitas/ui-report`, `first-report` y `full-report`
+corresponden a las ejecuciones históricas del 22 de octubre. No son el origen del
+reporte actual ni forman parte de la descarga del repositorio.
 
-El reporte completo de la última fila se seleccionó para `evidence/final/report/`. El resumen y los logs conservan también el resultado de la primera ejecución. Las rutas de `work/` son intermedios locales ignorados y no forman parte de la descarga del repositorio. Estas variables no están definidas por la configuración versionada: los comandos habituales generan el reporte local predeterminado si la sesión no conserva un override. Si se utiliza una ruta personalizada, debe registrarse y abrirse con `show-report` apuntando a esa carpeta.
+Estas variables no están definidas por la configuración versionada: los comandos
+habituales generan el reporte local predeterminado si la sesión no conserva un
+override. Si se utiliza una ruta personalizada, debe registrarse y abrirse con
+`show-report` apuntando a esa carpeta.
 
 El código de salida **0** indica que el comando terminó correctamente; cualquier código distinto de 0 bloquea el gate y debe investigarse. En PowerShell, consulta `$LASTEXITCODE` inmediatamente después del comando. Un listado correcto no equivale a pruebas ejecutadas. La configuración conserva traces, capturas y vídeo pertinentes ante fallos, y mantiene los reintentos desactivados.
 
@@ -362,69 +369,110 @@ La [documentación de Postman](https://www.postman.com/automation-in-testing/res
 
 La demo es compartida y puede reiniciarse, eliminar registros o reutilizar IDs. Consultar disponibilidad antes de crear no impide que otro usuario reserve después. La comprobación de identidad protege la limpieza; si un registro ya no existe, se anota sin inventar la causa. Las ramas de recuperación sin ID y fallo forzado de limpieza no se han ejercitado deliberadamente. No se atribuye cobertura de otros navegadores a la ejecución Chromium.
 
-**No se ha confirmado un bug de producto.** Los fallos de implementación, configuración, herramientas y disponibilidad de datos encontrados se conservan en la evidencia de IA. Si una ejecución futura revela una discrepancia, debe registrar pasos, dataset, esperado, observado y evidencia; no relajar aserciones ni cambiar fechas automáticamente para declararla aprobada.
+**Incidencias observadas el 24 de octubre:** GET de reservas y habitaciones por ID devolvió 500; el formulario no apareció; y dos creaciones originales respondieron 409 pese a persistir sus marcadores. El [informe actual](evidence/failures/demo-20261024/diagnosis.md) incluye pasos, esperado, observado, impacto y evidencia. Su causa interna no está demostrada. La afirmación histórica de que no se habían confirmado bugs corresponde a las ejecuciones anteriores y no se aplica a esta revisión. Se mantienen las expectativas y los fallos.
 
 ## 7. Resultados, evidencias y uso de IA
 
 ### Ejecución seleccionada
 
-Resultados conservados después del cambio de fechas autorizado el **22 de octubre de 2026 en Colombia**. Las suites completas comenzaron el **23 de octubre a las 02:13:07 y 02:13:40 UTC (22 de octubre, 21:13 en Colombia)**. Ambas utilizaron el backend real, las mismas fechas de marzo/abril de 2027 y las aserciones originales.
+La selección actual corresponde al **24 de octubre de 2026, 01:14:10 en Colombia
+(06:14:10 UTC)**. El código ejecutado fue `3b35be0`, con el formato local previo
+del archivo de datasets identificado por SHA256. No cambiaron lógica, fechas,
+aserciones, rutas ni reintentos.
 
-| Comprobación conservada | Resultado | Código de salida | Evidencia |
+| Comprobación | Resultado | Código de salida | Evidencia |
 | --- | --- | --- | --- |
 | TypeScript | Sin errores | 0 | [typecheck.log](evidence/final/typecheck.log) |
-| Listado Chromium | 10 pruebas en 6 archivos de origen reportados | 0 | [summary.json](evidence/final/summary.json) |
-| UI Chromium | 1 aprobada, 1 worker, 13.2 s | 0 | [ui.log](evidence/final/ui.log) |
-| API + UI Chromium, primera ejecución | 10 aprobadas, 2 workers efectivos, 18.4 s | 0 | [first-suite.log](evidence/final/first-suite.log) |
-| API + UI Chromium, segunda ejecución | 10 aprobadas, 2 workers efectivos, 18.3 s; sin omitidas, flaky ni errores | 0 | [suite.log](evidence/final/suite.log), [reporte completo](evidence/final/report/index.html) |
+| Listado Chromium | 10 pruebas, 6 archivos de origen reportados | 0 | [summary.json](evidence/final/summary.json) |
+| API + UI Chromium | **3 aprobadas, 7 fallidas**, 2 workers concurrentes, 29,4 s | **1** | [suite.log](evidence/final/suite.log), [HTML completo](evidence/final/report/index.html) |
+| Comprobación independiente | Login 200 y listados 200; consultas por ID 500 | No es una suite aprobada | [Diagnóstico](evidence/failures/demo-20261024/diagnosis.json) |
+| Comprobación posterior de propiedad | Los marcadores propios ya no aparecían; no se ejecutó DELETE | No acredita éxito del teardown | [Estado de limpieza](evidence/failures/demo-20261024/diagnosis.md#limpieza-y-comprobación-posterior) |
 
-El [resumen](evidence/final/summary.json) contiene los comandos exactos, variables de salida del reporte, códigos, workers, datasets y huellas del código ejecutado. [reservation.json](evidence/final/reservation.json) conserva creación UI, consulta API y limpieza 202/404 del mismo registro. La observación con MCP y la ejecución de Playwright Test están identificadas por separado.
+Se aprobaron el negativo de nombre vacío y las dos variantes de fechas inválidas.
+Fallaron los dos éxitos API, los dos solapamientos, las dos variantes de autorización
+y la integración UI/API. Los índices de worker cambian al reemplazar procesos tras
+fallos; no deben contarse como más de dos workers concurrentes.
 
-### Diagnóstico del reporte local anterior
-
-El reporte local anterior al cambio de fechas tenía siete aprobadas y tres fallos por disponibilidad en la habitación 1. Los traces confirman que los tres se detuvieron antes de enviar POST `/api/booking`; no fueron rechazos de creación ni fallos de autenticación.
-
-| Caso | Fechas solicitadas | Reserva existente que impedía la preparación |
-| --- | --- | --- |
-| API exitosa sin depósito | 2026-11-10 → 2026-11-12 | 2026-11-09 → 2026-11-13 |
-| SOL-01 | 2026-11-16 → 2026-11-20 | 2026-11-14 → 2026-11-17; 2026-11-17 → 2026-11-19; 2026-11-19 → 2026-11-22 |
-| AUT-01 | 2026-12-01 → 2026-12-03 | 2026-12-01 → 2026-12-02; 2026-12-02 → 2026-12-06 |
-
-La comprobación de disponibilidad detectó correctamente esas colisiones. Una reejecución previa había pasado momentáneamente, pero el problema reapareció al ocuparse otra vez las ventanas fijas. Por decisión explícita del autor se actualizaron los datos a marzo y abril de 2027, sin crear habitaciones, alterar aserciones, añadir reintentos ni borrar registros ajenos. Después pasaron dos ejecuciones completas consecutivas. Esto verifica la repetición con los datos elegidos; no garantiza disponibilidad indefinida en la demo compartida.
-
-El [diagnóstico](evidence/failures/availability/diagnosis.json) conserva esperado, observado, mensajes y los intervalos obtenidos de los traces. Se mantiene una [copia del trace de SOL-01](evidence/failures/availability/sol-01-trace.zip) con tokens anonimizados; los tres traces y el reporte original permanecen íntegros en el archivo local fuera de Git. Para inspeccionar la copia entregable:
+El [resumen](evidence/final/summary.json) conserva resultados, comandos, destinos del
+reporter, workers, huellas y pendientes. [reservation.json](evidence/final/reservation.json)
+registra que el flujo UI falló **antes del POST**; no se inventan creación,
+correlación ni limpieza. El reporte contiene sus recursos completos y traces
+anonimizados. Para abrirlo desde la raíz:
 
 ~~~powershell
-npx.cmd playwright show-trace evidence/failures/availability/sol-01-trace.zip
+npx.cmd playwright show-report evidence/final/report
 ~~~
 
-El aviso de Node sobre `NO_COLOR` y `FORCE_COLOR` afecta al formato de la terminal y no hizo fallar ninguna prueba. Los estados y códigos de salida, no ese aviso, determinan el resultado.
+GitHub puede mostrar el código del HTML; clona el repositorio o descarga su ZIP y
+usa el comando anterior. No es necesario configurar un despliegue para revisar
+esta entrega. `playwright-report/` sigue siendo la salida habitual de ejecuciones
+locales; `evidence/final/report/` es la selección preparada por el agente.
+
+### Incidencias actuales y limitaciones
+
+El [informe de incidencias](evidence/failures/demo-20261024/diagnosis.md) describe:
+
+- **DEMO-01, P1:** consultas por ID 500 y formulario inaccesible, reproducidos
+  también con la reserva inicial 1 y la habitación 3. La causa interna es desconocida.
+- **DEMO-02, P1:** POST original 409 con persistencia del mismo marcador en SOL-01
+  y SOL-02. No se alcanzó el intento de solapamiento deliberado.
+- **Limpieza:** se detuvo ante GET 500 para proteger la identidad. Posteriormente
+  no se encontraron los marcadores; no se atribuye su desaparición a un actor/reset.
+- **Negativos aprobados:** acreditan las aserciones ejecutadas; el rechazo genérico
+  de fechas no prueba por sí solo la salud del entorno.
+
+No se corrigió el servidor público ni se debilitaron los tests para aprobarlo.
+Queda pendiente recuperar el entorno y reejecutar la suite, incluida su limpieza.
+
+### Ejecuciones históricas y diagnóstico de disponibilidad
+
+El **22 de octubre en Colombia** se ejecutaron dos suites consecutivas de diez
+aprobadas con dos workers y las mismas fechas de marzo/abril de 2027. Son resultados
+históricos conservados en Git:
+
+- [Reporte completo aprobado del commit 3b35be0](https://github.com/andreudev/prueba-quality-engineer/blob/3b35be02197e378cdc42d7d50a33770ddd1e840f/evidence/final/report/index.html).
+- [Resumen y comandos históricos](https://github.com/andreudev/prueba-quality-engineer/blob/3b35be02197e378cdc42d7d50a33770ddd1e840f/evidence/final/summary.json).
+- [Correlación histórica del ID 20: UI 201, GET 200, DELETE 202 y GET 404](https://github.com/andreudev/prueba-quality-engineer/blob/3b35be02197e378cdc42d7d50a33770ddd1e840f/evidence/final/reservation.json).
+
+Los conflictos anteriores con ventanas de noviembre/diciembre están en el
+[diagnóstico histórico de disponibilidad](evidence/failures/availability/diagnosis.json).
+Esos fallos ocurrían antes del POST, a diferencia de los errores actuales. Un
+resultado anterior aprobado no acredita la ejecución de hoy.
 
 ### Trazabilidad del agente y revisión
 
-- Skill principal guardada antes de la implementación original: commit [6aecc959](https://github.com/andreudev/prueba-quality-engineer/commit/6aecc9591eb81e0aab136eaded89bcf55bd4c843).
-- Configuración MCP y las cuatro skills guardadas antes de la ampliación: commit [29c1876e](https://github.com/andreudev/prueba-quality-engineer/commit/29c1876e6f8e8cfa918b4edf736e26548976394d).
-- Código y evidencia seleccionada de la ampliación: commit [f928ae26](https://github.com/andreudev/prueba-quality-engineer/commit/f928ae269a0cabb2710578bb0ecebcf7bda9d634).
-- Invocaciones exactas, cambios, revisión técnica del agente, diferencias de contrato y observaciones humanas reales: [evidence/ai-usage.md](evidence/ai-usage.md). Las observaciones sobre alcance y evidencias no se presentan como aprobación funcional humana.
+La skill original precede al resultado integrado; las cuatro skills y MCP de la
+ampliación se guardaron en `29c1876` antes de utilizarlos. La versión de instrucciones
+de la última ejecución está identificada por `3eefd8b`.
+[evidence/ai-usage.md](evidence/ai-usage.md) conserva invocaciones, cambios,
+intervenciones humanas reales y revisiones del agente.
 
-Las huellas de las skills en el resumen identifican las versiones utilizadas en aquella ejecución. Los ajustes posteriores de sus instrucciones no reescriben esa evidencia ni representan una nueva ejecución de pruebas.
+Esta revisión usó el extracto de contrato conservado; no se presenta como una nueva
+consulta OAuth de Postman. La observación UI con MCP se distingue de la ejecución
+de Playwright Test. La configuración global y la configuración MCP del proyecto
+no cambiaron.
 
-Las conexiones del proyecto se comprobaron mediante observación real del formulario con Playwright y lectura de identidad/colección/solicitudes con Postman OAuth. Se conservan el [snapshot del proyecto](evidence/exploration/project-form.yml) y el resumen de conexiones; no se versionan credenciales personales ni tokens.
+**Dedicación declarada por el autor:** aproximadamente **6 horas**, durante una
+tarde-noche, con apoyo de IA mediante Codex y MCP de Playwright y Postman. Es el dato
+informado por el autor, no una estimación a partir de commits ni las 4–5 horas
+orientativas del enunciado.
+
+**Pendientes:** recuperación del entorno externo y nueva verificación completa.
+La revisión técnica del agente está documentada; no se ha registrado una revisión
+funcional humana completa ni se declara realizada la sustentación.
 
 ### Fallos históricos y conservación
 
-Los errores históricos incluyen TypeScript, el formato de `.env` y herramientas MCP. Sus causas y correcciones están en el [registro de IA](evidence/ai-usage.md), junto con los adjuntos vigentes. Para abrir el trace del fallo histórico de configuración:
-
-~~~powershell
-npx.cmd playwright show-trace evidence/failures/env-format/trace.zip
-~~~
-
-| Ubicación | Qué conservar |
+| Ubicación | Política |
 | --- | --- |
-| `playwright-report/` y `test-results/` | Salidas habituales de ejecución; ignoradas por Git |
-| `work/` | Auxiliares y resultados intermedios; ignorados por Git |
-| `evidence/final/` | Un único reporte completo seleccionado, sus recursos, resumen, logs y correlación |
-| `evidence/exploration/` y `evidence/failures/` | Snapshots necesarios y fallos pertinentes, sin acumular cada intento |
-| `evidence/ai-usage.md` y `evidence/postman-contract.json` | Trazabilidad del trabajo y extracto útil del contrato |
+| `playwright-report/`, `test-results/` y `work/` | Salidas locales ignoradas por Git |
+| `evidence/final/` | Un reporte completo actual, resumen, logs y estado UI; los logs aislados anteriores se identifican como históricos en el resumen |
+| `evidence/exploration/` y `evidence/failures/` | Snapshots útiles, fallos históricos e incidencias actuales |
+| `evidence/ai-usage.md` y `evidence/postman-contract.json` | Trazabilidad y extracto del contrato |
 
-Las ejecuciones normales no sustituyen la selección final. Al preparar otra entrega, la skill archiva localmente la selección anterior fuera de Git, actualiza reporte/resumen/enlaces, conserva fallos pertinentes y anonimiza tokens en la copia entregable. Los logs históricos mantienen sus rutas originales; el registro de IA indica dónde están ahora sus adjuntos. La [.gitignore](.gitignore) separa las salidas locales de la evidencia seleccionada.
+Antes de sustituir la selección se archivaron los 26 archivos previos fuera de Git
+y se verificaron sus SHA256. Se conservaron los originales de la revisión actual;
+las nueve cadenas de token encontradas se sustituyeron solo en las copias de
+traces y datos del reporte entregable. Los recursos permanecen completos y los
+fallos siguen visibles. Los archivos históricos y su éxito también son recuperables
+en el commit citado.

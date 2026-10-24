@@ -1,0 +1,164 @@
+{
+  "date": "2026-10-24",
+  "runStartUtc": "2026-10-24T06:14:10.491Z",
+  "classification": "Discrepancias del entorno público reproducidas; causa interna no demostrada",
+  "codeCommit": "3b35be02197e378cdc42d7d50a33770ddd1e840f",
+  "stats": {
+    "startTime": "2026-10-24T06:14:10.491Z",
+    "duration": 29390.98,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 7,
+    "flaky": 0
+  },
+  "configuredWorkers": 2,
+  "findings": [
+    {
+      "id": "DEMO-01",
+      "priority": "P1",
+      "title": "Consultas por ID y formulario de reserva indisponibles",
+      "steps": [
+        "Autenticar mediante POST /api/auth/login",
+        "Consultar GET /api/booking/1 y GET /api/room/3",
+        "Abrir /reservation/3?checkin=2027-03-10&checkout=2027-03-12"
+      ],
+      "expected": "GET 200 para registros existentes y formulario visible",
+      "observed": "Login 200; GET por ID 500 con Internal Server Error; UI sin Book This Room",
+      "impact": "Impide consulta del mismo registro, validación de integridad y limpieza segura",
+      "rootCause": "No determinada; no se atribuye a una versión desplegada concreta"
+    },
+    {
+      "id": "DEMO-02",
+      "priority": "P1",
+      "title": "POST con respuesta 409 deja una reserva persistida",
+      "steps": [
+        "Comprobar ventana disponible de SOL-01/SOL-02",
+        "Enviar una creación original válida",
+        "Leer respuesta y consultar listado autenticado por habitación y marcador"
+      ],
+      "expected": "Creación válida 201; un rechazo no debe persistir la reserva",
+      "observed": "POST devolvió 409 con Failed to create booking; el listado posterior contenía el mismo marcador",
+      "examples": [
+        {
+          "dataset": "SOL-01",
+          "bookingid": 4,
+          "marker": "Exbce848bdcede4b"
+        },
+        {
+          "dataset": "SOL-02",
+          "bookingid": 5,
+          "marker": "Ex06702881a89f4f"
+        }
+      ],
+      "impact": "Persistencia pese al rechazo y bloqueo de la preparación del escenario",
+      "rootCause": "No determinada; no se declara el mecanismo interno de persistencia"
+    }
+  ],
+  "readOnlyChecks": [
+    {
+      "url": "/api/room/3",
+      "status": 500,
+      "body": "Internal Server Error"
+    },
+    {
+      "url": "/api/booking/1",
+      "status": 500,
+      "body": "Internal Server Error"
+    },
+    {
+      "url": "/api/booking/7",
+      "status": 500,
+      "body": "Internal Server Error"
+    },
+    {
+      "url": "/api/booking/6",
+      "status": 500,
+      "body": "Internal Server Error"
+    },
+    {
+      "url": "/api/booking/8",
+      "status": 500,
+      "body": "Internal Server Error"
+    },
+    {
+      "url": "/api/booking/9",
+      "status": 500,
+      "body": "Internal Server Error"
+    }
+  ],
+  "cleanupRecheck": {
+    "checkedAt": "2026-10-24T06:22:08.392Z",
+    "loginStatus": 200,
+    "readOnlyChecks": [
+      {
+        "url": "/api/room/3",
+        "status": 500,
+        "body": "Internal Server Error"
+      },
+      {
+        "url": "/api/booking/1",
+        "status": 500,
+        "body": "Internal Server Error"
+      }
+    ],
+    "records": [
+      {
+        "test": "FEC-01 rechazar salida igual a entrada",
+        "marker": "Ex80bd97959aec48",
+        "status": "absent",
+        "cause": "not determined"
+      },
+      {
+        "test": "FEC-02 rechazar salida anterior a entrada",
+        "marker": "Ex3775bd65557d4f",
+        "status": "absent",
+        "cause": "not determined"
+      },
+      {
+        "test": "SOL-01 rechazar reserva con intervalo idéntico",
+        "marker": "Exbce848bdcede4b",
+        "status": "absent",
+        "cause": "not determined"
+      },
+      {
+        "test": "SOL-02 rechazar reserva con solapamiento parcial",
+        "marker": "Ex06702881a89f4f",
+        "status": "absent",
+        "cause": "not determined"
+      },
+      {
+        "test": "crear y consultar una reserva",
+        "marker": "Qa2b1f8a9205",
+        "status": "absent",
+        "cause": "not determined"
+      },
+      {
+        "test": "crear y consultar una reserva",
+        "marker": "Qa513e281430",
+        "status": "absent",
+        "cause": "not determined"
+      },
+      {
+        "test": "AUT-01 impedir eliminación sin token",
+        "marker": "Ex2ea047ff3ce546",
+        "status": "absent",
+        "cause": "not determined"
+      },
+      {
+        "test": "AUT-02 impedir eliminación token inválido",
+        "marker": "Ex593e0ff6d04e49",
+        "status": "absent",
+        "cause": "not determined"
+      }
+    ]
+  },
+  "cleanupInterpretation": "Falló durante la suite; en la comprobación posterior no aparecieron los ocho marcadores consultados. No se ejecutó DELETE ni se atribuye la desaparición a un reset.",
+  "report": "../../final/report/index.html",
+  "anonymization": {
+    "tokensReplacedInReportCopies": 9,
+    "originalsArchivedOutsideGit": true
+  },
+  "noAssertionRelaxation": true,
+  "noAutomaticRetries": true,
+  "noAutomaticDateChanges": true
+}

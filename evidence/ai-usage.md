@@ -1,7 +1,9 @@
 # Uso de IA para la reserva integrada UI y API
 
-Última reejecución: 2026-10-23 UTC (2026-10-22 en Colombia). Historial desde 2026-10-22 UTC. Agente: Codex.
-**Revisión humana funcional: PENDIENTE.** La selección de archivos no equivale a aprobar los tests.
+Última revisión: 2026-10-24 (Colombia). Historial desde 2026-10-22. Agente: Codex.
+**Revisión humana funcional: no registrada.** La selección de archivos no equivale a aprobar los tests.
+
+> Las secciones históricas siguientes describen las ejecuciones anteriores. La última revisión, con resultado fallido, aparece al final; sus enlaces históricos al reporte están fijados al commit anterior.
 
 ## Invocaciones exactas
 
@@ -34,7 +36,7 @@ Quiero que uses de nuevo [$booker-ui-api-tests](C:\Users\Andre\OneDrive\Document
 - [booking-integrated.spec.ts](../tests/ui/booking-integrated.spec.ts): disponibilidad, creación UI, mismo ID por API, aserciones de negocio y limpieza con comprobación de identidad.
 - Se reutilizaron BookingClient, AuthClient y la fixture de autenticación; no se modificaron las pruebas API, sus aserciones ni los reintentos.
 - El agente añadió BASE_URL al .env local y corrigió un salto de línea. .env no se entrega.
-- [summary.json](final/summary.json) identifica el último código ejecutado y las huellas de fuentes, tests, configuración y dependencias. Los comentarios que apuntaban a evidencias trasladadas se corrigieron antes de esta nueva ejecución.
+- [summary.json](https://github.com/andreudev/prueba-quality-engineer/blob/3b35be02197e378cdc42d7d50a33770ddd1e840f/evidence/final/summary.json) identifica el último código ejecutado y las huellas de fuentes, tests, configuración y dependencias. Los comentarios que apuntaban a evidencias trasladadas se corrigieron antes de esta nueva ejecución.
 
 ## Exploración y contrato
 
@@ -50,19 +52,19 @@ Contrato consultado: [documentación de Postman](https://www.postman.com/automat
 - GET no expone email/phone: el test comprueba su envío en el POST real, sin atribuir a GET una verificación de persistencia que no permite.
 - La confirmación no expone ID ni huésped; la correlación usa el ID de la respuesta real de creación. Se mantuvieron las fechas del entorno y la habitación 3 para separar este caso de los escenarios API de habitaciones 1 y 2.
 
-## Reejecución seleccionada y diagnóstico
+## Histórico del 22 de octubre: reejecución y diagnóstico
 
-La selección actual corresponde al cambio de fechas autorizado y guardado en `1a08a50c8bff91aeef4fdc66af6d7a9a12884ccc`. El árbol ejecutado conserva el formato local previo de `tests/data/booking-cases.ts`; sus valores coinciden con el commit y ese formato no se incorporó. Las instrucciones de la skill principal estaban guardadas desde `3eefd8b`.
+La selección histórica corresponde al cambio de fechas autorizado y guardado en `1a08a50c8bff91aeef4fdc66af6d7a9a12884ccc`. El árbol ejecutado conserva el formato local previo de `tests/data/booking-cases.ts`; sus valores coinciden con el commit y ese formato no se incorporó. Las instrucciones de la skill principal estaban guardadas desde `3eefd8b`.
 
 | Comprobación | Resultado real | Código | Evidencia |
 | --- | --- | --- | --- |
-| npm run typecheck | Sin errores | 0 | [log](final/typecheck.log) |
-| Listado Chromium | 10 tests en 6 archivos | 0 | [resumen](final/summary.json) |
-| UI Chromium | 1 aprobada; 1 worker; 13.2 s | 0 | [log](final/ui.log) |
-| API + UI Chromium, primera ejecución | 10 aprobadas; 2 workers reales; 18.4 s | 0 | [log](final/first-suite.log) |
-| API + UI Chromium, segunda ejecución | 10 aprobadas; 2 workers reales; 18.3 s; sin omitidas, flaky ni errores | 0 | [log](final/suite.log), [reporte completo](final/report/index.html) |
+| npm run typecheck | Sin errores | 0 | [log](https://github.com/andreudev/prueba-quality-engineer/blob/3b35be02197e378cdc42d7d50a33770ddd1e840f/evidence/final/typecheck.log) |
+| Listado Chromium | 10 tests en 6 archivos | 0 | [resumen](https://github.com/andreudev/prueba-quality-engineer/blob/3b35be02197e378cdc42d7d50a33770ddd1e840f/evidence/final/summary.json) |
+| UI Chromium | 1 aprobada; 1 worker; 13.2 s | 0 | [log](https://github.com/andreudev/prueba-quality-engineer/blob/3b35be02197e378cdc42d7d50a33770ddd1e840f/evidence/final/ui.log) |
+| API + UI Chromium, primera ejecución | 10 aprobadas; 2 workers reales; 18.4 s | 0 | [log](https://github.com/andreudev/prueba-quality-engineer/blob/3b35be02197e378cdc42d7d50a33770ddd1e840f/evidence/final/first-suite.log) |
+| API + UI Chromium, segunda ejecución | 10 aprobadas; 2 workers reales; 18.3 s; sin omitidas, flaky ni errores | 0 | [log](https://github.com/andreudev/prueba-quality-engineer/blob/3b35be02197e378cdc42d7d50a33770ddd1e840f/evidence/final/suite.log), [reporte completo](https://github.com/andreudev/prueba-quality-engineer/blob/3b35be02197e378cdc42d7d50a33770ddd1e840f/evidence/final/report/index.html) |
 
-Son las mismas diez pruebas ejecutadas dos veces con las mismas fechas y sin reintentos automáticos. El [resumen](final/summary.json) registra ambos resultados, comandos, variables de salida, huellas del árbol ejecutado y versiones de las skills. La [reserva integrada](final/reservation.json) de la segunda suite correlaciona creación UI 201, GET 200 y limpieza 202/404 del mismo ID **20**.
+Son las mismas diez pruebas ejecutadas dos veces con las mismas fechas y sin reintentos automáticos. El [resumen](https://github.com/andreudev/prueba-quality-engineer/blob/3b35be02197e378cdc42d7d50a33770ddd1e840f/evidence/final/summary.json) registra ambos resultados, comandos, variables de salida, huellas del árbol ejecutado y versiones de las skills. La [reserva integrada](https://github.com/andreudev/prueba-quality-engineer/blob/3b35be02197e378cdc42d7d50a33770ddd1e840f/evidence/final/reservation.json) de la segunda suite correlaciona creación UI 201, GET 200 y limpieza 202/404 del mismo ID **20**.
 
 La recurrencia anterior produjo siete aprobadas y tres fallos en las ventanas originales de noviembre/diciembre: [diagnóstico](failures/availability/diagnosis.json) y [trace representativo anonimizado](failures/availability/sol-01-trace.zip). Los tres casos se detenían antes de POST /api/booking. Las nuevas ventanas explícitas son marzo/abril de 2027 y se conservaron las habitaciones 1, 2 y 3, las aserciones y la limpieza de registros propios. La disponibilidad futura sigue dependiendo de la demo compartida.
 
@@ -180,7 +182,7 @@ codex mcp get leyó command=npm.cmd y args=run,--silent,mcp:playwright desde el 
 
 La comprobación posterior utilizó el cliente nativo de Codex app-server en un contexto efímero situado en la raíz del proyecto, sin ejecutar un modelo ni crear un chat de trabajo persistente. El inventario mostró Playwright con 25 herramientas y Postman con OAuth y las siete herramientas de lectura configuradas. Se llamó realmente a getAuthenticatedUser, getCollection y getCollectionRequest para CreateBooking/DeleteBooking desde ese servidor Postman, no como sustitución mediante el plugin global.
 
-El Playwright local navegó a la habitación 3 con las fechas de .env y abrió el formulario sin enviar otra reserva. Se conservaron los campos reales en [snapshot del proyecto](exploration/project-form.yml). El [resumen](final/summary.json) registra conexiones, configuración y comprobaciones. La configuración global conservó exactamente su SHA256 original; sus conexiones permanecen intactas. No se crearon ni modificaron recursos remotos de Postman.
+El Playwright local navegó a la habitación 3 con las fechas de .env y abrió el formulario sin enviar otra reserva. Se conservaron los campos reales en [snapshot del proyecto](exploration/project-form.yml). El [resumen](https://github.com/andreudev/prueba-quality-engineer/blob/3b35be02197e378cdc42d7d50a33770ddd1e840f/evidence/final/summary.json) registra conexiones, configuración y comprobaciones. La configuración global conservó exactamente su SHA256 original; sus conexiones permanecen intactas. No se crearon ni modificaron recursos remotos de Postman.
 
 ### Diagnóstico de la observación MCP
 
@@ -259,3 +261,47 @@ Se aplicó la skill principal con revisión de contrato, cobertura y diagnóstic
 - El README distingue las fechas vigentes de los intervalos históricos del diagnóstico. Las salidas locales habituales se actualizan al último reporte aprobado después de archivar sus versiones anteriores.
 
 La elección humana modifica explícitamente los datos, no constituye una revisión funcional inventada de todo el código. Los logs seleccionados incorporan sus códigos de salida observados y las salidas brutas permanecen en el archivo local de intermedios.
+
+
+## Revisión de entrega del 24 de octubre de 2026
+
+Solicitud aplicada: «revisa que todo está implementado»; después, «Corrige esta parte
+para enviar todo completo». El autor pidió conocer la entrega antes de enviar el
+correo. No se ha enviado el correo en este cierre.
+
+El agente aplicó `booker-ui-api-tests`, `revisar-contrato-api`,
+`priorizar-cobertura-reservas` y `diagnosticar-fallos-reservas`; utilizó además la
+guía Postman api-testing. Se leyeron las instrucciones ya guardadas, el enunciado
+completo, clientes, fixtures y documentación. El contraste de contrato se basó en
+el extracto histórico conservado; no se afirma una nueva consulta Postman OAuth.
+
+- **Verificación:** TypeScript terminó con código 0; el listado encontró diez
+  pruebas; la suite Chromium con dos workers terminó con código 1, tres aprobadas
+  y siete fallidas en 29,4 s. No se cambiaron aserciones, fechas ni reintentos.
+- **Diagnóstico:** login y listados funcionaron; consultas por ID devolvieron 500,
+  incluso sobre la reserva inicial. Se observó con Playwright MCP la página UI
+  vacía, sin formulario. Los POST originales de SOL devolvieron 409 pero dejaron
+  sus marcadores en el listado. Se documentaron pasos, esperado, observado,
+  impacto y evidencia, dejando la causa interna sin determinar.
+- **Limpieza:** falló en la suite porque GET no permitió confirmar identidad. La
+  comprobación posterior ya no encontró los ocho marcadores consultados; no
+  ejecutó DELETE ni atribuyó la desaparición a un reset. No se borraron registros ajenos.
+- **Alcance del cambio:** documentación y selección de evidencia. Las fuentes de
+  tests, configuración, tipos y clientes conservaron sus bytes. El formato local
+  previamente preparado de booking-cases.ts se conserva fuera del commit; se
+  comprobó su equivalencia léxica con HEAD sin modificarlo.
+- **Cierre:** copia íntegra de la selección anterior, verificada por SHA256; reporte
+  completo actual con sus recursos y copias anonimizadas de traces; resumen,
+  intento UI fallido y diagnóstico. El éxito histórico se referencia por commit,
+  sin presentarlo como aprobación actual.
+- **Intervención humana real:** el autor informó aproximadamente seis horas en una
+  tarde-noche, con apoyo de Codex y MCP de Playwright y Postman. No se interpreta
+  ese dato como una revisión funcional humana completa.
+
+Evidencia actual: [reporte](final/report/index.html), [resumen](final/summary.json),
+[log](final/suite.log), [estado UI](final/reservation.json),
+[incidencias](failures/demo-20261024/diagnosis.md) y
+[comprobación posterior](failures/demo-20261024/diagnosis.json).
+Los reportes anteriores quedan vinculados a su commit y los originales locales
+permanecen archivados fuera del repositorio. La nueva selección no oculta fallos
+ni agrega capacidades ajenas al alcance.

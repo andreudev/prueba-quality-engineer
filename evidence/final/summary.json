@@ -1,19 +1,51 @@
 {
-  "date": "2026-10-23",
-  "localDate": "2026-10-22",
+  "date": "2026-10-24",
+  "localDate": "2026-10-24",
   "timeZone": "America/Bogota",
-  "selectionStatus": "Fechas explícitas actualizadas: dos suites consecutivas de 10 aprobadas; fallos previos conservados",
-  "verificationCodeCommit": "1a08a50c8bff91aeef4fdc66af6d7a9a12884ccc",
+  "selectionStatus": "Última ejecución: 3 aprobadas y 7 fallidas; incidentes actuales de la demo documentados. No se declara aprobación.",
+  "verificationCodeCommit": "3b35be02197e378cdc42d7d50a33770ddd1e840f",
   "verificationSkillCommit": "3eefd8b789c4c1cd48874ed5d949c190b96a8bc1",
+  "skillCommitBeforeImplementation": "29c1876e6f8e8cfa918b4edf736e26548976394d",
+  "originalSkillCommitBeforeImplementation": "6aecc9591eb81e0aab136eaded89bcf55bd4c843",
   "workingTreeChanges": [
     {
       "path": "tests/data/booking-cases.ts",
-      "description": "Formato local previo a la ejecución; datasets y valores idénticos a HEAD; no incluido en el commit de evidencias"
+      "description": "Formato y retirada de comentarios ya preparados por el usuario; equivalencia léxica verificada con HEAD. Se conserva fuera del commit de entrega."
     }
   ],
-  "skillCommitBeforeImplementation": "29c1876e6f8e8cfa918b4edf736e26548976394d",
-  "originalSkillCommitBeforeImplementation": "6aecc9591eb81e0aab136eaded89bcf55bd4c843",
   "implementationSha256": [
+    {
+      "path": ".agents/skills/booker-ui-api-tests/SKILL.md",
+      "sha256": "FCD430BA23136CBD12167D0E3B9F70E5C070ECC23FC4F59DEDAF910B18A18077"
+    },
+    {
+      "path": ".agents/skills/booker-ui-api-tests/agents/openai.yaml",
+      "sha256": "61E8853CFE0F45F0E013451DC8446C2DCCB9D989F8928F7E11DC06E38A817FB3"
+    },
+    {
+      "path": ".agents/skills/diagnosticar-fallos-reservas/SKILL.md",
+      "sha256": "662EFC8680906824DCFC458FACF4A79CD629A787A0E83EA01C998C7DC7B915C2"
+    },
+    {
+      "path": ".agents/skills/diagnosticar-fallos-reservas/agents/openai.yaml",
+      "sha256": "69727AE4C6FB66C0CBE9C8515FBFFD605156C7228524D607C14EE76452F39B6F"
+    },
+    {
+      "path": ".agents/skills/priorizar-cobertura-reservas/SKILL.md",
+      "sha256": "233D71E2467E3A394243A7B14362AB5C2F114B1657D3E561A4BC968C7C29F0D3"
+    },
+    {
+      "path": ".agents/skills/revisar-contrato-api/SKILL.md",
+      "sha256": "2283D42F8237D98FD43E7C5189829D50F4BC80DEF6A80B8FED92A0B880048409"
+    },
+    {
+      "path": ".agents/skills/revisar-contrato-api/agents/openai.yaml",
+      "sha256": "F3C121C84513DCC0E38C4E0CD8EC786C94C931B2645F9FC49BB11C3C617E278E"
+    },
+    {
+      "path": ".codex/config.toml",
+      "sha256": "0CE8F37A7B2CCC88B6831E61ACA2EB28AFE9A7F59CE99241CDB4623F894519E2"
+    },
     {
       "path": ".env.example",
       "sha256": "0921512983BF81E0DC4328647899B5DA44C6DD87B2CE949BD5B56737A62D7A96"
@@ -103,417 +135,107 @@
       "sha256": "03D213F1ABB2BF1827D4214C686E905DBD0E3A59826752F4FDA135B49D54567F"
     }
   ],
-  "hashSemantics": "SHA256 de los bytes del árbol de trabajo ejecutado; Git puede normalizar finales de línea.",
-  "skills": [
-    {
-      "name": "booker-ui-api-tests",
-      "sha256": "FCD430BA23136CBD12167D0E3B9F70E5C070ECC23FC4F59DEDAF910B18A18077"
-    },
-    {
-      "name": "diagnosticar-fallos-reservas",
-      "sha256": "662EFC8680906824DCFC458FACF4A79CD629A787A0E83EA01C998C7DC7B915C2"
-    },
-    {
-      "name": "priorizar-cobertura-reservas",
-      "sha256": "233D71E2467E3A394243A7B14362AB5C2F114B1657D3E561A4BC968C7C29F0D3"
-    },
-    {
-      "name": "revisar-contrato-api",
-      "sha256": "2283D42F8237D98FD43E7C5189829D50F4BC80DEF6A80B8FED92A0B880048409"
-    }
-  ],
+  "hashSemantics": "SHA256 de los bytes del árbol ejecutado; los tests y configuración no se modificaron para este cierre.",
   "stats": {
-    "startTime": "2026-10-23T02:13:40.345Z",
-    "duration": 18285.851,
-    "expected": 10,
+    "startTime": "2026-10-24T06:14:10.491Z",
+    "duration": 29390.98,
+    "expected": 3,
     "skipped": 0,
-    "unexpected": 0,
+    "unexpected": 7,
     "flaky": 0
   },
+  "configuredWorkers": 2,
+  "concurrentWorkersUsed": 2,
   "actualWorkerIndexes": [
     0,
-    1
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
   ],
+  "workerInterpretation": "La suite usó dos workers concurrentes. Tras fallos Playwright reemplaza procesos; sus índices únicos no representan mayor concurrencia.",
   "tests": [
     {
       "title": "FEC-01 rechazar salida igual a entrada",
-      "suite": "api\\booking-invalid-dates.spec.ts",
-      "project": "chromium",
-      "annotations": [
-        {
-          "type": "dataset",
-          "description": "FEC-01"
-        },
-        {
-          "type": "prioridad",
-          "description": "P2"
-        },
-        {
-          "type": "riesgo",
-          "description": "Persistencia de una estancia de duración cero"
-        }
-      ],
+      "file": "api/booking-invalid-dates.spec.ts",
       "status": "passed",
       "workerIndex": 0,
-      "startTime": "2026-10-23T02:13:41.754Z",
-      "durationMs": 1510
+      "durationMs": 5678,
+      "retry": 0
     },
     {
       "title": "FEC-02 rechazar salida anterior a entrada",
-      "suite": "api\\booking-invalid-dates.spec.ts",
-      "project": "chromium",
-      "annotations": [
-        {
-          "type": "dataset",
-          "description": "FEC-02"
-        },
-        {
-          "type": "prioridad",
-          "description": "P2"
-        },
-        {
-          "type": "riesgo",
-          "description": "Persistencia de una estancia de duración negativa"
-        }
-      ],
+      "file": "api/booking-invalid-dates.spec.ts",
       "status": "passed",
       "workerIndex": 1,
-      "startTime": "2026-10-23T02:13:42.048Z",
-      "durationMs": 1655
+      "durationMs": 5670,
+      "retry": 0
     },
     {
       "title": "rechazar un nombre vacío sin guardar la reserva",
-      "suite": "api\\booking-negative.spec.ts",
-      "project": "chromium",
-      "annotations": [],
+      "file": "api/booking-negative.spec.ts",
       "status": "passed",
       "workerIndex": 0,
-      "startTime": "2026-10-23T02:13:43.393Z",
-      "durationMs": 1117
+      "durationMs": 964,
+      "retry": 0
     },
     {
       "title": "SOL-01 rechazar reserva con intervalo idéntico",
-      "suite": "api\\booking-overlap.spec.ts",
-      "project": "chromium",
-      "annotations": [
-        {
-          "type": "dataset",
-          "description": "SOL-01"
-        },
-        {
-          "type": "prioridad",
-          "description": "P1"
-        },
-        {
-          "type": "riesgo",
-          "description": "Doble asignación de una habitación en el mismo intervalo"
-        }
-      ],
-      "status": "passed",
+      "file": "api/booking-overlap.spec.ts",
+      "status": "failed",
       "workerIndex": 1,
-      "startTime": "2026-10-23T02:13:43.781Z",
-      "durationMs": 3241
+      "durationMs": 3678,
+      "retry": 0
     },
     {
       "title": "SOL-02 rechazar reserva con solapamiento parcial",
-      "suite": "api\\booking-overlap.spec.ts",
-      "project": "chromium",
-      "annotations": [
-        {
-          "type": "dataset",
-          "description": "SOL-02"
-        },
-        {
-          "type": "prioridad",
-          "description": "P1"
-        },
-        {
-          "type": "riesgo",
-          "description": "Doble asignación al cruzar parcialmente los intervalos"
-        }
-      ],
-      "status": "passed",
+      "file": "api/booking-overlap.spec.ts",
+      "status": "failed",
       "workerIndex": 0,
-      "startTime": "2026-10-23T02:13:44.548Z",
-      "durationMs": 3018
+      "durationMs": 2682,
+      "retry": 0
     },
     {
       "title": "crear y consultar una reserva",
-      "suite": "api\\booking-success-with-deposit.spec.ts > Reservas por API - con depósito",
-      "project": "chromium",
-      "annotations": [],
-      "status": "passed",
-      "workerIndex": 1,
-      "startTime": "2026-10-23T02:13:47.049Z",
-      "durationMs": 2138
+      "file": "scenarios/booking-success.scenario.ts",
+      "status": "failed",
+      "workerIndex": 2,
+      "durationMs": 1777,
+      "retry": 0
     },
     {
       "title": "crear y consultar una reserva",
-      "suite": "api\\booking-success.spec.ts > Reservas por API - sin depósito",
-      "project": "chromium",
-      "annotations": [],
-      "status": "passed",
-      "workerIndex": 0,
-      "startTime": "2026-10-23T02:13:47.603Z",
-      "durationMs": 2205
+      "file": "scenarios/booking-success.scenario.ts",
+      "status": "failed",
+      "workerIndex": 3,
+      "durationMs": 1748,
+      "retry": 0
     },
     {
       "title": "AUT-01 impedir eliminación sin token",
-      "suite": "api\\booking-unauthorized.spec.ts",
-      "project": "chromium",
-      "annotations": [
-        {
-          "type": "dataset",
-          "description": "AUT-01"
-        },
-        {
-          "type": "prioridad",
-          "description": "P1"
-        },
-        {
-          "type": "riesgo",
-          "description": "Eliminación de reservas sin autenticación"
-        }
-      ],
-      "status": "passed",
-      "workerIndex": 1,
-      "startTime": "2026-10-23T02:13:49.212Z",
-      "durationMs": 2776
+      "file": "api/booking-unauthorized.spec.ts",
+      "status": "failed",
+      "workerIndex": 4,
+      "durationMs": 1786,
+      "retry": 0
     },
     {
       "title": "AUT-02 impedir eliminación token inválido",
-      "suite": "api\\booking-unauthorized.spec.ts",
-      "project": "chromium",
-      "annotations": [
-        {
-          "type": "dataset",
-          "description": "AUT-02"
-        },
-        {
-          "type": "prioridad",
-          "description": "P1"
-        },
-        {
-          "type": "riesgo",
-          "description": "Eliminación de reservas con una identidad no válida"
-        }
-      ],
-      "status": "passed",
-      "workerIndex": 0,
-      "startTime": "2026-10-23T02:13:49.852Z",
-      "durationMs": 2616
+      "file": "api/booking-unauthorized.spec.ts",
+      "status": "failed",
+      "workerIndex": 5,
+      "durationMs": 1776,
+      "retry": 0
     },
     {
       "title": "crear una reserva por UI y consultar exactamente la misma por API",
-      "suite": "ui\\booking-integrated.spec.ts",
-      "project": "chromium",
-      "annotations": [],
-      "status": "passed",
-      "workerIndex": 1,
-      "startTime": "2026-10-23T02:13:52.025Z",
-      "durationMs": 6014
-    }
-  ],
-  "additionalCaseResults": [
-    {
-      "dataset": "FEC-01",
-      "creationStatuses": [
-        409
-      ],
-      "unauthorizedDeleteStatuses": [],
-      "ownRecordsCleaned": []
-    },
-    {
-      "dataset": "FEC-02",
-      "creationStatuses": [
-        409
-      ],
-      "unauthorizedDeleteStatuses": [],
-      "ownRecordsCleaned": []
-    },
-    {
-      "dataset": "SOL-01",
-      "creationStatuses": [
-        201,
-        409
-      ],
-      "unauthorizedDeleteStatuses": [],
-      "ownRecordsCleaned": [
-        {
-          "bookingid": 13,
-          "marker": "Ex40dcdaeadac743",
-          "deleteStatus": 202,
-          "getAfterDeleteStatus": 404
-        }
-      ]
-    },
-    {
-      "dataset": "SOL-02",
-      "creationStatuses": [
-        201,
-        409
-      ],
-      "unauthorizedDeleteStatuses": [],
-      "ownRecordsCleaned": [
-        {
-          "bookingid": 14,
-          "marker": "Exd61f22a0c6c64c",
-          "deleteStatus": 202,
-          "getAfterDeleteStatus": 404
-        }
-      ]
-    },
-    {
-      "dataset": "AUT-01",
-      "creationStatuses": [
-        201
-      ],
-      "unauthorizedDeleteStatuses": [
-        403
-      ],
-      "ownRecordsCleaned": [
-        {
-          "bookingid": 18,
-          "marker": "Exe4d05abdc10e44",
-          "deleteStatus": 202,
-          "getAfterDeleteStatus": 404
-        }
-      ]
-    },
-    {
-      "dataset": "AUT-02",
-      "creationStatuses": [
-        201
-      ],
-      "unauthorizedDeleteStatuses": [
-        403
-      ],
-      "ownRecordsCleaned": [
-        {
-          "bookingid": 19,
-          "marker": "Ex65b4ea61e21441",
-          "deleteStatus": 202,
-          "getAfterDeleteStatus": 404
-        }
-      ]
-    }
-  ],
-  "repeatedExecutions": [
-    {
-      "run": 1,
-      "stats": {
-        "startTime": "2026-10-23T02:13:07.741Z",
-        "duration": 18426.906,
-        "expected": 10,
-        "skipped": 0,
-        "unexpected": 0,
-        "flaky": 0
-      },
-      "workers": [
-        0,
-        1
-      ],
-      "tests": [
-        {
-          "title": "FEC-01 rechazar salida igual a entrada",
-          "status": "passed"
-        },
-        {
-          "title": "FEC-02 rechazar salida anterior a entrada",
-          "status": "passed"
-        },
-        {
-          "title": "rechazar un nombre vacío sin guardar la reserva",
-          "status": "passed"
-        },
-        {
-          "title": "SOL-01 rechazar reserva con intervalo idéntico",
-          "status": "passed"
-        },
-        {
-          "title": "SOL-02 rechazar reserva con solapamiento parcial",
-          "status": "passed"
-        },
-        {
-          "title": "crear y consultar una reserva",
-          "status": "passed"
-        },
-        {
-          "title": "crear y consultar una reserva",
-          "status": "passed"
-        },
-        {
-          "title": "AUT-01 impedir eliminación sin token",
-          "status": "passed"
-        },
-        {
-          "title": "AUT-02 impedir eliminación token inválido",
-          "status": "passed"
-        },
-        {
-          "title": "crear una reserva por UI y consultar exactamente la misma por API",
-          "status": "passed"
-        }
-      ],
-      "log": "first-suite.log"
-    },
-    {
-      "run": 2,
-      "stats": {
-        "startTime": "2026-10-23T02:13:40.345Z",
-        "duration": 18285.851,
-        "expected": 10,
-        "skipped": 0,
-        "unexpected": 0,
-        "flaky": 0
-      },
-      "workers": [
-        0,
-        1
-      ],
-      "tests": [
-        {
-          "title": "FEC-01 rechazar salida igual a entrada",
-          "status": "passed"
-        },
-        {
-          "title": "FEC-02 rechazar salida anterior a entrada",
-          "status": "passed"
-        },
-        {
-          "title": "rechazar un nombre vacío sin guardar la reserva",
-          "status": "passed"
-        },
-        {
-          "title": "SOL-01 rechazar reserva con intervalo idéntico",
-          "status": "passed"
-        },
-        {
-          "title": "SOL-02 rechazar reserva con solapamiento parcial",
-          "status": "passed"
-        },
-        {
-          "title": "crear y consultar una reserva",
-          "status": "passed"
-        },
-        {
-          "title": "crear y consultar una reserva",
-          "status": "passed"
-        },
-        {
-          "title": "AUT-01 impedir eliminación sin token",
-          "status": "passed"
-        },
-        {
-          "title": "AUT-02 impedir eliminación token inválido",
-          "status": "passed"
-        },
-        {
-          "title": "crear una reserva por UI y consultar exactamente la misma por API",
-          "status": "passed"
-        }
-      ],
-      "log": "suite.log"
+      "file": "ui/booking-integrated.spec.ts",
+      "status": "failed",
+      "workerIndex": 6,
+      "durationMs": 10780,
+      "retry": 0
     }
   ],
   "commands": [
@@ -528,73 +250,177 @@
       "listedTests": 10
     },
     {
-      "command": "npx.cmd playwright test tests/ui --project=chromium --workers=2 --reporter=list,html,json --output=work/fechas-explicitas/ui-artifacts",
-      "exitCode": 0,
-      "actualWorkers": 1,
-      "durationMs": 13156.423,
-      "log": "ui.log",
-      "environment": {
-        "PLAYWRIGHT_HTML_OUTPUT_DIR": "work/fechas-explicitas/ui-report",
-        "PLAYWRIGHT_JSON_OUTPUT_FILE": "work/fechas-explicitas/ui-results.json"
-      }
-    },
-    {
-      "command": "npx.cmd playwright test tests/api tests/ui --project=chromium --workers=2 --reporter=list,html,json --output=work/fechas-explicitas/first-artifacts",
-      "exitCode": 0,
-      "actualWorkers": 2,
-      "log": "first-suite.log",
-      "environment": {
-        "PLAYWRIGHT_HTML_OUTPUT_DIR": "work/fechas-explicitas/first-report",
-        "PLAYWRIGHT_JSON_OUTPUT_FILE": "work/fechas-explicitas/first-results.json"
-      }
-    },
-    {
-      "command": "npx.cmd playwright test tests/api tests/ui --project=chromium --workers=2 --reporter=list,html,json --output=work/fechas-explicitas/full-artifacts",
-      "exitCode": 0,
-      "actualWorkers": 2,
+      "command": "npx.cmd playwright test tests/api tests/ui --project=chromium --workers=2 --reporter=list,html,json --output=C:\\Users\\Andre\\OneDrive\\Documentos\\ChatGPT\\Prueba Tecnica\\work\\revision-envio-20261024\\artifacts",
+      "exitCode": 1,
       "log": "suite.log",
-      "environment": {
-        "PLAYWRIGHT_HTML_OUTPUT_DIR": "work/fechas-explicitas/full-report",
-        "PLAYWRIGHT_JSON_OUTPUT_FILE": "work/fechas-explicitas/full-results.json"
-      }
+      "reporterEnvironment": {
+        "PLAYWRIGHT_HTML_OUTPUT_DIR": "C:\\Users\\Andre\\OneDrive\\Documentos\\ChatGPT\\Prueba Tecnica\\work\\revision-envio-20261024\\report",
+        "PLAYWRIGHT_JSON_OUTPUT_FILE": "C:\\Users\\Andre\\OneDrive\\Documentos\\ChatGPT\\Prueba Tecnica\\work\\revision-envio-20261024\\results.json"
+      },
+      "note": "Directorios originales locales de ejecución, fuera de Git."
+    },
+    {
+      "command": "Comprobación independiente autenticada de GET por ID y listados por habitación",
+      "exitCode": 0,
+      "note": "El script terminó; las comprobaciones devolvieron 500/200. Código del comprobador no implica aprobación de la aplicación."
+    },
+    {
+      "command": "Comprobación posterior de marcadores propios antes de cualquier limpieza",
+      "exitCode": 0,
+      "evidence": "../failures/demo-20261024/diagnosis.json",
+      "note": "Todos los marcadores ausentes; no se ejecutó DELETE. Las consultas por ID siguieron con 500."
     }
   ],
-  "connections": {
-    "projectConfig": ".codex/config.toml",
-    "projectConfigSha256": "0CE8F37A7B2CCC88B6831E61ACA2EB28AFE9A7F59CE99241CDB4623F894519E2",
-    "globalConfigUnchanged": true,
-    "playwright": {
-      "command": "npm.cmd",
-      "args": [
-        "run",
-        "--silent",
-        "mcp:playwright"
-      ],
-      "localPackageVersion": "0.0.83",
-      "exposedTools": 25,
-      "formObservedInProject": true,
-      "snapshot": "../exploration/project-form.yml"
-    },
-    "postman": {
-      "url": "https://mcp.postman.com/mcp",
-      "auth": "OAuth",
-      "exposedTools": [
-        "getCollectionFolder",
-        "getAuthenticatedUser",
-        "getCollectionRequest",
-        "getEnabledTools",
-        "getCollectionResponse",
-        "searchPostmanElements",
-        "getCollection"
-      ],
-      "authenticatedUserRead": true,
-      "collectionRead": true,
-      "createAndDeleteRequestsRead": true
-    }
-  },
   "report": "report/index.html",
   "reservationEvidence": "reservation.json",
-  "priorFailureDiagnosis": "../failures/availability/diagnosis.json",
-  "humanReview": "Pendiente",
-  "totalTimeSpent": "Pendiente de indicar por el autor"
+  "currentFailureDiagnosis": "../failures/demo-20261024/diagnosis.json",
+  "historicalSuccessfulVerification": {
+    "codeCommit": "1a08a50c8bff91aeef4fdc66af6d7a9a12884ccc",
+    "evidenceCommit": "3b35be02197e378cdc42d7d50a33770ddd1e840f",
+    "localDate": "2026-10-22",
+    "runs": [
+      {
+        "run": 1,
+        "stats": {
+          "startTime": "2026-10-23T02:13:07.741Z",
+          "duration": 18426.906,
+          "expected": 10,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "workers": [
+          0,
+          1
+        ],
+        "tests": [
+          {
+            "title": "FEC-01 rechazar salida igual a entrada",
+            "status": "passed"
+          },
+          {
+            "title": "FEC-02 rechazar salida anterior a entrada",
+            "status": "passed"
+          },
+          {
+            "title": "rechazar un nombre vacío sin guardar la reserva",
+            "status": "passed"
+          },
+          {
+            "title": "SOL-01 rechazar reserva con intervalo idéntico",
+            "status": "passed"
+          },
+          {
+            "title": "SOL-02 rechazar reserva con solapamiento parcial",
+            "status": "passed"
+          },
+          {
+            "title": "crear y consultar una reserva",
+            "status": "passed"
+          },
+          {
+            "title": "crear y consultar una reserva",
+            "status": "passed"
+          },
+          {
+            "title": "AUT-01 impedir eliminación sin token",
+            "status": "passed"
+          },
+          {
+            "title": "AUT-02 impedir eliminación token inválido",
+            "status": "passed"
+          },
+          {
+            "title": "crear una reserva por UI y consultar exactamente la misma por API",
+            "status": "passed"
+          }
+        ],
+        "log": "first-suite.log"
+      },
+      {
+        "run": 2,
+        "stats": {
+          "startTime": "2026-10-23T02:13:40.345Z",
+          "duration": 18285.851,
+          "expected": 10,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "workers": [
+          0,
+          1
+        ],
+        "tests": [
+          {
+            "title": "FEC-01 rechazar salida igual a entrada",
+            "status": "passed"
+          },
+          {
+            "title": "FEC-02 rechazar salida anterior a entrada",
+            "status": "passed"
+          },
+          {
+            "title": "rechazar un nombre vacío sin guardar la reserva",
+            "status": "passed"
+          },
+          {
+            "title": "SOL-01 rechazar reserva con intervalo idéntico",
+            "status": "passed"
+          },
+          {
+            "title": "SOL-02 rechazar reserva con solapamiento parcial",
+            "status": "passed"
+          },
+          {
+            "title": "crear y consultar una reserva",
+            "status": "passed"
+          },
+          {
+            "title": "crear y consultar una reserva",
+            "status": "passed"
+          },
+          {
+            "title": "AUT-01 impedir eliminación sin token",
+            "status": "passed"
+          },
+          {
+            "title": "AUT-02 impedir eliminación token inválido",
+            "status": "passed"
+          },
+          {
+            "title": "crear una reserva por UI y consultar exactamente la misma por API",
+            "status": "passed"
+          }
+        ],
+        "log": "suite.log"
+      }
+    ],
+    "report": "https://github.com/andreudev/prueba-quality-engineer/blob/3b35be02197e378cdc42d7d50a33770ddd1e840f/evidence/final/report/index.html",
+    "correlation": "https://github.com/andreudev/prueba-quality-engineer/blob/3b35be02197e378cdc42d7d50a33770ddd1e840f/evidence/final/reservation.json"
+  },
+  "connections": {
+    "scope": "Configuración del proyecto conservada y comprobaciones OAuth históricas; no se afirma una nueva autenticación MCP en esta revisión.",
+    "historicalEvidenceCommit": "3b35be02197e378cdc42d7d50a33770ddd1e840f"
+  },
+  "humanReview": "Revisión funcional humana no registrada; revisión técnica actual realizada por el agente.",
+  "totalTimeSpent": {
+    "approximateHours": 6,
+    "reportedBy": "Autor",
+    "description": "Una tarde-noche, aproximadamente seis horas, con apoyo de IA mediante Codex y MCP de Playwright y Postman.",
+    "scope": "Tiempo declarado por el autor; no inferido de commits ni del tiempo de esta revisión."
+  },
+  "pending": [
+    "Recuperación de las rutas por ID y del formulario de la demo",
+    "Reejecutar la suite cuando se recupere el entorno; los negativos aprobados no prueban salud completa de la demo",
+    "Revisión funcional humana no registrada"
+  ],
+  "anonymization": {
+    "tokensReplacedInReportCopies": 9,
+    "originalsArchivedOutsideGit": true
+  },
+  "historicalLogs": {
+    "first-suite.log": "Primera suite del 22 de octubre, 10 aprobadas; no es la revisión actual",
+    "ui.log": "UI aislada del 22 de octubre, 1 aprobada; no es la revisión actual"
+  }
 }
